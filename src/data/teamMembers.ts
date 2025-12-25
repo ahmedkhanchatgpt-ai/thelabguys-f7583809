@@ -10,7 +10,9 @@ export interface TeamMember {
   twitter?: string;
   github?: string;
   image: string;
-  accentColor: string;
+  gradient: string;
+  glowColor: string;
+  iconBg: string;
 }
 
 export const teamMembers: TeamMember[] = [
@@ -25,7 +27,9 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
     image: "/placeholder.svg",
-    accentColor: "from-emerald-400 to-teal-500",
+    gradient: "from-cyan-400 via-teal-400 to-emerald-500",
+    glowColor: "shadow-[0_0_60px_-10px_hsl(180_100%_50%/0.5)]",
+    iconBg: "bg-gradient-to-br from-cyan-400 to-emerald-500",
   },
   {
     id: "jawad-ahmed",
@@ -38,7 +42,9 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://linkedin.com",
     github: "https://github.com",
     image: "/placeholder.svg",
-    accentColor: "from-blue-400 to-indigo-500",
+    gradient: "from-blue-400 via-indigo-500 to-purple-600",
+    glowColor: "shadow-[0_0_60px_-10px_hsl(230_100%_60%/0.5)]",
+    iconBg: "bg-gradient-to-br from-blue-400 to-purple-600",
   },
   {
     id: "muhammad-altaf",
@@ -51,7 +57,9 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
     image: "/placeholder.svg",
-    accentColor: "from-red-400 to-rose-500",
+    gradient: "from-red-400 via-rose-500 to-pink-600",
+    glowColor: "shadow-[0_0_60px_-10px_hsl(350_100%_60%/0.5)]",
+    iconBg: "bg-gradient-to-br from-red-400 to-pink-600",
   },
   {
     id: "joshua",
@@ -64,7 +72,9 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
     image: "/placeholder.svg",
-    accentColor: "from-amber-400 to-orange-500",
+    gradient: "from-amber-400 via-orange-500 to-red-500",
+    glowColor: "shadow-[0_0_60px_-10px_hsl(30_100%_50%/0.5)]",
+    iconBg: "bg-gradient-to-br from-amber-400 to-red-500",
   },
   {
     id: "muhammad-ahmed",
@@ -77,7 +87,9 @@ export const teamMembers: TeamMember[] = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
     image: "/placeholder.svg",
-    accentColor: "from-purple-400 to-pink-500",
+    gradient: "from-purple-400 via-fuchsia-500 to-pink-500",
+    glowColor: "shadow-[0_0_60px_-10px_hsl(280_100%_60%/0.5)]",
+    iconBg: "bg-gradient-to-br from-purple-400 to-pink-500",
   },
 ];
 
