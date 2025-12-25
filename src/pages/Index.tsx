@@ -2,69 +2,119 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import { teamMembers } from "@/data/teamMembers";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette } from "lucide-react";
 
 const Index = () => {
+  const icons = [
+    <Sparkles key="1" className="w-6 h-6" />,
+    <Zap key="2" className="w-6 h-6" />,
+    <Shield key="3" className="w-6 h-6" />,
+    <TrendingUp key="4" className="w-6 h-6" />,
+    <Palette key="5" className="w-6 h-6" />,
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated background orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-500/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+      </div>
+
       <Header />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center pt-20 px-6">
-        <div className="container mx-auto text-center">
-          <div className="max-w-4xl mx-auto">
-            <p className="text-sm md:text-base text-accent font-medium tracking-widest uppercase mb-4 opacity-0 animate-fade-up">
-              Digital Experts Collective
-            </p>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 opacity-0 animate-fade-up stagger-1">
+      <section className="min-h-screen flex items-center justify-center pt-20 px-6 relative">
+        <div className="container mx-auto text-center relative z-10">
+          <div className="max-w-5xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10 mb-8 opacity-0 animate-fade-up">
+              <span className="w-2 h-2 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 animate-pulse" />
+              <span className="text-sm text-muted-foreground">Digital Experts Collective</span>
+            </div>
+
+            {/* Main heading */}
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] mb-8 opacity-0 animate-fade-up stagger-1">
               We Are{" "}
-              <span className="relative">
+              <span className="relative inline-block">
                 <span className="text-gradient">The Lab Guys</span>
                 <svg
                   className="absolute -bottom-2 left-0 w-full"
-                  viewBox="0 0 200 12"
+                  viewBox="0 0 300 12"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M2 8C50 2 150 2 198 8"
-                    stroke="hsl(var(--accent))"
-                    strokeWidth="3"
+                    d="M2 8C70 2 230 2 298 8"
+                    stroke="url(#underline-gradient)"
+                    strokeWidth="4"
                     strokeLinecap="round"
                   />
+                  <defs>
+                    <linearGradient id="underline-gradient" x1="0" y1="0" x2="300" y2="0">
+                      <stop offset="0%" stopColor="hsl(270 95% 65%)" />
+                      <stop offset="50%" stopColor="hsl(200 100% 60%)" />
+                      <stop offset="100%" stopColor="hsl(340 95% 60%)" />
+                    </linearGradient>
+                  </defs>
                 </svg>
               </span>
             </h1>
+
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 opacity-0 animate-fade-up stagger-2">
-              A collective of five digital experts, each bringing unique skills
-              to help you navigate the digital landscape. From SEO to
-              cybersecurity, we've got you covered.
+              Five digital experts. One mission. Transforming ideas into
+              extraordinary digital experiences.
             </p>
-            <a
-              href="#team"
-              className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent transition-colors opacity-0 animate-fade-up stagger-3"
-            >
-              Meet the Team
-              <ArrowDown className="w-4 h-4 animate-float" />
-            </a>
+
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 opacity-0 animate-fade-up stagger-3">
+              <a
+                href="#team"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white font-medium hover:bg-[position:100%_0] transition-all duration-500 shadow-glow"
+              >
+                Meet the Team
+                <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+              </a>
+              <a
+                href="mailto:hello@thelabguys.com"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full glass border border-white/10 text-foreground font-medium hover:bg-white/5 transition-all duration-300"
+              >
+                Get in Touch
+              </a>
+            </div>
+
+            {/* Floating expertise icons */}
+            <div className="flex justify-center items-center gap-4 md:gap-6 opacity-0 animate-fade-up stagger-4">
+              {teamMembers.map((member, i) => (
+                <div
+                  key={member.id}
+                  className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg animate-float`}
+                  style={{ animationDelay: `${i * 0.3}s` }}
+                  title={member.role}
+                >
+                  {icons[i]}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-24 px-6">
+      <section id="team" className="py-24 px-6 relative">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              The Experts
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 opacity-0 animate-fade-up">
+              The <span className="text-gradient">Experts</span>
             </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">
-              Click on any profile to learn more about our team members and
-              their expertise.
+            <p className="text-muted-foreground max-w-lg mx-auto opacity-0 animate-fade-up stagger-1">
+              Click on any profile to discover their expertise and connect.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
             {teamMembers.map((member, index) => (
               <TeamMemberCard key={member.id} member={member} index={index} />
             ))}
@@ -73,21 +123,29 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-6 bg-secondary/50">
-        <div className="container mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-            Ready to Work Together?
-          </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto mb-8">
-            Whether you need SEO optimization, web development, cybersecurity,
-            trading insights, or creative design — we're here to help.
-          </p>
-          <a
-            href="mailto:hello@thelabguys.com"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-primary text-primary-foreground font-medium hover:bg-accent transition-colors duration-300"
-          >
-            Get in Touch
-          </a>
+      <section className="py-24 px-6 relative">
+        <div className="container mx-auto">
+          <div className="relative rounded-3xl glass overflow-hidden">
+            {/* Gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10" />
+            <div className="absolute inset-0 noise" />
+            
+            <div className="relative text-center py-20 px-6">
+              <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+                Ready to <span className="text-gradient">Collaborate?</span>
+              </h2>
+              <p className="text-muted-foreground max-w-lg mx-auto mb-10">
+                Whether you need SEO, development, security, trading insights, or
+                creative design — let's build something amazing together.
+              </p>
+              <a
+                href="mailto:hello@thelabguys.com"
+                className="inline-flex items-center justify-center px-10 py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white font-semibold hover:bg-[position:100%_0] transition-all duration-500 shadow-glow"
+              >
+                Start a Conversation
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
