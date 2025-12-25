@@ -12,7 +12,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 flex items-center justify-center group-hover:shadow-glow transition-shadow duration-300">
-              <span className="text-white font-display font-extrabold text-xl tracking-tighter">5</span>
+              <span className="text-white font-display font-extrabold text-xs tracking-tight">LAB</span>
             </div>
             <span className="font-display text-xl font-bold tracking-tight">
               The Lab <span className="text-gradient">Guys</span>
