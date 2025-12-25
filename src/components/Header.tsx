@@ -1,10 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-const Header = () => {
+interface HeaderProps {
+  onContactClick?: () => void;
+}
+
+const Header = ({ onContactClick }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleTeamClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    // Navigate to home if not already there, then scroll
+    navigate('/');
+    setTimeout(() => {
+      document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const handleContactClick = () => {
+    setIsMenuOpen(false);
+    onContactClick?.();
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-strong">
@@ -28,14 +48,19 @@ const Header = () => {
               Home
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 group-hover:w-full transition-all duration-300" />
             </Link>
-            <Link
-              to="/#team"
+            <button
+              onClick={handleTeamClick}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
             >
               Team
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Button variant="default" size="sm" className="ml-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 border-0 shadow-glow-sm">
+            </button>
+            <Button 
+              variant="default" 
+              size="sm" 
+              className="ml-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 border-0 shadow-glow-sm"
+              onClick={handleContactClick}
+            >
               Get in Touch
             </Button>
           </nav>
@@ -60,14 +85,18 @@ const Header = () => {
               >
                 Home
               </Link>
-              <Link
-                to="/#team"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={handleTeamClick}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
               >
                 Team
-              </Link>
-              <Button variant="default" size="sm" className="w-fit bg-gradient-to-r from-purple-600 to-pink-600 border-0">
+              </button>
+              <Button 
+                variant="default" 
+                size="sm" 
+                className="w-fit bg-gradient-to-r from-purple-600 to-pink-600 border-0"
+                onClick={handleContactClick}
+              >
                 Get in Touch
               </Button>
             </nav>

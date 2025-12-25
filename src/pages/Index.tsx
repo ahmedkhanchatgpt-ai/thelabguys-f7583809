@@ -1,10 +1,14 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
+import ContactModal from "@/components/ContactModal";
 import { teamMembers } from "@/data/teamMembers";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette } from "lucide-react";
 
 const Index = () => {
+  const [contactOpen, setContactOpen] = useState(false);
+  
   const icons = [
     <Sparkles key="1" className="w-6 h-6" />,
     <Zap key="2" className="w-6 h-6" />,
@@ -22,7 +26,8 @@ const Index = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-500/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
       </div>
 
-      <Header />
+      <Header onContactClick={() => setContactOpen(true)} />
+      <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-20 px-6 relative">
@@ -76,12 +81,12 @@ const Index = () => {
                 Meet the Team
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
               </a>
-              <a
-                href="mailto:hello@thelabguys.com"
+              <button
+                onClick={() => setContactOpen(true)}
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full glass border border-white/10 text-foreground font-medium hover:bg-white/5 transition-all duration-300"
               >
                 Get in Touch
-              </a>
+              </button>
             </div>
 
             {/* Floating expertise icons */}
@@ -138,12 +143,12 @@ const Index = () => {
                 Whether you need SEO, development, security, trading insights, or
                 creative design — let's build something amazing together.
               </p>
-              <a
-                href="mailto:hello@thelabguys.com"
+              <button
+                onClick={() => setContactOpen(true)}
                 className="inline-flex items-center justify-center px-10 py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white font-semibold hover:bg-[position:100%_0] transition-all duration-500 shadow-glow"
               >
                 Start a Conversation
-              </a>
+              </button>
             </div>
           </div>
         </div>
