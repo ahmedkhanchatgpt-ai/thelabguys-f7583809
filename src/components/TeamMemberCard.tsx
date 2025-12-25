@@ -24,7 +24,7 @@ const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardPr
       {/* Noise texture */}
       <div className="absolute inset-0 noise opacity-50" />
 
-      <div className={`relative ${isFeatured ? "aspect-[3/4]" : "aspect-square"} p-6 flex flex-col justify-between`}>
+      <div className={`relative ${isFeatured ? "aspect-[3/4]" : "aspect-square"} p-6 flex flex-col`}>
         {/* Floating orb with initials */}
         <div className="flex-1 flex items-center justify-center relative">
           {/* Glow effect behind orb */}
@@ -39,22 +39,20 @@ const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardPr
           </div>
         </div>
 
-        {/* Content */}
-        <div className="relative mt-4">
-          <div className="flex items-end justify-between gap-4">
-            <div className="flex-1">
-              <h3 className="font-display text-lg md:text-xl font-semibold text-foreground mb-1 group-hover:text-gradient transition-all duration-300">
-                {member.name}
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                {member.role}
-              </p>
-            </div>
-            
-            {/* Arrow button */}
-            <div className={`w-11 h-11 rounded-full ${member.iconBg} flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg`}>
-              <ArrowUpRight className="w-5 h-5 text-white" />
-            </div>
+        {/* Content - fixed height area */}
+        <div className="relative mt-4 h-20 flex items-start justify-between gap-3">
+          <div className="flex-1 min-w-0">
+            <h3 className="font-display text-lg md:text-xl font-semibold text-foreground mb-1 group-hover:text-gradient transition-all duration-300 truncate">
+              {member.name}
+            </h3>
+            <p className="text-sm text-muted-foreground line-clamp-2">
+              {member.role}
+            </p>
+          </div>
+          
+          {/* Arrow button - circular with colored background */}
+          <div className={`flex-shrink-0 w-10 h-10 rounded-full ${member.iconBg} flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg`}>
+            <ArrowUpRight className="w-4 h-4 text-white" strokeWidth={2.5} />
           </div>
         </div>
       </div>
