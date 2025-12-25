@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { ArrowLeft, Mail, Linkedin, Twitter, Github, ArrowRight } from "lucide-react";
+import { ArrowLeft, Mail, Linkedin, Github, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SkillBadge from "@/components/SkillBadge";
@@ -112,8 +112,10 @@ const TeamMemberProfile = () => {
                 {member.twitter && (
                   <Button asChild variant="outline" className="gap-2 glass border-white/10 hover:bg-white/5">
                     <a href={member.twitter} target="_blank" rel="noopener noreferrer">
-                      <Twitter className="w-4 h-4" />
-                      Twitter
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                      </svg>
+                      X
                     </a>
                   </Button>
                 )}
