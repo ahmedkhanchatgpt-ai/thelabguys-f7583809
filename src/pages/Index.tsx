@@ -55,6 +55,11 @@ const Index = () => {
                     stroke="url(#underline-gradient)"
                     strokeWidth="4"
                     strokeLinecap="round"
+                    className="animate-draw-line"
+                    style={{
+                      strokeDasharray: 300,
+                      strokeDashoffset: 300,
+                    }}
                   />
                   <defs>
                     <linearGradient id="underline-gradient" x1="0" y1="0" x2="300" y2="0">
