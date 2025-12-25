@@ -39,13 +39,12 @@ const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardPr
           </div>
         </div>
 
-        {/* Content - fixed height area */}
-        <div className="relative mt-4 h-20 flex items-start justify-between gap-3">
+        <div className="relative mt-4 min-h-20 flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
-            <h3 className="font-display text-lg md:text-xl font-semibold text-foreground mb-1 group-hover:text-gradient transition-all duration-300 truncate">
+            <h3 className="font-display text-lg md:text-xl font-semibold text-foreground mb-1 group-hover:text-gradient transition-all duration-300">
               {member.name}
             </h3>
-            <p className="text-sm text-muted-foreground line-clamp-2">
+            <p className="text-sm text-muted-foreground">
               {member.role}
             </p>
           </div>
