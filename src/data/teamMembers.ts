@@ -63,8 +63,8 @@ export const teamMembers: TeamMember[] = [
     iconBg: "bg-gradient-to-br from-amber-400 to-red-500",
   },
   {
-    id: "muhammad-ahmed",
-    name: "Muhammad Ahmed",
+    id: "muhammad-ahmed-khan",
+    name: "Muhammad Ahmed Khan MAK",
     role: "Video Editor & Graphic Designer",
     shortBio: "Crafting visual stories that captivate and inspire.",
     fullBio: "I bring ideas to life through compelling visual content. From cinematic video editing to stunning graphic design, I create content that resonates with audiences. My creative process focuses on storytelling, brand consistency, and visual impact. Whether it's a brand identity, social media content, or a promotional video, I deliver polished, professional results.",
