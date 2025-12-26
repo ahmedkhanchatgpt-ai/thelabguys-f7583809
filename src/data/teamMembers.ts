@@ -86,6 +86,7 @@ export const teamMembers: TeamMember[] = [
     skills: ["Data Analysis", "SQL", "Python", "Data Visualization", "Excel", "Business Intelligence"],
     email: "kamrankhankakar000@gmail.com",
     linkedin: "https://www.linkedin.com/in/kamran-kakar-581043376",
+    twitter: "https://x.com/kamrankakar07",
     image: "/placeholder.svg",
     gradient: "from-green-400 via-emerald-500 to-teal-600",
     glowColor: "shadow-[0_0_60px_-10px_hsl(160_100%_50%/0.5)]",
