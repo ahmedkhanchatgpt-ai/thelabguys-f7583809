@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { teamMembers } from "@/data/teamMembers";
-import { Mail, Sparkles, Zap, Shield, TrendingUp, Palette } from "lucide-react";
+import { Mail, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 
 interface ContactModalProps {
   open: boolean;
@@ -13,6 +13,7 @@ const icons = [
   <Shield key="3" className="w-5 h-5" />,
   <TrendingUp key="4" className="w-5 h-5" />,
   <Palette key="5" className="w-5 h-5" />,
+  <Brain key="6" className="w-5 h-5" />,
 ];
 
 const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
