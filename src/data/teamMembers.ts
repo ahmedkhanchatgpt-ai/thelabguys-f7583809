@@ -24,7 +24,7 @@ export const teamMembers: TeamMember[] = [
     fullBio: "Sumair Ahmed is a Generative Engine Optimization (GEO) and Meta Ads specialist helping brands achieve instant reach and long-term visibility. He optimizes digital presence for AI-powered platforms like ChatGPT, Google Gemini, Perplexity, Bing, and DeepSeek, while also running high-performing Meta ad campaigns focused on conversions and growth. By combining AI search visibility, structured data, and data-driven advertising, he positions brands as trusted answers across modern search ecosystems. Sumair's work centers on scalable growth, authority, and measurable results.",
     skills: ["GEO", "Technical SEO", "Keyword Research", "Content Strategy", "Link Building", "Analytics", "Local SEO"],
     email: "sumairahmed714@gmail.com",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/in/sumair-ahmed-1087a9335",
     twitter: "https://twitter.com",
     image: "/placeholder.svg",
     gradient: "from-cyan-400 via-teal-400 to-emerald-500",
