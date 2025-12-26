@@ -19,7 +19,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "sumair-ahmed",
     name: "Sumair Ahmed",
-    role: "SEO Expert",
+    role: "GEO & SEO Expert",
     shortBio: "Driving organic growth through strategic SEO optimization.",
     fullBio: "Sumair Ahmed is a Generative Engine Optimization (GEO) and Meta Ads specialist helping brands achieve instant reach and long-term visibility. He optimizes digital presence for AI-powered platforms like ChatGPT, Google Gemini, Perplexity, Bing, and DeepSeek, while also running high-performing Meta ad campaigns focused on conversions and growth. By combining AI search visibility, structured data, and data-driven advertising, he positions brands as trusted answers across modern search ecosystems. Sumair's work centers on scalable growth, authority, and measurable results.",
     skills: ["GEO", "Technical SEO", "Keyword Research", "Content Strategy", "Link Building", "Analytics", "Local SEO"],
