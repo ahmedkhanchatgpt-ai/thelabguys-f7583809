@@ -151,6 +151,10 @@ export default {
           "50%": { transform: "scale(1)", opacity: "1" },
           "75%": { transform: "scale(1.05)", opacity: "0.9" },
         },
+        "button-glow": {
+          "0%, 100%": { boxShadow: "0 0 20px 0 hsl(270 95% 65% / 0.4), 0 0 40px 0 hsl(340 95% 60% / 0.2)" },
+          "50%": { boxShadow: "0 0 40px 5px hsl(270 95% 65% / 0.6), 0 0 80px 10px hsl(340 95% 60% / 0.4)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -168,6 +172,7 @@ export default {
         "chart-rise": "chart-rise 1.5s ease-in-out infinite",
         "palette-spin": "palette-spin 8s linear infinite",
         "brain-think": "brain-think 3s ease-in-out infinite",
+        "button-glow": "button-glow 2s ease-in-out infinite",
       },
     },
   },
