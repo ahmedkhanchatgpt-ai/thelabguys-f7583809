@@ -13,6 +13,7 @@ export interface TeamMember {
   gradient: string;
   glowColor: string;
   iconBg: string;
+  initials?: string;
 }
 
 export const teamMembers: TeamMember[] = [
@@ -64,7 +65,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: "muhammad-ahmed-khan",
-    name: "Muhammad Ahmed Khan MAK",
+    name: "Muhammad Ahmed Khan",
     role: "Video Editor & Graphic Designer",
     shortBio: "Crafting visual stories that captivate and inspire.",
     fullBio: "I bring ideas to life through compelling visual content. From cinematic video editing to stunning graphic design, I create content that resonates with audiences. My creative process focuses on storytelling, brand consistency, and visual impact. Whether it's a brand identity, social media content, or a promotional video, I deliver polished, professional results.",
@@ -76,6 +77,7 @@ export const teamMembers: TeamMember[] = [
     gradient: "from-purple-400 via-fuchsia-500 to-pink-500",
     glowColor: "shadow-[0_0_60px_-10px_hsl(280_100%_60%/0.5)]",
     iconBg: "bg-gradient-to-br from-purple-400 to-pink-500",
+    initials: "MAK",
   },
   {
     id: "kamran-khan",
