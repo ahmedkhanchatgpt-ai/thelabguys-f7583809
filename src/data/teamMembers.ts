@@ -25,7 +25,7 @@ export const teamMembers: TeamMember[] = [
     skills: ["GEO", "Technical SEO", "Keyword Research", "Content Strategy", "Link Building", "Analytics", "Local SEO"],
     email: "sumairahmed714@gmail.com",
     linkedin: "https://www.linkedin.com/in/sumair-ahmed-1087a9335",
-    twitter: "https://twitter.com",
+    twitter: "https://x.com/sumairx012",
     image: "/placeholder.svg",
     gradient: "from-cyan-400 via-teal-400 to-emerald-500",
     glowColor: "shadow-[0_0_60px_-10px_hsl(180_100%_50%/0.5)]",
