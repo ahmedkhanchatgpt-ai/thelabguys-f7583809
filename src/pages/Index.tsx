@@ -9,6 +9,15 @@ import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lu
 const Index = () => {
   const [contactOpen, setContactOpen] = useState(false);
   
+  const iconAnimations = [
+    "animate-twinkle",      // Sparkles - twinkle effect
+    "animate-zap",          // Zap - quick shake
+    "animate-shield-pulse", // Shield - breathing pulse
+    "animate-chart-rise",   // TrendingUp - rising motion
+    "animate-palette-spin", // Palette - slow rotation
+    "animate-brain-think",  // Brain - thinking pulse
+  ];
+
   const icons = [
     <Sparkles key="1" className="w-6 h-6" />,
     <Zap key="2" className="w-6 h-6" />,
@@ -100,11 +109,12 @@ const Index = () => {
               {teamMembers.map((member, i) => (
                 <div
                   key={member.id}
-                  className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg animate-icon-dance hover:scale-125 hover:shadow-xl transition-all duration-300 cursor-pointer`}
-                  style={{ animationDelay: `${i * 0.4}s` }}
+                  className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer`}
                   title={member.role}
                 >
-                  {icons[i]}
+                  <div className={iconAnimations[i]}>
+                    {icons[i]}
+                  </div>
                 </div>
               ))}
             </div>

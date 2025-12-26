@@ -124,6 +124,33 @@ export default {
           "80%": { transform: "translateY(-3px) rotate(-2deg) scale(1.02)" },
           "100%": { transform: "translateY(0) rotate(0deg) scale(1)" },
         },
+        "twinkle": {
+          "0%, 100%": { transform: "scale(1) rotate(0deg)", opacity: "1" },
+          "50%": { transform: "scale(1.15) rotate(15deg)", opacity: "0.8" },
+        },
+        "zap": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "25%": { transform: "translateX(-2px)" },
+          "75%": { transform: "translateX(2px)" },
+        },
+        "shield-pulse": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.08)" },
+        },
+        "chart-rise": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+        "palette-spin": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "brain-think": {
+          "0%, 100%": { transform: "scale(1)", opacity: "1" },
+          "25%": { transform: "scale(1.05)", opacity: "0.9" },
+          "50%": { transform: "scale(1)", opacity: "1" },
+          "75%": { transform: "scale(1.05)", opacity: "0.9" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -135,6 +162,12 @@ export default {
         "wiggle": "wiggle 1s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "icon-dance": "icon-dance 3s ease-in-out infinite",
+        "twinkle": "twinkle 2s ease-in-out infinite",
+        "zap": "zap 0.3s ease-in-out infinite",
+        "shield-pulse": "shield-pulse 2.5s ease-in-out infinite",
+        "chart-rise": "chart-rise 1.5s ease-in-out infinite",
+        "palette-spin": "palette-spin 8s linear infinite",
+        "brain-think": "brain-think 3s ease-in-out infinite",
       },
     },
   },
