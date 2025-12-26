@@ -161,10 +161,9 @@ const Index = () => {
               </p>
               <button
                 onClick={() => setContactOpen(true)}
-                className="group relative inline-flex items-center justify-center px-10 py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white font-semibold hover:bg-[position:100%_0] hover:scale-105 transition-all duration-500 shadow-glow overflow-hidden"
+                className="group relative inline-flex items-center justify-center px-10 py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white font-semibold transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_15px_rgba(168,85,247,0.4),0_0_80px_30px_rgba(236,72,153,0.3)] shadow-[0_0_15px_2px_rgba(168,85,247,0.3)]"
               >
-                <span className="relative z-10">Start a Conversation</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                Start a Conversation
               </button>
             </div>
           </div>
