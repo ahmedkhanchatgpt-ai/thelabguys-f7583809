@@ -76,6 +76,20 @@ export const teamMembers: TeamMember[] = [
     glowColor: "shadow-[0_0_60px_-10px_hsl(280_100%_60%/0.5)]",
     iconBg: "bg-gradient-to-br from-purple-400 to-pink-500",
   },
+  {
+    id: "kamran-khan",
+    name: "Kamran Khan",
+    role: "Data Analyst",
+    shortBio: "Transforming raw data into actionable business insights.",
+    fullBio: "I specialize in data analysis and visualization, helping businesses make informed decisions through data-driven insights. From collecting and cleaning data to building comprehensive dashboards and reports, I turn complex datasets into clear, actionable strategies. My expertise spans statistical analysis, predictive modeling, and business intelligence tools.",
+    skills: ["Data Analysis", "SQL", "Python", "Data Visualization", "Excel", "Business Intelligence"],
+    email: "kamrankhankakar000@gmail.com",
+    linkedin: "https://www.linkedin.com/in/kamran-kakar-581043376",
+    image: "/placeholder.svg",
+    gradient: "from-green-400 via-emerald-500 to-teal-600",
+    glowColor: "shadow-[0_0_60px_-10px_hsl(160_100%_50%/0.5)]",
+    iconBg: "bg-gradient-to-br from-green-400 to-teal-600",
+  },
 ];
 
 export const getTeamMember = (id: string): TeamMember | undefined => {
