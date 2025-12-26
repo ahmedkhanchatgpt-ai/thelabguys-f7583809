@@ -100,11 +100,13 @@ const Index = () => {
               {teamMembers.map((member, i) => (
                 <div
                   key={member.id}
-                  className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg animate-float`}
-                  style={{ animationDelay: `${i * 0.3}s` }}
+                  className={`group w-12 h-12 md:w-14 md:h-14 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg animate-bounce-soft hover:scale-125 hover:rotate-12 transition-all duration-300 cursor-pointer`}
+                  style={{ animationDelay: `${i * 0.2}s` }}
                   title={member.role}
                 >
-                  {icons[i]}
+                  <div className="group-hover:animate-wiggle">
+                    {icons[i]}
+                  </div>
                 </div>
               ))}
             </div>
