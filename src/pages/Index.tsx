@@ -100,8 +100,8 @@ const Index = () => {
               {teamMembers.map((member, i) => (
                 <div
                   key={member.id}
-                  className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg animate-float`}
-                  style={{ animationDelay: `${i * 0.15}s` }}
+                  className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg animate-icon-dance hover:scale-125 hover:shadow-xl transition-all duration-300 cursor-pointer`}
+                  style={{ animationDelay: `${i * 0.4}s` }}
                   title={member.role}
                 >
                   {icons[i]}
