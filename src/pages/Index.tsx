@@ -161,7 +161,7 @@ const Index = () => {
               </p>
               <button
                 onClick={() => setContactOpen(true)}
-                className="inline-flex items-center justify-center px-10 py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white font-semibold hover:bg-[position:100%_0] transition-all duration-500 shadow-glow"
+                className="inline-flex items-center justify-center px-10 py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white font-semibold hover:bg-[position:100%_0] hover:scale-105 transition-all duration-500 animate-button-glow"
               >
                 Start a Conversation
               </button>
