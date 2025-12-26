@@ -27,21 +27,21 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
         
         <div className="mt-6 space-y-3">
           {teamMembers.map((member, index) => {
-            const glowColors: Record<string, string> = {
-              'bg-gradient-to-br from-cyan-500 to-blue-600': 'hover:shadow-[0_0_25px_5px_rgba(6,182,212,0.4)]',
-              'bg-gradient-to-br from-orange-500 to-red-600': 'hover:shadow-[0_0_25px_5px_rgba(249,115,22,0.4)]',
-              'bg-gradient-to-br from-amber-500 to-orange-600': 'hover:shadow-[0_0_25px_5px_rgba(245,158,11,0.4)]',
-              'bg-gradient-to-br from-emerald-500 to-teal-600': 'hover:shadow-[0_0_25px_5px_rgba(16,185,129,0.4)]',
-              'bg-gradient-to-br from-pink-500 to-rose-600': 'hover:shadow-[0_0_25px_5px_rgba(236,72,153,0.4)]',
-              'bg-gradient-to-br from-red-500 to-rose-600': 'hover:shadow-[0_0_25px_5px_rgba(239,68,68,0.4)]',
+            const borderGlowStyles: Record<string, string> = {
+              'bg-gradient-to-br from-cyan-500 to-blue-600': 'hover:border-cyan-500/60 hover:shadow-[0_0_20px_2px_rgba(6,182,212,0.5),inset_0_0_20px_rgba(6,182,212,0.1)]',
+              'bg-gradient-to-br from-orange-500 to-red-600': 'hover:border-orange-500/60 hover:shadow-[0_0_20px_2px_rgba(249,115,22,0.5),inset_0_0_20px_rgba(249,115,22,0.1)]',
+              'bg-gradient-to-br from-amber-500 to-orange-600': 'hover:border-amber-500/60 hover:shadow-[0_0_20px_2px_rgba(245,158,11,0.5),inset_0_0_20px_rgba(245,158,11,0.1)]',
+              'bg-gradient-to-br from-emerald-500 to-teal-600': 'hover:border-emerald-500/60 hover:shadow-[0_0_20px_2px_rgba(16,185,129,0.5),inset_0_0_20px_rgba(16,185,129,0.1)]',
+              'bg-gradient-to-br from-pink-500 to-rose-600': 'hover:border-pink-500/60 hover:shadow-[0_0_20px_2px_rgba(236,72,153,0.5),inset_0_0_20px_rgba(236,72,153,0.1)]',
+              'bg-gradient-to-br from-red-500 to-rose-600': 'hover:border-red-500/60 hover:shadow-[0_0_20px_2px_rgba(239,68,68,0.5),inset_0_0_20px_rgba(239,68,68,0.1)]',
             };
-            const glowClass = glowColors[member.iconBg] || 'hover:shadow-[0_0_25px_5px_rgba(168,85,247,0.4)]';
+            const glowClass = borderGlowStyles[member.iconBg] || 'hover:border-purple-500/60 hover:shadow-[0_0_20px_2px_rgba(168,85,247,0.5),inset_0_0_20px_rgba(168,85,247,0.1)]';
             
             return (
               <a
                 key={member.id}
                 href={`mailto:${member.email}`}
-                className={`group flex items-center gap-4 p-4 rounded-2xl glass border border-white/5 hover:border-white/20 transition-all duration-300 hover:scale-[1.02] ${glowClass}`}
+                className={`group flex items-center gap-4 p-4 rounded-2xl glass border-2 border-white/10 transition-all duration-300 hover:scale-[1.02] ${glowClass}`}
                 onClick={() => onOpenChange(false)}
               >
                 <div
