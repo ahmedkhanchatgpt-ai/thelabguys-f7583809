@@ -83,7 +83,7 @@ const Index = () => {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 opacity-0 animate-fade-up stagger-2">
-              Six digital experts. One mission. Transforming ideas into
+              {teamMembers.length} digital experts. One mission. Transforming ideas into
               extraordinary digital experiences.
             </p>
 

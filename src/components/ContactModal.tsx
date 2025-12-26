@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { teamMembers } from "@/data/teamMembers";
 import { Mail, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 
@@ -24,6 +24,9 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
           <DialogTitle className="font-display text-2xl font-bold text-center">
             Who would you like to <span className="text-gradient">contact?</span>
           </DialogTitle>
+          <DialogDescription className="text-center text-muted-foreground">
+            Select a team member to send them an email directly.
+          </DialogDescription>
         </DialogHeader>
         
         <div className="mt-6 space-y-3">
