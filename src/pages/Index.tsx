@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import ContactModal from "@/components/ContactModal";
 import { teamMembers } from "@/data/teamMembers";
-import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette } from "lucide-react";
+import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Megaphone } from "lucide-react";
 
 const Index = () => {
   const [contactOpen, setContactOpen] = useState(false);
@@ -15,6 +15,7 @@ const Index = () => {
     <Shield key="3" className="w-6 h-6" />,
     <TrendingUp key="4" className="w-6 h-6" />,
     <Palette key="5" className="w-6 h-6" />,
+    <Megaphone key="6" className="w-6 h-6" />,
   ];
 
   return (
@@ -73,7 +74,7 @@ const Index = () => {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 opacity-0 animate-fade-up stagger-2">
-              Five digital experts. One mission. Transforming ideas into
+              Six digital experts. One mission. Transforming ideas into
               extraordinary digital experiences.
             </p>
 
