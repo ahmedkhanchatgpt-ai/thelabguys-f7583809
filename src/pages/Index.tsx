@@ -123,13 +123,11 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Team Grid - Centered */}
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl">
-              {teamMembers.map((member, index) => (
-                <TeamMemberCard key={member.id} member={member} index={index} />
-              ))}
-            </div>
+          {/* Team Grid - Single Row */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+            {teamMembers.map((member, index) => (
+              <TeamMemberCard key={member.id} member={member} index={index} />
+            ))}
           </div>
         </div>
       </section>
