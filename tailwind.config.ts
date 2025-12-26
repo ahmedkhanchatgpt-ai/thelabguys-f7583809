@@ -155,6 +155,10 @@ export default {
           "0%, 100%": { boxShadow: "0 0 20px 0 hsl(270 95% 65% / 0.4), 0 0 40px 0 hsl(340 95% 60% / 0.2)" },
           "50%": { boxShadow: "0 0 40px 5px hsl(270 95% 65% / 0.6), 0 0 80px 10px hsl(340 95% 60% / 0.4)" },
         },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -173,6 +177,7 @@ export default {
         "palette-spin": "palette-spin 8s linear infinite",
         "brain-think": "brain-think 3s ease-in-out infinite",
         "button-glow": "button-glow 2s ease-in-out infinite",
+        "shimmer": "shimmer 3s ease-in-out infinite",
       },
     },
   },
