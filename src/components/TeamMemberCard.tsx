@@ -35,7 +35,7 @@ const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardPr
           
           {/* Main orb */}
           <div className={`relative w-28 h-28 md:w-32 md:h-32 rounded-full ${member.iconBg} flex items-center justify-center text-white text-2xl md:text-3xl font-display font-bold shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-            {member.name.split(' ').map(n => n[0]).join('')}
+            {member.initials || member.name.split(' ').map(n => n[0]).join('')}
           </div>
         </div>
 
