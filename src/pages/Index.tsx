@@ -101,12 +101,6 @@ const Index = () => {
                 Meet the Team
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
               </button>
-              <button
-                onClick={() => setContactOpen(true)}
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full glass border border-white/10 text-foreground font-medium hover:bg-white/5 transition-all duration-300"
-              >
-                Get in Touch
-              </button>
             </div>
 
             {/* Floating expertise icons */}
