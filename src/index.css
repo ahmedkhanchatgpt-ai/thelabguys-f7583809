@@ -204,3 +204,16 @@
 .animate-draw-line {
   animation: draw-line 1s ease-out 0.8s forwards;
 }
+
+@keyframes border-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.group:hover .group-hover\:animate-border-spin {
+  animation: border-rotate 2s linear infinite;
+}
