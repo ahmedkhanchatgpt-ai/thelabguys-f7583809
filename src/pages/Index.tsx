@@ -89,13 +89,18 @@ const Index = () => {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 opacity-0 animate-fade-up stagger-3">
-              <a
-                href="#team"
+              <button
+                onClick={() => {
+                  document.getElementById('team')?.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }}
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white font-medium hover:bg-[position:100%_0] transition-all duration-500 shadow-glow"
               >
                 Meet the Team
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
-              </a>
+              </button>
               <button
                 onClick={() => setContactOpen(true)}
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full glass border border-white/10 text-foreground font-medium hover:bg-white/5 transition-all duration-300"
