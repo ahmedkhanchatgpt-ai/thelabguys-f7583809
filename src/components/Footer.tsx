@@ -7,12 +7,12 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-col items-center md:items-start gap-3">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 flex items-center justify-center">
+            <Link to="/" className="group flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 flex items-center justify-center transition-shadow duration-300 group-hover:shadow-glow-purple">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <span className="font-display text-lg font-bold">
-                The Lab <span className="text-gradient">Guys</span>
+              <span className="font-display text-lg font-bold transition-all duration-300 group-hover:drop-shadow-[0_0_12px_hsl(var(--primary))]">
+                The Lab <span className="text-gradient group-hover:drop-shadow-[0_0_15px_hsl(280,100%,70%)]">Guys</span>
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
