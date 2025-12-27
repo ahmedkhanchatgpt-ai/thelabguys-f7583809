@@ -43,24 +43,32 @@ const TeamMemberProfile = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Left Column - Visual */}
             <div className="opacity-0 animate-fade-up stagger-1">
-              <div className="aspect-square rounded-3xl glass overflow-hidden relative">
-                {/* Gradient background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-20`} />
-                <div className="absolute inset-0 noise" />
+              <div className="relative">
+                {/* Gradient glow border - outer blur */}
+                <div className={`absolute -inset-[3px] rounded-3xl bg-gradient-to-br ${member.gradient} blur-md opacity-70`} />
+                {/* Gradient border - sharp */}
+                <div className={`absolute -inset-[2px] rounded-3xl bg-gradient-to-br ${member.gradient}`} />
                 
-                {/* Animated ring */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-72 h-72 rounded-full border border-white/10 animate-spin-slow" />
-                  <div className="absolute w-56 h-56 rounded-full border border-white/5 animate-spin-slow" style={{ animationDirection: 'reverse' }} />
-                </div>
+                {/* Content container */}
+                <div className="relative aspect-square rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden">
+                  {/* Gradient background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-20`} />
+                  <div className="absolute inset-0 noise" />
+                  
+                  {/* Animated ring */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-72 h-72 rounded-full border border-white/10 animate-spin-slow" />
+                    <div className="absolute w-56 h-56 rounded-full border border-white/5 animate-spin-slow" style={{ animationDirection: 'reverse' }} />
+                  </div>
 
-                {/* Main orb */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className={`absolute w-48 h-48 ${member.iconBg} rounded-full blur-3xl opacity-40`} />
-                  <div
-                    className={`relative w-44 h-44 md:w-56 md:h-56 rounded-full ${member.iconBg} flex items-center justify-center text-white text-6xl md:text-7xl font-display font-bold shadow-2xl`}
-                  >
-                    {member.name.split(" ").map((n) => n[0]).join("")}
+                  {/* Main orb */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className={`absolute w-48 h-48 ${member.iconBg} rounded-full blur-3xl opacity-40`} />
+                    <div
+                      className={`relative w-44 h-44 md:w-56 md:h-56 rounded-full ${member.iconBg} flex items-center justify-center text-white text-6xl md:text-7xl font-display font-bold shadow-2xl`}
+                    >
+                      {member.name.split(" ").map((n) => n[0]).join("")}
+                    </div>
                   </div>
                 </div>
               </div>
