@@ -19,7 +19,7 @@ const icons = [
 const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="glass border-white/10 max-w-lg">
+      <DialogContent className="glass border-transparent max-w-lg relative before:absolute before:inset-0 before:rounded-lg before:p-[2px] before:bg-gradient-to-br before:from-purple-500 before:via-cyan-500 before:to-pink-500 before:-z-10 before:blur-sm after:absolute after:inset-[1px] after:rounded-lg after:bg-background after:-z-10 shadow-[0_0_30px_rgba(168,85,247,0.3),0_0_60px_rgba(6,182,212,0.2)]">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-bold text-center">
             Who would you like to <span className="text-gradient">contact?</span>
