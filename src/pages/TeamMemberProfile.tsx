@@ -43,16 +43,16 @@ const TeamMemberProfile = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Left Column - Visual */}
             <div className="opacity-0 animate-fade-up stagger-1">
-              <div className="relative">
+              <div className="relative group cursor-pointer">
                 {/* Gradient glow border - outer blur */}
-                <div className={`absolute -inset-[3px] rounded-3xl bg-gradient-to-br ${member.gradient} blur-md opacity-70`} />
+                <div className={`absolute -inset-[3px] rounded-3xl bg-gradient-to-br ${member.gradient} blur-md opacity-70 transition-all duration-500 group-hover:opacity-100 group-hover:blur-xl group-hover:-inset-[6px]`} />
                 {/* Gradient border - sharp */}
-                <div className={`absolute -inset-[2px] rounded-3xl bg-gradient-to-br ${member.gradient}`} />
+                <div className={`absolute -inset-[2px] rounded-3xl bg-gradient-to-br ${member.gradient} transition-all duration-300 group-hover:animate-pulse`} />
                 
                 {/* Content container */}
-                <div className="relative aspect-square rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden">
+                <div className="relative aspect-square rounded-3xl bg-background/95 backdrop-blur-xl overflow-hidden transition-transform duration-300 group-hover:scale-[1.01]">
                   {/* Gradient background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-20`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-20 transition-opacity duration-300 group-hover:opacity-30`} />
                   <div className="absolute inset-0 noise" />
                   
                   {/* Animated ring */}
@@ -63,9 +63,9 @@ const TeamMemberProfile = () => {
 
                   {/* Main orb */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className={`absolute w-48 h-48 ${member.iconBg} rounded-full blur-3xl opacity-40`} />
+                    <div className={`absolute w-48 h-48 ${member.iconBg} rounded-full blur-3xl opacity-40 transition-all duration-300 group-hover:opacity-60 group-hover:w-56 group-hover:h-56`} />
                     <div
-                      className={`relative w-44 h-44 md:w-56 md:h-56 rounded-full ${member.iconBg} flex items-center justify-center text-white text-6xl md:text-7xl font-display font-bold shadow-2xl`}
+                      className={`relative w-44 h-44 md:w-56 md:h-56 rounded-full ${member.iconBg} flex items-center justify-center text-white text-6xl md:text-7xl font-display font-bold shadow-2xl transition-all duration-300 group-hover:shadow-[0_0_60px_rgba(255,255,255,0.3)]`}
                     >
                       {member.name.split(" ").map((n) => n[0]).join("")}
                     </div>
