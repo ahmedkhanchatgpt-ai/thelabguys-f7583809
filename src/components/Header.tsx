@@ -11,6 +11,13 @@ const Header = ({ onContactClick }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleTeamClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsMenuOpen(false);
@@ -41,13 +48,13 @@ const Header = ({ onContactClick }: HeaderProps) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link
-              to="/"
+            <button
+              onClick={handleHomeClick}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
             >
               Home
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 group-hover:w-full transition-all duration-300" />
-            </Link>
+            </button>
             <button
               onClick={handleTeamClick}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
@@ -78,13 +85,12 @@ const Header = ({ onContactClick }: HeaderProps) => {
         {isMenuOpen && (
           <div className="md:hidden py-6 border-t border-border animate-fade-in">
             <nav className="flex flex-col gap-4">
-              <Link
-                to="/"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={handleHomeClick}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
               >
                 Home
-              </Link>
+              </button>
               <button
                 onClick={handleTeamClick}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
