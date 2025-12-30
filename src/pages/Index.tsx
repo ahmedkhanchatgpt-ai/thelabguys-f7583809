@@ -134,7 +134,7 @@ const Index = () => {
           </div>
 
           {/* Team Grid - Single Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5">
             {teamMembers.map((member, index) => (
               <TeamMemberCard key={member.id} member={member} index={index} />
             ))}
