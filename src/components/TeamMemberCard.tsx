@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import type { TeamMember } from "@/data/teamMembers";
@@ -8,7 +9,7 @@ interface TeamMemberCardProps {
   variant?: "default" | "featured";
 }
 
-const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardProps) => {
+const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ member, index, variant = "default" }, ref) => {
   const isFeatured = variant === "featured";
 
   return (
@@ -57,6 +58,8 @@ const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardPr
       </div>
     </Link>
   );
-};
+});
+
+TeamMemberCard.displayName = "TeamMemberCard";
 
 export default TeamMemberCard;
