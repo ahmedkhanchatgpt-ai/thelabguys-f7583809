@@ -27,44 +27,44 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
           <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-br from-purple-500 via-cyan-500 to-pink-500" />
           
           {/* Content container */}
-          <div className="relative rounded-xl bg-background/95 backdrop-blur-xl p-6">
+          <div className="relative rounded-xl bg-background/95 backdrop-blur-xl p-4">
             <DialogHeader>
-              <DialogTitle className="font-display text-2xl font-bold text-center">
+              <DialogTitle className="font-display text-xl font-bold text-center">
                 Who would you like to <span className="text-gradient">contact?</span>
               </DialogTitle>
-              <DialogDescription className="text-center text-muted-foreground">
+              <DialogDescription className="text-center text-muted-foreground text-sm">
                 Select a team member to send them an email directly.
               </DialogDescription>
             </DialogHeader>
             
-            <div className="mt-6 space-y-3">
+            <div className="mt-4 space-y-2">
               {teamMembers.map((member, index) => (
                 <a
                   key={member.id}
                   href={`mailto:${member.email}`}
-                  className="group flex items-center gap-4 p-4 rounded-2xl glass border-2 border-white/10 transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/60 hover:shadow-[0_0_25px_3px_rgba(168,85,247,0.5),0_0_50px_6px_rgba(236,72,153,0.3),inset_0_0_20px_rgba(168,85,247,0.1)]"
+                  className="group flex items-center gap-3 p-3 rounded-xl glass border-2 border-white/10 transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/60 hover:shadow-[0_0_25px_3px_rgba(168,85,247,0.5),0_0_50px_6px_rgba(236,72,153,0.3),inset_0_0_20px_rgba(168,85,247,0.1)]"
                   onClick={() => onOpenChange(false)}
                 >
                   <div
-                    className={`w-12 h-12 rounded-xl ${member.iconBg} flex items-center justify-center text-white shadow-lg`}
+                    className={`w-10 h-10 rounded-lg ${member.iconBg} flex items-center justify-center text-white shadow-lg`}
                   >
                     {icons[index]}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-display font-semibold text-foreground group-hover:text-white transition-colors">
+                    <h3 className="font-display font-semibold text-sm text-foreground group-hover:text-white transition-colors">
                       {member.name}
                     </h3>
-                    <p className="text-sm text-muted-foreground">{member.role}</p>
+                    <p className="text-xs text-muted-foreground">{member.role}</p>
                   </div>
-                  <Mail className="w-5 h-5 text-muted-foreground group-hover:text-white transition-colors" />
+                  <Mail className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />
                 </a>
               ))}
             </div>
             
-            <div className="mt-6 pt-4 border-t border-white/10">
+            <div className="mt-4 pt-3 border-t border-white/10">
               <a
                 href="mailto:hello@thelabguys.com"
-                className="block w-full text-center py-3 px-6 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white font-medium hover:bg-[position:100%_0] transition-all duration-500"
+                className="block w-full text-center py-2.5 px-4 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white text-sm font-medium hover:bg-[position:100%_0] transition-all duration-500"
                 onClick={() => onOpenChange(false)}
               >
                 Contact the whole team
