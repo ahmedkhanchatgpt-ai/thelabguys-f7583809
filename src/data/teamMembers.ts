@@ -22,7 +22,7 @@ export const teamMembers: TeamMember[] = [
     name: "Sumair Ahmed",
     role: "GEO & SEO Expert",
     shortBio: "Driving organic growth through strategic SEO optimization.",
-    fullBio: "I work with Generative Engine Optimization (GEO) and SEO to help brands, websites, and creators get discovered across both AI search platforms like ChatGPT, DeepSeek, Google Gemini, Perplexity, and Bing, as well as traditional search engines like Google.\n\nMy focus is on AI search visibility, structured data, entity optimization, and technical GEO, combined with practical SEO. The goal is simple: help your content show up as a trusted answer, wherever people are searching.\n\nIf you want to grow visibility and build long-term authority, feel free to reach out for a GEO + SEO strategy that fits your goals.",
+    fullBio: "I help brands, websites, and creators get discovered through GEO and SEO, on AI platforms like ChatGPT, DeepSeek, Google Gemini, Perplexity, Bing, and Google. I focus on AI search visibility, structured data, entity optimization, and technical GEO, making your content a trusted answer across all search.",
     skills: ["GEO", "Technical SEO", "Keyword Research", "Content Strategy", "Link Building", "Analytics", "Local SEO"],
     email: "sumairahmed714@gmail.com",
     linkedin: "https://www.linkedin.com/in/sumair-ahmed-1087a9335",
