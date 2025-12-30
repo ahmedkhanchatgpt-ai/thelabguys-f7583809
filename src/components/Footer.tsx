@@ -1,7 +1,8 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Sparkles } from "lucide-react";
 
-const Footer = () => {
+const Footer = forwardRef<HTMLElement>((_, ref) => {
   return (
     <footer className="border-t border-border glass-strong">
       <div className="container mx-auto px-6 py-12">
@@ -29,6 +30,8 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = "Footer";
 
 export default Footer;
