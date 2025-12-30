@@ -19,12 +19,12 @@ const Index = () => {
   ];
 
   const icons = [
-    <Sparkles key="1" className="w-6 h-6" />,
-    <Zap key="2" className="w-6 h-6" />,
-    <Shield key="3" className="w-6 h-6" />,
-    <TrendingUp key="4" className="w-6 h-6" />,
-    <Palette key="5" className="w-6 h-6" />,
-    <Brain key="6" className="w-6 h-6" />,
+    <Sparkles key="1" className="w-8 h-8" />,
+    <Zap key="2" className="w-8 h-8" />,
+    <Shield key="3" className="w-8 h-8" />,
+    <TrendingUp key="4" className="w-8 h-8" />,
+    <Palette key="5" className="w-8 h-8" />,
+    <Brain key="6" className="w-8 h-8" />,
   ];
 
   return (
@@ -108,7 +108,7 @@ const Index = () => {
               {teamMembers.map((member, i) => (
                 <div
                   key={member.id}
-                  className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer`}
+                  className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer`}
                   title={member.role}
                 >
                   <div className={iconAnimations[i]}>
