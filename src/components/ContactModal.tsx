@@ -42,7 +42,8 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
                 <a
                   key={member.id}
                   href={`mailto:${member.email}`}
-                  className="group flex items-center gap-3 p-3 rounded-xl glass border-2 border-white/10 transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/60 hover:shadow-[0_0_25px_3px_rgba(168,85,247,0.5),0_0_50px_6px_rgba(236,72,153,0.3),inset_0_0_20px_rgba(168,85,247,0.1)]"
+                  className="group flex items-center gap-3 p-3 rounded-xl glass border-2 border-white/10 transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/60 hover:shadow-[0_0_25px_3px_rgba(168,85,247,0.5),0_0_50px_6px_rgba(236,72,153,0.3),inset_0_0_20px_rgba(168,85,247,0.1)] opacity-0 animate-fade-in"
+                  style={{ animationDelay: `${index * 80}ms`, animationFillMode: 'forwards' }}
                   onClick={() => onOpenChange(false)}
                 >
                   <div
