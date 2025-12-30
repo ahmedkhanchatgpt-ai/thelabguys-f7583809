@@ -19,7 +19,7 @@ const icons = [
 const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl p-0 overflow-visible border-0 bg-transparent shadow-none">
+      <DialogContent className="max-w-lg p-0 overflow-visible border-0 bg-transparent shadow-none [&>button]:text-white [&>button]:hover:text-white">
         <div className="relative">
           {/* Gradient glow border - outer blur */}
           <div className="absolute -inset-[3px] rounded-xl bg-gradient-to-br from-purple-500 via-cyan-500 to-pink-500 blur-md opacity-70" />
