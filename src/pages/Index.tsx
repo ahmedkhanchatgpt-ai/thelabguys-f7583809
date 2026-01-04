@@ -49,75 +49,38 @@ const Index = () => {
               <span className="text-xs md:text-sm text-muted-foreground">Digital Experts Collective</span>
             </div>
 
-            {/* Main heading - Laboratory themed with flask visual */}
-            <div className="relative mb-8 md:mb-12 opacity-0 animate-fade-up stagger-1">
-              {/* Laboratory flask visual with text inside */}
-              <div className="relative inline-block">
-                {/* Floating bubbles */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                  <div className="absolute bottom-1/4 left-1/4 w-3 h-3 rounded-full bg-cyan-400/60 animate-bubble-1" />
-                  <div className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full bg-purple-400/60 animate-bubble-2" />
-                  <div className="absolute bottom-1/4 right-1/3 w-4 h-4 rounded-full bg-pink-400/60 animate-bubble-3" />
-                  <div className="absolute bottom-1/2 right-1/4 w-2 h-2 rounded-full bg-emerald-400/60 animate-bubble-1" style={{ animationDelay: '1s' }} />
-                  <div className="absolute bottom-1/3 left-1/2 w-3 h-3 rounded-full bg-yellow-400/60 animate-bubble-2" style={{ animationDelay: '0.5s' }} />
-                </div>
-                
-                {/* Main title with glitch/scan effect */}
-                <h1 className="font-display relative">
-                  {/* Scan line effect */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent h-full animate-scan-line pointer-events-none" />
-                  
-                  {/* THE */}
-                  <div className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[0.2em] text-muted-foreground/50 mb-2 md:mb-4">
-                    THE
-                  </div>
-                  
-                  {/* LAB - with chemical formula styling */}
-                  <div className="relative text-6xl sm:text-8xl md:text-[11rem] lg:text-[14rem] font-black leading-none">
-                    <span className="relative inline-block">
-                      <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(6,182,212,0.5)]">L</span>
-                      <sub className="absolute -bottom-2 -right-2 text-sm md:text-base font-mono text-cyan-400/70">₆</sub>
-                    </span>
-                    <span className="relative inline-block mx-1 md:mx-3">
-                      <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-rose-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(236,72,153,0.5)]">A</span>
-                      <sub className="absolute -bottom-2 -right-2 text-sm md:text-base font-mono text-pink-400/70">¹²</sub>
-                    </span>
-                    <span className="relative inline-block">
-                      <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]">B</span>
-                      <sub className="absolute -bottom-2 -right-3 text-sm md:text-base font-mono text-amber-400/70">∞</sub>
-                    </span>
-                  </div>
-                  
-                  {/* GUYS - like periodic table element with colorful letters */}
-                  <div className="mt-8 md:mt-10 flex items-center justify-center gap-3 md:gap-5">
-                    {['G', 'U', 'Y', 'S'].map((letter, i) => {
-                      const gradients = [
-                        'bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500', // G
-                        'bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500',  // U
-                        'bg-gradient-to-br from-purple-400 via-pink-500 to-rose-500',  // Y
-                        'bg-gradient-to-br from-orange-400 via-amber-400 to-yellow-400' // S
-                      ];
-                      const glowColors = [
-                        'hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]',   // G
-                        'hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]',  // U
-                        'hover:shadow-[0_0_30px_rgba(236,72,153,0.5)]',  // Y
-                        'hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]'   // S
-                      ];
-                      return (
-                        <div 
-                          key={letter}
-                          className={`group relative w-20 h-24 sm:w-24 sm:h-28 md:w-32 md:h-40 border-2 border-foreground/20 rounded-xl bg-background/50 backdrop-blur-sm flex flex-col items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-default ${glowColors[i]}`}
-                        >
-                          <span className="absolute top-2 left-2.5 text-xs md:text-sm text-muted-foreground font-mono">{47 + i}</span>
-                          <span className={`text-4xl sm:text-5xl md:text-6xl font-black ${gradients[i]} bg-clip-text text-transparent`}>{letter}</span>
-                          <span className="text-xs md:text-sm text-muted-foreground font-mono mt-1">{['Gu', 'Un', 'Yt', 'Sy'][i]}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </h1>
-              </div>
-            </div>
+            {/* Main heading */}
+            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] mb-6 md:mb-8 opacity-0 animate-fade-up stagger-1">
+              We Are{" "}
+              <span className="relative inline-block">
+                <span className="text-gradient">The Lab Guys</span>
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  viewBox="0 0 300 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 8C70 2 230 2 298 8"
+                    stroke="url(#underline-gradient)"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    className="animate-draw-line"
+                    style={{
+                      strokeDasharray: 300,
+                      strokeDashoffset: 300,
+                    }}
+                  />
+                  <defs>
+                    <linearGradient id="underline-gradient" x1="0" y1="0" x2="300" y2="0">
+                      <stop offset="0%" stopColor="hsl(270 95% 65%)" />
+                      <stop offset="50%" stopColor="hsl(200 100% 60%)" />
+                      <stop offset="100%" stopColor="hsl(340 95% 60%)" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+            </h1>
 
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 md:mb-12 px-2 opacity-0 animate-fade-up stagger-2">
               {teamMembers.length} digital experts. One mission. Transforming ideas into
