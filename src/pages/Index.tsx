@@ -97,19 +97,32 @@ const Index = () => {
                     </span>
                   </div>
                   
-                  {/* GUYS - like periodic table element */}
-                  <div className="mt-4 md:mt-6 flex items-center justify-center gap-2 md:gap-3">
-                    {['G', 'U', 'Y', 'S'].map((letter, i) => (
-                      <div 
-                        key={letter}
-                        className="group relative w-12 h-14 sm:w-14 sm:h-16 md:w-20 md:h-24 border-2 border-foreground/20 rounded-lg bg-background/50 backdrop-blur-sm flex flex-col items-center justify-center hover:border-primary hover:bg-primary/10 transition-all duration-300 cursor-default"
-                        style={{ animationDelay: `${i * 0.1}s` }}
-                      >
-                        <span className="absolute top-1 left-1.5 text-[8px] md:text-[10px] text-muted-foreground font-mono">{47 + i}</span>
-                        <span className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground group-hover:text-primary transition-colors">{letter}</span>
-                        <span className="text-[8px] md:text-[10px] text-muted-foreground font-mono mt-0.5">{['Gu', 'Un', 'Yt', 'Sy'][i]}</span>
-                      </div>
-                    ))}
+                  {/* GUYS - like periodic table element with colorful letters */}
+                  <div className="mt-6 md:mt-8 flex items-center justify-center gap-3 md:gap-4">
+                    {['G', 'U', 'Y', 'S'].map((letter, i) => {
+                      const gradients = [
+                        'bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500', // G
+                        'bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500',  // U
+                        'bg-gradient-to-br from-purple-400 via-pink-500 to-rose-500',  // Y
+                        'bg-gradient-to-br from-orange-400 via-amber-400 to-yellow-400' // S
+                      ];
+                      const glowColors = [
+                        'hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]',   // G
+                        'hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]',  // U
+                        'hover:shadow-[0_0_30px_rgba(236,72,153,0.5)]',  // Y
+                        'hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]'   // S
+                      ];
+                      return (
+                        <div 
+                          key={letter}
+                          className={`group relative w-16 h-20 sm:w-20 sm:h-24 md:w-28 md:h-32 border-2 border-foreground/20 rounded-xl bg-background/50 backdrop-blur-sm flex flex-col items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-default ${glowColors[i]}`}
+                        >
+                          <span className="absolute top-1.5 left-2 text-[10px] md:text-xs text-muted-foreground font-mono">{47 + i}</span>
+                          <span className={`text-3xl sm:text-4xl md:text-5xl font-black ${gradients[i]} bg-clip-text text-transparent`}>{letter}</span>
+                          <span className="text-[10px] md:text-xs text-muted-foreground font-mono mt-1">{['Gu', 'Un', 'Yt', 'Sy'][i]}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </h1>
               </div>
