@@ -62,43 +62,34 @@ const Index = () => {
                   <div className="absolute bottom-1/3 left-1/2 w-3 h-3 rounded-full bg-yellow-400/60 animate-bubble-2" style={{ animationDelay: '0.5s' }} />
                 </div>
                 
-                {/* "WE ARE" as small lab label */}
-                <div className="flex items-center justify-center gap-2 mb-4 md:mb-6">
-                  <div className="px-3 py-1 rounded-md border border-dashed border-muted-foreground/30 bg-muted/20">
-                    <span className="text-[10px] md:text-xs tracking-[0.4em] text-muted-foreground font-mono uppercase">
-                      Specimen_01
-                    </span>
-                  </div>
-                </div>
-                
                 {/* Main title with glitch/scan effect */}
                 <h1 className="font-display relative">
                   {/* Scan line effect */}
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent h-full animate-scan-line pointer-events-none" />
                   
                   {/* THE */}
-                  <div className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.2em] text-muted-foreground/50 mb-2">
+                  <div className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[0.2em] text-muted-foreground/50 mb-2 md:mb-4">
                     THE
                   </div>
                   
                   {/* LAB - with chemical formula styling */}
-                  <div className="relative text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] font-black leading-none">
+                  <div className="relative text-6xl sm:text-8xl md:text-[11rem] lg:text-[14rem] font-black leading-none">
                     <span className="relative inline-block">
                       <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(6,182,212,0.5)]">L</span>
-                      <sub className="absolute -bottom-2 -right-2 text-xs md:text-sm font-mono text-cyan-400/70">₆</sub>
+                      <sub className="absolute -bottom-2 -right-2 text-sm md:text-base font-mono text-cyan-400/70">₆</sub>
                     </span>
-                    <span className="relative inline-block mx-1 md:mx-2">
+                    <span className="relative inline-block mx-1 md:mx-3">
                       <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-rose-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(236,72,153,0.5)]">A</span>
-                      <sub className="absolute -bottom-2 -right-2 text-xs md:text-sm font-mono text-pink-400/70">¹²</sub>
+                      <sub className="absolute -bottom-2 -right-2 text-sm md:text-base font-mono text-pink-400/70">¹²</sub>
                     </span>
                     <span className="relative inline-block">
                       <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]">B</span>
-                      <sub className="absolute -bottom-2 -right-3 text-xs md:text-sm font-mono text-amber-400/70">∞</sub>
+                      <sub className="absolute -bottom-2 -right-3 text-sm md:text-base font-mono text-amber-400/70">∞</sub>
                     </span>
                   </div>
                   
                   {/* GUYS - like periodic table element with colorful letters */}
-                  <div className="mt-6 md:mt-8 flex items-center justify-center gap-3 md:gap-4">
+                  <div className="mt-8 md:mt-10 flex items-center justify-center gap-3 md:gap-5">
                     {['G', 'U', 'Y', 'S'].map((letter, i) => {
                       const gradients = [
                         'bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500', // G
@@ -115,11 +106,11 @@ const Index = () => {
                       return (
                         <div 
                           key={letter}
-                          className={`group relative w-16 h-20 sm:w-20 sm:h-24 md:w-28 md:h-32 border-2 border-foreground/20 rounded-xl bg-background/50 backdrop-blur-sm flex flex-col items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-default ${glowColors[i]}`}
+                          className={`group relative w-20 h-24 sm:w-24 sm:h-28 md:w-32 md:h-40 border-2 border-foreground/20 rounded-xl bg-background/50 backdrop-blur-sm flex flex-col items-center justify-center hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-default ${glowColors[i]}`}
                         >
-                          <span className="absolute top-1.5 left-2 text-[10px] md:text-xs text-muted-foreground font-mono">{47 + i}</span>
-                          <span className={`text-3xl sm:text-4xl md:text-5xl font-black ${gradients[i]} bg-clip-text text-transparent`}>{letter}</span>
-                          <span className="text-[10px] md:text-xs text-muted-foreground font-mono mt-1">{['Gu', 'Un', 'Yt', 'Sy'][i]}</span>
+                          <span className="absolute top-2 left-2.5 text-xs md:text-sm text-muted-foreground font-mono">{47 + i}</span>
+                          <span className={`text-4xl sm:text-5xl md:text-6xl font-black ${gradients[i]} bg-clip-text text-transparent`}>{letter}</span>
+                          <span className="text-xs md:text-sm text-muted-foreground font-mono mt-1">{['Gu', 'Un', 'Yt', 'Sy'][i]}</span>
                         </div>
                       );
                     })}
