@@ -49,58 +49,69 @@ const Index = () => {
               <span className="text-xs md:text-sm text-muted-foreground">Digital Experts Collective</span>
             </div>
 
-            {/* Main heading - Unique stacked design */}
-            <div className="relative mb-6 md:mb-8 opacity-0 animate-fade-up stagger-1">
-              {/* "We Are" - smaller, offset text */}
-              <div className="flex items-center justify-center gap-3 md:gap-4 mb-2 md:mb-3">
-                <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent to-muted-foreground/50" />
-                <span className="font-display text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-[0.3em] text-muted-foreground uppercase">
-                  We Are
-                </span>
-                <div className="h-[1px] w-8 md:w-16 bg-gradient-to-l from-transparent to-muted-foreground/50" />
-              </div>
-              
-              {/* "THE LAB GUYS" - Bold, letter-spaced with individual styling */}
-              <h1 className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black leading-none tracking-tight">
-                <span className="inline-flex items-baseline">
-                  {/* T */}
-                  <span className="text-foreground hover:text-primary transition-colors duration-300 cursor-default">T</span>
-                  {/* H */}
-                  <span className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-default">H</span>
-                  {/* E */}
-                  <span className="text-foreground/60 hover:text-primary transition-colors duration-300 cursor-default">E</span>
-                </span>
-                <span className="mx-2 sm:mx-3 md:mx-4" />
-                <span className="inline-flex items-baseline relative">
-                  {/* L */}
-                  <span className="bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent hover:from-pink-500 hover:via-cyan-400 hover:to-purple-500 transition-all duration-500 cursor-default">L</span>
-                  {/* A */}
-                  <span className="bg-gradient-to-br from-purple-400 via-pink-500 to-orange-400 bg-clip-text text-transparent hover:from-orange-400 hover:via-purple-500 hover:to-pink-400 transition-all duration-500 cursor-default">A</span>
-                  {/* B */}
-                  <span className="bg-gradient-to-br from-pink-400 via-red-500 to-yellow-400 bg-clip-text text-transparent hover:from-yellow-400 hover:via-pink-500 hover:to-red-400 transition-all duration-500 cursor-default">B</span>
-                </span>
-                <span className="mx-2 sm:mx-3 md:mx-4" />
-                <span className="inline-flex items-baseline">
-                  {/* G */}
-                  <span className="text-foreground hover:text-primary transition-colors duration-300 cursor-default">G</span>
-                  {/* U */}
-                  <span className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-default">U</span>
-                  {/* Y */}
-                  <span className="text-foreground/60 hover:text-primary transition-colors duration-300 cursor-default">Y</span>
-                  {/* S */}
-                  <span className="text-foreground/40 hover:text-primary transition-colors duration-300 cursor-default">S</span>
-                </span>
-              </h1>
-              
-              {/* Decorative element */}
-              <div className="flex justify-center mt-4 md:mt-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-                  <div className="w-12 md:w-24 h-[2px] bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500" />
-                  <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                  <div className="w-12 md:w-24 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500" />
-                  <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" style={{ animationDelay: '0.4s' }} />
+            {/* Main heading - Laboratory themed with flask visual */}
+            <div className="relative mb-8 md:mb-12 opacity-0 animate-fade-up stagger-1">
+              {/* Laboratory flask visual with text inside */}
+              <div className="relative inline-block">
+                {/* Floating bubbles */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                  <div className="absolute bottom-1/4 left-1/4 w-3 h-3 rounded-full bg-cyan-400/60 animate-bubble-1" />
+                  <div className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full bg-purple-400/60 animate-bubble-2" />
+                  <div className="absolute bottom-1/4 right-1/3 w-4 h-4 rounded-full bg-pink-400/60 animate-bubble-3" />
+                  <div className="absolute bottom-1/2 right-1/4 w-2 h-2 rounded-full bg-emerald-400/60 animate-bubble-1" style={{ animationDelay: '1s' }} />
+                  <div className="absolute bottom-1/3 left-1/2 w-3 h-3 rounded-full bg-yellow-400/60 animate-bubble-2" style={{ animationDelay: '0.5s' }} />
                 </div>
+                
+                {/* "WE ARE" as small lab label */}
+                <div className="flex items-center justify-center gap-2 mb-4 md:mb-6">
+                  <div className="px-3 py-1 rounded-md border border-dashed border-muted-foreground/30 bg-muted/20">
+                    <span className="text-[10px] md:text-xs tracking-[0.4em] text-muted-foreground font-mono uppercase">
+                      Specimen_01
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Main title with glitch/scan effect */}
+                <h1 className="font-display relative">
+                  {/* Scan line effect */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent h-full animate-scan-line pointer-events-none" />
+                  
+                  {/* THE */}
+                  <div className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.2em] text-muted-foreground/50 mb-2">
+                    THE
+                  </div>
+                  
+                  {/* LAB - with chemical formula styling */}
+                  <div className="relative text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] font-black leading-none">
+                    <span className="relative inline-block">
+                      <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(6,182,212,0.5)]">L</span>
+                      <sub className="absolute -bottom-2 -right-2 text-xs md:text-sm font-mono text-cyan-400/70">₆</sub>
+                    </span>
+                    <span className="relative inline-block mx-1 md:mx-2">
+                      <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-rose-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(236,72,153,0.5)]">A</span>
+                      <sub className="absolute -bottom-2 -right-2 text-xs md:text-sm font-mono text-pink-400/70">¹²</sub>
+                    </span>
+                    <span className="relative inline-block">
+                      <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]">B</span>
+                      <sub className="absolute -bottom-2 -right-3 text-xs md:text-sm font-mono text-amber-400/70">∞</sub>
+                    </span>
+                  </div>
+                  
+                  {/* GUYS - like periodic table element */}
+                  <div className="mt-4 md:mt-6 flex items-center justify-center gap-2 md:gap-3">
+                    {['G', 'U', 'Y', 'S'].map((letter, i) => (
+                      <div 
+                        key={letter}
+                        className="group relative w-12 h-14 sm:w-14 sm:h-16 md:w-20 md:h-24 border-2 border-foreground/20 rounded-lg bg-background/50 backdrop-blur-sm flex flex-col items-center justify-center hover:border-primary hover:bg-primary/10 transition-all duration-300 cursor-default"
+                        style={{ animationDelay: `${i * 0.1}s` }}
+                      >
+                        <span className="absolute top-1 left-1.5 text-[8px] md:text-[10px] text-muted-foreground font-mono">{47 + i}</span>
+                        <span className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground group-hover:text-primary transition-colors">{letter}</span>
+                        <span className="text-[8px] md:text-[10px] text-muted-foreground font-mono mt-0.5">{['Gu', 'Un', 'Yt', 'Sy'][i]}</span>
+                      </div>
+                    ))}
+                  </div>
+                </h1>
               </div>
             </div>
 
