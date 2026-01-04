@@ -49,38 +49,60 @@ const Index = () => {
               <span className="text-xs md:text-sm text-muted-foreground">Digital Experts Collective</span>
             </div>
 
-            {/* Main heading */}
-            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] mb-6 md:mb-8 opacity-0 animate-fade-up stagger-1">
-              We Are{" "}
-              <span className="relative inline-block">
-                <span className="text-gradient">The Lab Guys</span>
-                <svg
-                  className="absolute -bottom-2 left-0 w-full"
-                  viewBox="0 0 300 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M2 8C70 2 230 2 298 8"
-                    stroke="url(#underline-gradient)"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    className="animate-draw-line"
-                    style={{
-                      strokeDasharray: 300,
-                      strokeDashoffset: 300,
-                    }}
-                  />
-                  <defs>
-                    <linearGradient id="underline-gradient" x1="0" y1="0" x2="300" y2="0">
-                      <stop offset="0%" stopColor="hsl(270 95% 65%)" />
-                      <stop offset="50%" stopColor="hsl(200 100% 60%)" />
-                      <stop offset="100%" stopColor="hsl(340 95% 60%)" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </span>
-            </h1>
+            {/* Main heading - Unique stacked design */}
+            <div className="relative mb-6 md:mb-8 opacity-0 animate-fade-up stagger-1">
+              {/* "We Are" - smaller, offset text */}
+              <div className="flex items-center justify-center gap-3 md:gap-4 mb-2 md:mb-3">
+                <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent to-muted-foreground/50" />
+                <span className="font-display text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-[0.3em] text-muted-foreground uppercase">
+                  We Are
+                </span>
+                <div className="h-[1px] w-8 md:w-16 bg-gradient-to-l from-transparent to-muted-foreground/50" />
+              </div>
+              
+              {/* "THE LAB GUYS" - Bold, letter-spaced with individual styling */}
+              <h1 className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black leading-none tracking-tight">
+                <span className="inline-flex items-baseline">
+                  {/* T */}
+                  <span className="text-foreground hover:text-primary transition-colors duration-300 cursor-default">T</span>
+                  {/* H */}
+                  <span className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-default">H</span>
+                  {/* E */}
+                  <span className="text-foreground/60 hover:text-primary transition-colors duration-300 cursor-default">E</span>
+                </span>
+                <span className="mx-2 sm:mx-3 md:mx-4" />
+                <span className="inline-flex items-baseline relative">
+                  {/* L */}
+                  <span className="bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent hover:from-pink-500 hover:via-cyan-400 hover:to-purple-500 transition-all duration-500 cursor-default">L</span>
+                  {/* A */}
+                  <span className="bg-gradient-to-br from-purple-400 via-pink-500 to-orange-400 bg-clip-text text-transparent hover:from-orange-400 hover:via-purple-500 hover:to-pink-400 transition-all duration-500 cursor-default">A</span>
+                  {/* B */}
+                  <span className="bg-gradient-to-br from-pink-400 via-red-500 to-yellow-400 bg-clip-text text-transparent hover:from-yellow-400 hover:via-pink-500 hover:to-red-400 transition-all duration-500 cursor-default">B</span>
+                </span>
+                <span className="mx-2 sm:mx-3 md:mx-4" />
+                <span className="inline-flex items-baseline">
+                  {/* G */}
+                  <span className="text-foreground hover:text-primary transition-colors duration-300 cursor-default">G</span>
+                  {/* U */}
+                  <span className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-default">U</span>
+                  {/* Y */}
+                  <span className="text-foreground/60 hover:text-primary transition-colors duration-300 cursor-default">Y</span>
+                  {/* S */}
+                  <span className="text-foreground/40 hover:text-primary transition-colors duration-300 cursor-default">S</span>
+                </span>
+              </h1>
+              
+              {/* Decorative element */}
+              <div className="flex justify-center mt-4 md:mt-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+                  <div className="w-12 md:w-24 h-[2px] bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500" />
+                  <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                  <div className="w-12 md:w-24 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500" />
+                  <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" style={{ animationDelay: '0.4s' }} />
+                </div>
+              </div>
+            </div>
 
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 md:mb-12 px-2 opacity-0 animate-fade-up stagger-2">
               {teamMembers.length} digital experts. One mission. Transforming ideas into
