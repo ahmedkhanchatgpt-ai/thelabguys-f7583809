@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import ContactModal from "@/components/ContactModal";
+import Scene3D from "@/components/Scene3D";
 import { teamMembers } from "@/data/teamMembers";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 
@@ -41,6 +42,11 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-16 md:pt-20 px-4 md:px-6 relative">
+        {/* 3D Scene */}
+        <Suspense fallback={null}>
+          <Scene3D />
+        </Suspense>
+        
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-5xl mx-auto">
             {/* Badge */}
