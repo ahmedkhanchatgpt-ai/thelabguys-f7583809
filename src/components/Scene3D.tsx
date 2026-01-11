@@ -1,21 +1,42 @@
-import { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useRef, useMemo, useState, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, MeshDistortMaterial, MeshWobbleMaterial, Sphere, Torus, Icosahedron, Octahedron } from '@react-three/drei';
 import * as THREE from 'three';
 
-function FloatingShape({ position, color, speed = 1, distort = 0.4, type = 'sphere' }: {
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
+function FloatingShape({ position, color, speed = 1, distort = 0.4, type = 'sphere', mouseInfluence = 0.5 }: {
   position: [number, number, number];
   color: string;
   speed?: number;
   distort?: number;
   type?: 'sphere' | 'torus' | 'icosahedron' | 'octahedron';
+  mouseInfluence?: number;
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
+  const { mouse } = useThree();
 
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.x = state.clock.elapsedTime * 0.2 * speed;
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.3 * speed;
+    }
+    if (groupRef.current) {
+      // Smooth mouse following with lerp
+      groupRef.current.position.x = THREE.MathUtils.lerp(
+        groupRef.current.position.x,
+        position[0] + mouse.x * mouseInfluence,
+        0.05
+      );
+      groupRef.current.position.y = THREE.MathUtils.lerp(
+        groupRef.current.position.y,
+        position[1] + mouse.y * mouseInfluence,
+        0.05
+      );
     }
   });
 
@@ -78,7 +99,7 @@ function FloatingShape({ position, color, speed = 1, distort = 0.4, type = 'sphe
 
   return (
     <Float speed={speed} rotationIntensity={0.5} floatIntensity={1}>
-      <group position={position} scale={0.8}>
+      <group ref={groupRef} position={position} scale={0.8}>
         {Shape}
       </group>
     </Float>
@@ -88,6 +109,7 @@ function FloatingShape({ position, color, speed = 1, distort = 0.4, type = 'sphe
 function ParticleField() {
   const count = 100;
   const pointsRef = useRef<THREE.Points>(null);
+  const { mouse } = useThree();
 
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -101,8 +123,8 @@ function ParticleField() {
 
   useFrame((state) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-      pointsRef.current.rotation.x = state.clock.elapsedTime * 0.01;
+      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02 + mouse.x * 0.1;
+      pointsRef.current.rotation.x = state.clock.elapsedTime * 0.01 + mouse.y * 0.1;
     }
   });
 
@@ -127,6 +149,20 @@ function ParticleField() {
   );
 }
 
+function MouseLight() {
+  const lightRef = useRef<THREE.PointLight>(null);
+  const { mouse } = useThree();
+
+  useFrame(() => {
+    if (lightRef.current) {
+      lightRef.current.position.x = THREE.MathUtils.lerp(lightRef.current.position.x, mouse.x * 8, 0.1);
+      lightRef.current.position.y = THREE.MathUtils.lerp(lightRef.current.position.y, mouse.y * 5, 0.1);
+    }
+  });
+
+  return <pointLight ref={lightRef} position={[0, 0, 5]} intensity={1.5} color="#ffffff" distance={15} />;
+}
+
 function Scene() {
   return (
     <>
@@ -134,12 +170,13 @@ function Scene() {
       <pointLight position={[10, 10, 10]} intensity={1} color="#a855f7" />
       <pointLight position={[-10, -10, -10]} intensity={0.5} color="#06b6d4" />
       <spotLight position={[0, 10, 0]} intensity={0.8} color="#ec4899" angle={0.5} />
+      <MouseLight />
       
-      <FloatingShape position={[-4, 2, -2]} color="#a855f7" speed={0.8} type="sphere" />
-      <FloatingShape position={[4, -1, -3]} color="#06b6d4" speed={1.2} type="icosahedron" />
-      <FloatingShape position={[-3, -2, -1]} color="#ec4899" speed={0.6} type="torus" distort={0.3} />
-      <FloatingShape position={[3, 2, -4]} color="#22c55e" speed={1} type="octahedron" />
-      <FloatingShape position={[0, -3, -2]} color="#f59e0b" speed={0.9} type="sphere" distort={0.5} />
+      <FloatingShape position={[-4, 2, -2]} color="#a855f7" speed={0.8} type="sphere" mouseInfluence={1.2} />
+      <FloatingShape position={[4, -1, -3]} color="#06b6d4" speed={1.2} type="icosahedron" mouseInfluence={0.8} />
+      <FloatingShape position={[-3, -2, -1]} color="#ec4899" speed={0.6} type="torus" distort={0.3} mouseInfluence={1.5} />
+      <FloatingShape position={[3, 2, -4]} color="#22c55e" speed={1} type="octahedron" mouseInfluence={0.6} />
+      <FloatingShape position={[0, -3, -2]} color="#f59e0b" speed={0.9} type="sphere" distort={0.5} mouseInfluence={1} />
       
       <ParticleField />
     </>
