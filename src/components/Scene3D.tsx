@@ -16,8 +16,8 @@ function FloatingShape({ position, color, speed = 1, distort = 0.4, type = 'sphe
   type?: 'sphere' | 'torus' | 'icosahedron' | 'octahedron';
   mouseInfluence?: number;
 }) {
-  const meshRef = useRef<THREE.Mesh>(null);
   const groupRef = useRef<THREE.Group>(null);
+  const meshRef = useRef<THREE.Mesh>(null);
   const { mouse } = useThree();
 
   useFrame((state) => {
@@ -26,7 +26,6 @@ function FloatingShape({ position, color, speed = 1, distort = 0.4, type = 'sphe
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.3 * speed;
     }
     if (groupRef.current) {
-      // Smooth mouse following with lerp
       groupRef.current.position.x = THREE.MathUtils.lerp(
         groupRef.current.position.x,
         position[0] + mouse.x * mouseInfluence,
@@ -40,67 +39,49 @@ function FloatingShape({ position, color, speed = 1, distort = 0.4, type = 'sphe
     }
   });
 
-  const Shape = useMemo(() => {
+  const renderShape = () => {
+    const materialProps = {
+      color,
+      roughness: 0.1,
+      metalness: 0.9,
+    };
+
     switch (type) {
       case 'torus':
         return (
-          <Torus args={[1, 0.4, 16, 32]} ref={meshRef}>
-            <MeshDistortMaterial
-              color={color}
-              attach="material"
-              distort={distort}
-              speed={2}
-              roughness={0.2}
-              metalness={0.8}
-            />
-          </Torus>
+          <mesh ref={meshRef}>
+            <torusGeometry args={[1, 0.4, 16, 32]} />
+            <meshStandardMaterial {...materialProps} roughness={0.2} metalness={0.8} />
+          </mesh>
         );
       case 'icosahedron':
         return (
-          <Icosahedron args={[1, 1]} ref={meshRef}>
-            <MeshWobbleMaterial
-              color={color}
-              attach="material"
-              factor={0.4}
-              speed={2}
-              roughness={0.1}
-              metalness={0.9}
-            />
-          </Icosahedron>
+          <mesh ref={meshRef}>
+            <icosahedronGeometry args={[1, 1]} />
+            <meshStandardMaterial {...materialProps} />
+          </mesh>
         );
       case 'octahedron':
         return (
-          <Octahedron args={[1, 0]} ref={meshRef}>
-            <MeshDistortMaterial
-              color={color}
-              attach="material"
-              distort={distort * 0.5}
-              speed={3}
-              roughness={0.3}
-              metalness={0.7}
-            />
-          </Octahedron>
+          <mesh ref={meshRef}>
+            <octahedronGeometry args={[1, 0]} />
+            <meshStandardMaterial {...materialProps} roughness={0.3} metalness={0.7} />
+          </mesh>
         );
       default:
         return (
-          <Sphere args={[1, 32, 32]} ref={meshRef}>
-            <MeshDistortMaterial
-              color={color}
-              attach="material"
-              distort={distort}
-              speed={2}
-              roughness={0.1}
-              metalness={0.9}
-            />
-          </Sphere>
+          <mesh ref={meshRef}>
+            <sphereGeometry args={[1, 32, 32]} />
+            <meshStandardMaterial {...materialProps} />
+          </mesh>
         );
     }
-  }, [type, color, distort]);
+  };
 
   return (
     <Float speed={speed} rotationIntensity={0.5} floatIntensity={1}>
       <group ref={groupRef} position={position} scale={0.8}>
-        {Shape}
+        {renderShape()}
       </group>
     </Float>
   );
