@@ -6,6 +6,7 @@ import ContactModal from "@/components/ContactModal";
 import Scene3D from "@/components/Scene3D";
 import { teamMembers } from "@/data/teamMembers";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
+import { ScrollReveal } from "@/hooks/useScrollReveal";
 
 const Index = () => {
   const [contactOpen, setContactOpen] = useState(false);
@@ -130,19 +131,21 @@ const Index = () => {
       {/* Team Section */}
       <section id="team" className="py-16 md:py-24 px-4 md:px-6 relative">
         <div className="container mx-auto">
-          <div className="text-center mb-10 md:mb-16">
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 opacity-0 animate-fade-up">
+          <ScrollReveal className="text-center mb-10 md:mb-16">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4">
               The <span className="text-gradient">Experts</span>
             </h2>
-            <p className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto px-2 opacity-0 animate-fade-up stagger-1">
+            <p className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto px-2">
               Click on any profile to discover their expertise and connect.
             </p>
-          </div>
+          </ScrollReveal>
 
           {/* Team Grid - Single Row */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5">
             {teamMembers.map((member, index) => (
-              <TeamMemberCard key={member.id} member={member} index={index} />
+              <ScrollReveal key={member.id} delay={index * 100} direction="up">
+                <TeamMemberCard member={member} index={index} />
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -151,27 +154,29 @@ const Index = () => {
       {/* CTA Section */}
       <section className="py-16 md:py-24 px-4 md:px-6 relative">
         <div className="container mx-auto">
-          <div className="relative rounded-2xl md:rounded-3xl glass overflow-hidden">
-            {/* Gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10" />
-            <div className="absolute inset-0 noise" />
-            
-            <div className="relative text-center py-12 md:py-20 px-4 md:px-6">
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
-                Ready to <span className="text-gradient">Collaborate?</span>
-              </h2>
-              <p className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto mb-6 md:mb-10 px-2">
-                Whether you need SEO, development, security, trading insights, or
-                creative design — let's build something amazing together.
-              </p>
-              <button
-                onClick={() => setContactOpen(true)}
-                className="group relative inline-flex items-center justify-center px-6 md:px-10 py-3 md:py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-sm md:text-base font-semibold transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_15px_rgba(168,85,247,0.4),0_0_80px_30px_rgba(236,72,153,0.3)] shadow-[0_0_15px_2px_rgba(168,85,247,0.3)]"
-              >
-                Start a Conversation
-              </button>
+          <ScrollReveal direction="scale" duration={800}>
+            <div className="relative rounded-2xl md:rounded-3xl glass overflow-hidden">
+              {/* Gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10" />
+              <div className="absolute inset-0 noise" />
+              
+              <div className="relative text-center py-12 md:py-20 px-4 md:px-6">
+                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
+                  Ready to <span className="text-gradient">Collaborate?</span>
+                </h2>
+                <p className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto mb-6 md:mb-10 px-2">
+                  Whether you need SEO, development, security, trading insights, or
+                  creative design — let's build something amazing together.
+                </p>
+                <button
+                  onClick={() => setContactOpen(true)}
+                  className="group relative inline-flex items-center justify-center px-6 md:px-10 py-3 md:py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-sm md:text-base font-semibold transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_15px_rgba(168,85,247,0.4),0_0_80px_30px_rgba(236,72,153,0.3)] shadow-[0_0_15px_2px_rgba(168,85,247,0.3)]"
+                >
+                  Start a Conversation
+                </button>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
