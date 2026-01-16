@@ -54,7 +54,7 @@ const CustomCursor = () => {
     <>
       {/* Main cursor dot */}
       <div
-        className={`fixed pointer-events-none z-[9999] mix-blend-difference transition-transform duration-75 ${
+        className={`fixed pointer-events-none z-[9999] transition-transform duration-75 ${
           isHidden ? "opacity-0" : "opacity-100"
         }`}
         style={{
@@ -82,8 +82,8 @@ const CustomCursor = () => {
         }}
       >
         <div
-          className={`rounded-full border border-white/30 transition-all duration-200 ${
-            isPointer ? "w-10 h-10 border-accent/50" : "w-8 h-8"
+          className={`rounded-full border transition-all duration-200 ${
+            isPointer ? "w-10 h-10 border-white/50" : "w-8 h-8 border-white/30"
           }`}
         />
       </div>
