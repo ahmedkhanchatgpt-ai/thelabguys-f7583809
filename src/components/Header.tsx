@@ -62,6 +62,13 @@ const Header = ({ onContactClick }: HeaderProps) => {
               Team
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 group-hover:w-full transition-all duration-300" />
             </button>
+            <Link
+              to="/about"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
+            >
+              About
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 group-hover:w-full transition-all duration-300" />
+            </Link>
             <Button 
               variant="default" 
               size="sm" 
@@ -97,6 +104,13 @@ const Header = ({ onContactClick }: HeaderProps) => {
               >
                 Team
               </button>
+              <Link
+                to="/about"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
+              >
+                About
+              </Link>
               <Button 
                 variant="default" 
                 size="sm" 

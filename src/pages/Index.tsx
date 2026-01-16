@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import ContactModal from "@/components/ContactModal";
 import Scene3D from "@/components/Scene3D";
+import StatsSection from "@/components/StatsSection";
+import FAQSection from "@/components/FAQSection";
 import { teamMembers } from "@/data/teamMembers";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollReveal";
@@ -152,6 +154,12 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Stats Section */}
+      <StatsSection />
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 px-4 md:px-6 relative">
