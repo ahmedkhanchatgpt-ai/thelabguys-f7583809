@@ -1,9 +1,9 @@
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import ContactModal from "@/components/ContactModal";
-import Scene3D from "@/components/Scene3D";
+import AdaptiveScene3D from "@/components/AdaptiveScene3D";
 import StatsSection from "@/components/StatsSection";
 import FAQSection from "@/components/FAQSection";
 import { teamMembers } from "@/data/teamMembers";
@@ -46,10 +46,8 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-16 md:pt-20 px-4 md:px-6 relative">
-        {/* 3D Scene */}
-        <Suspense fallback={null}>
-          <Scene3D />
-        </Suspense>
+        {/* 3D Scene - Adaptive based on device performance */}
+        <AdaptiveScene3D />
         
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-5xl mx-auto">
