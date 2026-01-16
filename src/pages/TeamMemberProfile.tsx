@@ -2,9 +2,10 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowLeft, Mail, Linkedin, Github, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SkillBadge from "@/components/SkillBadge";
+import AnimatedSkillBar from "@/components/AnimatedSkillBar";
 import { getTeamMember, teamMembers } from "@/data/teamMembers";
 import { Button } from "@/components/ui/button";
+import MagneticButton from "@/components/MagneticButton";
 
 const TeamMemberProfile = () => {
   const { id } = useParams<{ id: string }>();
@@ -94,14 +95,19 @@ const TeamMemberProfile = () => {
                 {member.fullBio}
               </p>
 
-              {/* Skills */}
+              {/* Skills with animated bars */}
               <div className="mb-10 opacity-0 animate-fade-up stagger-4">
-                <h3 className="font-display font-semibold text-xs uppercase tracking-widest text-muted-foreground mb-4">
+                <h3 className="font-display font-semibold text-xs uppercase tracking-widest text-muted-foreground mb-6">
                   Skills & Expertise
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  {member.skills.map((skill) => (
-                    <SkillBadge key={skill} skill={skill} gradient={member.iconBg} />
+                <div className="space-y-4">
+                  {member.skills.map((skill, index) => (
+                    <AnimatedSkillBar 
+                      key={skill} 
+                      skill={skill} 
+                      gradient={member.iconBg}
+                      delay={index * 100}
+                    />
                   ))}
                 </div>
               </div>

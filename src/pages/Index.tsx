@@ -7,6 +7,7 @@ import Scene3D from "@/components/Scene3D";
 import { teamMembers } from "@/data/teamMembers";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollReveal";
+import MagneticButton from "@/components/MagneticButton";
 
 const Index = () => {
   const [contactOpen, setContactOpen] = useState(false);
@@ -96,18 +97,19 @@ const Index = () => {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-10 md:mb-16 opacity-0 animate-fade-up stagger-3">
-              <button
+              <MagneticButton
                 onClick={() => {
                   document.getElementById('team')?.scrollIntoView({ 
                     behavior: 'smooth',
                     block: 'start'
                   });
                 }}
-                className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white text-sm md:text-base font-medium hover:bg-[position:100%_0] transition-all duration-500 shadow-glow"
+                className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white text-sm md:text-base font-medium hover:bg-[position:100%_0] transition-all duration-500 shadow-glow hover:shadow-[0_0_60px_-10px_hsl(270_95%_65%/0.6)]"
+                strength={0.4}
               >
                 Meet the Team
                 <ArrowDown className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-y-1 transition-transform" />
-              </button>
+              </MagneticButton>
             </div>
 
             {/* Floating expertise icons */}
@@ -168,12 +170,13 @@ const Index = () => {
                   Whether you need SEO, development, security, trading insights, or
                   creative design — let's build something amazing together.
                 </p>
-                <button
+                <MagneticButton
                   onClick={() => setContactOpen(true)}
                   className="group relative inline-flex items-center justify-center px-6 md:px-10 py-3 md:py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-sm md:text-base font-semibold transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_15px_rgba(168,85,247,0.4),0_0_80px_30px_rgba(236,72,153,0.3)] shadow-[0_0_15px_2px_rgba(168,85,247,0.3)]"
+                  strength={0.3}
                 >
                   Start a Conversation
-                </button>
+                </MagneticButton>
               </div>
             </div>
           </ScrollReveal>
