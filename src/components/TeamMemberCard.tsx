@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useCallback } from "react";
+import { forwardRef, useRef, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import type { TeamMember } from "@/data/teamMembers";
@@ -12,8 +12,26 @@ interface TeamMemberCardProps {
 const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ member, index, variant = "default" }, ref) => {
   const isFeatured = variant === "featured";
   const cardRef = useRef<HTMLAnchorElement>(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const lastUpdate = useRef(0);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (prefersReducedMotion) return;
+    
+    // Throttle to ~30fps for performance
+    const now = performance.now();
+    if (now - lastUpdate.current < 33) return;
+    lastUpdate.current = now;
+
     const card = cardRef.current;
     if (!card) return;
 
@@ -23,8 +41,9 @@ const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ mem
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -12;
-    const rotateY = ((x - centerX) / centerX) * 12;
+    // Reduced tilt angles for subtler effect
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
 
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
 
@@ -33,12 +52,12 @@ const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ mem
     const glowY = (y / rect.height) * 100;
     card.style.setProperty("--glow-x", `${glowX}%`);
     card.style.setProperty("--glow-y", `${glowY}%`);
-  }, []);
+  }, [prefersReducedMotion]);
 
   const handleMouseLeave = useCallback(() => {
     const card = cardRef.current;
     if (!card) return;
-    card.style.transition = "transform 400ms ease-out";
+    card.style.transition = "transform 300ms ease-out";
     card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
   }, []);
 
@@ -58,7 +77,7 @@ const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ mem
       className={`group relative overflow-hidden rounded-3xl glass glow-border tilt-card opacity-0 animate-fade-up stagger-${index + 1} ${
         isFeatured ? "row-span-2" : ""
       }`}
-      style={{ transformStyle: "preserve-3d" }}
+      style={{ transformStyle: "preserve-3d", willChange: "transform" }}
     >
       {/* Dynamic glow effect that follows cursor */}
       <div 
@@ -78,7 +97,7 @@ const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ mem
         {/* Floating orb with initials */}
         <div className="flex-1 flex items-center justify-center relative">
           {/* Glow effect behind orb */}
-          <div className={`absolute w-16 sm:w-20 md:w-28 lg:w-32 h-16 sm:h-20 md:h-28 lg:h-32 ${member.iconBg} rounded-full blur-2xl md:blur-3xl opacity-30 group-hover:opacity-60 transition-all duration-500 group-hover:scale-125`} />
+          <div className={`absolute w-16 sm:w-20 md:w-28 lg:w-32 h-16 sm:h-20 md:h-28 lg:h-32 ${member.iconBg} rounded-full blur-2xl md:blur-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-125`} />
           
           {/* Orbiting ring - hidden on mobile for cleaner look */}
           <div className="absolute hidden sm:block w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 rounded-full border border-white/10 animate-spin-slow group-hover:border-white/30 transition-colors" />

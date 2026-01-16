@@ -1,24 +1,48 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isPointer, setIsPointer] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const rafRef = useRef<number | null>(null);
+  const lastUpdate = useRef(0);
+
+  // Check for reduced motion preference and low-performance devices
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   const onMouseMove = useCallback((e: MouseEvent) => {
-    setPosition({ x: e.clientX, y: e.clientY });
-    
-    const target = e.target as HTMLElement;
-    const isClickable = 
-      target.tagName === "A" ||
-      target.tagName === "BUTTON" ||
-      !!target.closest("a") ||
-      !!target.closest("button") ||
-      target.classList.contains("cursor-pointer") ||
-      window.getComputedStyle(target).cursor === "pointer";
-    
-    setIsPointer(isClickable);
+    // Throttle updates to ~60fps max, less on slower devices
+    const now = performance.now();
+    if (now - lastUpdate.current < 16) return;
+    lastUpdate.current = now;
+
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
+
+    rafRef.current = requestAnimationFrame(() => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      
+      const target = e.target as HTMLElement;
+      const isClickable = 
+        target.tagName === "A" ||
+        target.tagName === "BUTTON" ||
+        !!target.closest("a") ||
+        !!target.closest("button") ||
+        target.classList.contains("cursor-pointer") ||
+        window.getComputedStyle(target).cursor === "pointer";
+      
+      setIsPointer(isClickable);
+    });
   }, []);
 
   const onMouseDown = useCallback(() => setIsClicking(true), []);
@@ -27,10 +51,10 @@ const CustomCursor = () => {
   const onMouseEnter = useCallback(() => setIsHidden(false), []);
 
   useEffect(() => {
-    // Only show custom cursor on desktop
+    // Only show custom cursor on desktop with hover capability
     if (window.matchMedia("(hover: none)").matches) return;
 
-    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mousemove", onMouseMove, { passive: true });
     document.addEventListener("mousedown", onMouseDown);
     document.addEventListener("mouseup", onMouseUp);
     document.addEventListener("mouseleave", onMouseLeave);
@@ -42,19 +66,23 @@ const CustomCursor = () => {
       document.removeEventListener("mouseup", onMouseUp);
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("mouseenter", onMouseEnter);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, [onMouseMove, onMouseDown, onMouseUp, onMouseLeave, onMouseEnter]);
 
-  // Don't render on touch devices
-  if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) {
+  // Don't render on touch devices or if user prefers reduced motion
+  if (typeof window !== "undefined" && 
+      (window.matchMedia("(hover: none)").matches || prefersReducedMotion)) {
     return null;
   }
 
   return (
     <>
-      {/* Main cursor dot */}
+      {/* Main cursor dot - using CSS will-change for GPU acceleration */}
       <div
-        className={`fixed pointer-events-none z-[9999] transition-transform duration-75 ${
+        className={`fixed pointer-events-none z-[9999] will-change-transform ${
           isHidden ? "opacity-0" : "opacity-100"
         }`}
         style={{
@@ -64,25 +92,25 @@ const CustomCursor = () => {
         }}
       >
         <div
-          className={`rounded-full bg-white transition-all duration-200 ${
+          className={`rounded-full bg-white transition-[width,height] duration-150 ${
             isPointer ? "w-4 h-4" : "w-2 h-2"
           }`}
         />
       </div>
 
-      {/* Cursor ring */}
+      {/* Cursor ring - simplified for performance */}
       <div
-        className={`fixed pointer-events-none z-[9998] transition-all duration-300 ease-out ${
+        className={`fixed pointer-events-none z-[9998] will-change-transform ${
           isHidden ? "opacity-0" : "opacity-100"
         }`}
         style={{
           left: position.x,
           top: position.y,
-          transform: `translate(-50%, -50%) scale(${isPointer ? 1.5 : 1}) ${isClicking ? "scale(0.9)" : ""}`,
+          transform: `translate(-50%, -50%) scale(${isPointer ? 1.5 : 1})`,
         }}
       >
         <div
-          className={`rounded-full border transition-all duration-200 ${
+          className={`rounded-full border transition-[width,height,border-color] duration-150 ${
             isPointer ? "w-10 h-10 border-white/50" : "w-8 h-8 border-white/30"
           }`}
         />
@@ -90,7 +118,7 @@ const CustomCursor = () => {
 
       {/* Hide default cursor */}
       <style>{`
-        @media (hover: hover) {
+        @media (hover: hover) and (prefers-reduced-motion: no-preference) {
           * {
             cursor: none !important;
           }
