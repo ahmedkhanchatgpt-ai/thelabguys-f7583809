@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { teamMembers } from "@/data/teamMembers";
-import { Mail, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
+import { Mail, Sparkles, Zap, Shield, TrendingUp, Palette, Brain, MessageSquare, Users } from "lucide-react";
+import EnhancedContactForm from "./EnhancedContactForm";
 
 interface ContactModalProps {
   open: boolean;
@@ -17,9 +20,11 @@ const icons = [
 ];
 
 const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
+  const [activeTab, setActiveTab] = useState("form");
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md p-0 overflow-visible border-0 bg-transparent shadow-none [&>button]:text-white [&>button]:hover:text-white">
+      <DialogContent className="max-w-lg p-0 overflow-visible border-0 bg-transparent shadow-none [&>button]:text-white [&>button]:hover:text-white">
         <div className="relative">
           {/* Gradient glow border - outer blur */}
           <div className="absolute -inset-[3px] rounded-xl bg-gradient-to-br from-purple-500 via-cyan-500 to-pink-500 blur-md opacity-70" />
@@ -27,50 +32,58 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
           <div className="absolute -inset-[2px] rounded-xl bg-gradient-to-br from-purple-500 via-cyan-500 to-pink-500" />
           
           {/* Content container */}
-          <div className="relative rounded-xl bg-background/95 backdrop-blur-xl p-4">
-            <DialogHeader>
+          <div className="relative rounded-xl bg-background/95 backdrop-blur-xl p-5">
+            <DialogHeader className="mb-4">
               <DialogTitle className="font-display text-xl font-bold text-center">
-                Who would you like to <span className="text-gradient">contact?</span>
+                Let's <span className="text-gradient">Connect</span>
               </DialogTitle>
               <DialogDescription className="text-center text-muted-foreground text-sm">
-                Select a team member to send them an email directly.
+                Send us a message or contact a team member directly.
               </DialogDescription>
             </DialogHeader>
-            
-            <div className="mt-4 space-y-2">
-              {teamMembers.map((member, index) => (
-                <a
-                  key={member.id}
-                  href={`mailto:${member.email}`}
-                  className="group flex items-center gap-3 p-3 rounded-xl glass border-2 border-white/10 transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/60 hover:shadow-[0_0_25px_3px_rgba(168,85,247,0.5),0_0_50px_6px_rgba(236,72,153,0.3),inset_0_0_20px_rgba(168,85,247,0.1)] opacity-0 animate-fade-in"
-                  style={{ animationDelay: `${index * 80}ms`, animationFillMode: 'forwards' }}
-                  onClick={() => onOpenChange(false)}
-                >
-                  <div
-                    className={`w-10 h-10 rounded-lg ${member.iconBg} flex items-center justify-center text-white shadow-lg`}
-                  >
-                    {icons[index]}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-display font-semibold text-sm text-foreground group-hover:text-white transition-colors">
-                      {member.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground">{member.role}</p>
-                  </div>
-                  <Mail className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />
-                </a>
-              ))}
-            </div>
-            
-            <div className="mt-4 pt-3 border-t border-white/10">
-              <a
-                href="mailto:hello@thelabguys.com"
-                className="block w-full text-center py-2.5 px-4 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white text-sm font-medium hover:bg-[position:100%_0] transition-all duration-500"
-                onClick={() => onOpenChange(false)}
-              >
-                Contact the whole team
-              </a>
-            </div>
+
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <TabsList className="w-full grid grid-cols-2 mb-4 bg-muted/30">
+                <TabsTrigger value="form" className="gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600/20 data-[state=active]:to-pink-600/20">
+                  <MessageSquare className="w-4 h-4" />
+                  Contact Form
+                </TabsTrigger>
+                <TabsTrigger value="team" className="gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600/20 data-[state=active]:to-pink-600/20">
+                  <Users className="w-4 h-4" />
+                  Team Members
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="form" className="mt-0 max-h-[60vh] overflow-y-auto pr-1">
+                <EnhancedContactForm onSuccess={() => onOpenChange(false)} />
+              </TabsContent>
+
+              <TabsContent value="team" className="mt-0 max-h-[60vh] overflow-y-auto pr-1">
+                <div className="space-y-2">
+                  {teamMembers.map((member, index) => (
+                    <a
+                      key={member.id}
+                      href={`mailto:${member.email}`}
+                      className="group flex items-center gap-3 p-3 rounded-xl glass border-2 border-white/10 transition-all duration-300 hover:scale-[1.02] hover:border-purple-500/60 hover:shadow-[0_0_25px_3px_rgba(168,85,247,0.5),0_0_50px_6px_rgba(236,72,153,0.3),inset_0_0_20px_rgba(168,85,247,0.1)]"
+                      onClick={() => onOpenChange(false)}
+                    >
+                      <div
+                        className={`w-10 h-10 rounded-lg ${member.iconBg} flex items-center justify-center text-white shadow-lg`}
+                      >
+                        {icons[index]}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-display font-semibold text-sm text-foreground group-hover:text-white transition-colors">
+                          {member.name}
+                        </h3>
+                        <p className="text-xs text-muted-foreground">{member.role}</p>
+                      </div>
+                      <Mail className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />
+                    </a>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </DialogContent>
