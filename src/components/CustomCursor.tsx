@@ -37,11 +37,18 @@ const CustomCursor = () => {
   useEffect(() => {
     if (!shouldEnable) return;
 
+    // Hide native cursor when custom cursor is enabled
+    document.body.style.cursor = 'none';
+    document.documentElement.style.cursor = 'none';
+
     document.addEventListener("mousemove", onMouseMove, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
     document.addEventListener("mouseenter", onMouseEnter);
 
     return () => {
+      // Restore native cursor on cleanup
+      document.body.style.cursor = '';
+      document.documentElement.style.cursor = '';
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("mouseenter", onMouseEnter);
@@ -89,9 +96,7 @@ const CustomCursor = () => {
       </div>
 
       <style>{`
-        @media (hover: hover) {
-          .cursor-custom-enabled * { cursor: none !important; }
-        }
+        * { cursor: none !important; }
       `}</style>
     </>
   );
