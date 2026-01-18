@@ -41,11 +41,11 @@ const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ mem
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    // Reduced tilt angles for subtler effect
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
+    // Subtle tilt angles for smooth effect
+    const rotateX = ((y - centerY) / centerY) * -6;
+    const rotateY = ((x - centerX) / centerX) * 6;
 
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015) translateZ(0)`;
 
     // Move the glow effect
     const glowX = (x / rect.width) * 100;
@@ -57,14 +57,14 @@ const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ mem
   const handleMouseLeave = useCallback(() => {
     const card = cardRef.current;
     if (!card) return;
-    card.style.transition = "transform 300ms ease-out";
-    card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+    card.style.transition = "transform 400ms cubic-bezier(0.22, 1, 0.36, 1)";
+    card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0)";
   }, []);
 
   const handleMouseEnter = useCallback(() => {
     const card = cardRef.current;
     if (!card) return;
-    card.style.transition = "none";
+    card.style.transition = "transform 150ms cubic-bezier(0.22, 1, 0.36, 1)";
   }, []);
 
   return (
@@ -74,10 +74,15 @@ const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ mem
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
-      className={`group relative overflow-hidden rounded-3xl glass glow-border tilt-card opacity-0 animate-fade-up stagger-${index + 1} ${
+      className={`group relative overflow-hidden rounded-3xl glass glow-border tilt-card opacity-0 animate-fade-up stagger-${Math.min(index + 1, 5)} ${
         isFeatured ? "row-span-2" : ""
       }`}
-      style={{ transformStyle: "preserve-3d", willChange: "transform" }}
+      style={{ 
+        transformStyle: "preserve-3d", 
+        willChange: "transform",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+      }}
     >
       {/* Dynamic glow effect that follows cursor */}
       <div 

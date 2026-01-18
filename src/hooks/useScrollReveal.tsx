@@ -53,24 +53,24 @@ export function ScrollReveal({
   className = "",
   delay = 0,
   direction = "up",
-  duration = 700,
+  duration = 600,
 }: ScrollRevealProps) {
   const [ref, isVisible] = useScrollReveal<HTMLDivElement>();
 
   const getTransform = () => {
     switch (direction) {
       case "up":
-        return "translateY(40px)";
+        return "translateY(24px) translateZ(0)";
       case "down":
-        return "translateY(-40px)";
+        return "translateY(-24px) translateZ(0)";
       case "left":
-        return "translateX(40px)";
+        return "translateX(24px) translateZ(0)";
       case "right":
-        return "translateX(-40px)";
+        return "translateX(-24px) translateZ(0)";
       case "scale":
-        return "scale(0.9)";
+        return "scale(0.95) translateZ(0)";
       default:
-        return "translateY(40px)";
+        return "translateY(24px) translateZ(0)";
     }
   };
 
@@ -80,8 +80,10 @@ export function ScrollReveal({
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "none" : getTransform(),
-        transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        transform: isVisible ? "translateZ(0)" : getTransform(),
+        transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
+        willChange: isVisible ? "auto" : "transform, opacity",
+        backfaceVisibility: "hidden",
       }}
     >
       {children}
