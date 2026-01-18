@@ -54,11 +54,11 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="form" className="mt-0 max-h-[60vh] overflow-y-auto pr-1">
+              <TabsContent value="form" className="mt-0 max-h-[60vh] overflow-y-auto scrollbar-hide">
                 <EnhancedContactForm onSuccess={() => onOpenChange(false)} />
               </TabsContent>
 
-              <TabsContent value="team" className="mt-0 max-h-[60vh] overflow-y-auto pr-1">
+              <TabsContent value="team" className="mt-0 max-h-[60vh] overflow-y-auto scrollbar-hide">
                 <div className="space-y-2">
                   {teamMembers.map((member, index) => (
                     <a
