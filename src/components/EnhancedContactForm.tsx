@@ -134,7 +134,6 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                 <FormControl>
                   <Input 
                     placeholder="John Doe" 
-                    className="glass border-white/10 focus:border-accent/50 transition-colors"
                     {...field} 
                   />
                 </FormControl>
@@ -152,7 +151,6 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                   <Input 
                     type="email"
                     placeholder="john@company.com" 
-                    className="glass border-white/10 focus:border-accent/50 transition-colors"
                     {...field} 
                   />
                 </FormControl>
@@ -172,7 +170,6 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                 <FormControl>
                   <Input 
                     placeholder="Company Name" 
-                    className="glass border-white/10 focus:border-accent/50 transition-colors"
                     {...field} 
                   />
                 </FormControl>
@@ -188,11 +185,11 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                 <FormLabel>Service Needed *</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="glass border-white/10 focus:border-accent/50 transition-colors">
+                    <SelectTrigger className="h-11 rounded-lg border-border/50 bg-secondary/30 hover:border-accent/30 hover:bg-secondary/50 focus:ring-2 focus:ring-accent/40 focus:ring-offset-2 focus:border-accent/50 transition-all duration-300">
                       <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="glass-strong border-white/10">
+                  <SelectContent className="rounded-lg border-border/50 bg-card/95 backdrop-blur-xl">
                     {services.map((service) => (
                       <SelectItem key={service.value} value={service.value}>
                         {service.label}
@@ -214,11 +211,11 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
               <FormLabel>Budget Range (Optional)</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className="glass border-white/10 focus:border-accent/50 transition-colors">
+                  <SelectTrigger className="h-11 rounded-lg border-border/50 bg-secondary/30 hover:border-accent/30 hover:bg-secondary/50 focus:ring-2 focus:ring-accent/40 focus:ring-offset-2 focus:border-accent/50 transition-all duration-300">
                     <SelectValue placeholder="Select your budget range" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent className="glass-strong border-white/10">
+                <SelectContent className="rounded-lg border-border/50 bg-card/95 backdrop-blur-xl">
                   {budgets.map((budget) => (
                     <SelectItem key={budget.value} value={budget.value}>
                       {budget.label}
@@ -240,7 +237,7 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
               <FormControl>
                 <Textarea 
                   placeholder="Tell us about your project, goals, and timeline..."
-                  className="glass border-white/10 focus:border-accent/50 transition-colors min-h-[120px] resize-none"
+                  className="min-h-[120px] resize-none rounded-lg border-border/50 bg-secondary/30 px-4 py-3 transition-all duration-300 hover:border-accent/30 hover:bg-secondary/50 focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:border-accent/50 focus-visible:bg-secondary/40 placeholder:text-muted-foreground/60"
                   {...field} 
                 />
               </FormControl>
