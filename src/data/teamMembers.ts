@@ -9,6 +9,8 @@ export interface ProcessStep {
   description: string;
 }
 
+export type LayoutVariant = "minimal" | "creative" | "tech" | "security" | "data" | "futuristic";
+
 export interface TeamMember {
   id: string;
   name: string;
@@ -16,6 +18,7 @@ export interface TeamMember {
   shortBio: string;
   fullBio: string;
   tagline: string;
+  layoutVariant: LayoutVariant;
   skills: string[];
   services: ServiceItem[];
   process: ProcessStep[];
@@ -38,6 +41,7 @@ export const teamMembers: TeamMember[] = [
     role: "GEO & SEO Expert",
     tagline: "Making brands discoverable across AI & search",
     shortBio: "Driving organic growth through strategic SEO optimization.",
+    layoutVariant: "minimal",
     fullBio: "I help brands, websites, and creators get discovered through GEO and SEO, on AI platforms like ChatGPT, DeepSeek, Google Gemini, Perplexity, Bing, and Google. I focus on AI search visibility, structured data, entity optimization, and technical GEO, making your content a trusted answer across all search.",
     skills: ["GEO", "Technical SEO", "Keyword Research", "Content Strategy", "Link Building", "Analytics", "Local SEO"],
     services: [
@@ -72,6 +76,7 @@ export const teamMembers: TeamMember[] = [
     role: "Web Developer",
     tagline: "Crafting digital experiences that perform",
     shortBio: "Building modern, scalable web applications.",
+    layoutVariant: "tech",
     fullBio: "I'm a passionate web developer specializing in creating fast, responsive, and user-friendly web applications. From concept to deployment, I build digital solutions that not only look great but perform exceptionally. My stack includes modern frameworks and best practices to ensure your web presence stands out.",
     skills: ["React", "TypeScript", "Node.js", "Next.js", "Tailwind CSS", "Database Design"],
     services: [
@@ -107,6 +112,7 @@ export const teamMembers: TeamMember[] = [
     role: "Cybersecurity & Networking Expert",
     tagline: "Protecting your digital fortress",
     shortBio: "Securing networks and building robust digital infrastructure.",
+    layoutVariant: "security",
     fullBio: "I specialize in cybersecurity and network infrastructure, ensuring businesses have secure and reliable digital foundations. From network architecture design to threat detection and prevention, I provide comprehensive solutions that protect your assets while maintaining optimal performance. My expertise spans both defensive security measures and proactive network optimization.",
     skills: ["Network Security", "Penetration Testing", "Network Architecture", "Firewall Management", "Threat Detection", "Infrastructure Design"],
     services: [
@@ -141,6 +147,7 @@ export const teamMembers: TeamMember[] = [
     role: "Video Editor & Graphic Designer",
     tagline: "Visual storytelling that captivates",
     shortBio: "Crafting visual stories that captivate and inspire.",
+    layoutVariant: "creative",
     fullBio: "I bring ideas to life through compelling visual content. From cinematic video editing to stunning graphic design, I create content that resonates with audiences. My creative process focuses on storytelling, brand consistency, and visual impact. Whether it's a brand identity, social media content, or a promotional video, I deliver polished, professional results.",
     skills: ["Video Editing", "Motion Graphics", "Brand Design", "Adobe Creative Suite", "Color Grading", "Social Media Content"],
     services: [
@@ -176,6 +183,7 @@ export const teamMembers: TeamMember[] = [
     role: "Data Analyst",
     tagline: "Turning data into decisions",
     shortBio: "Transforming raw data into actionable business insights.",
+    layoutVariant: "data",
     fullBio: "I specialize in data analysis and visualization, helping businesses make informed decisions through data-driven insights. From collecting and cleaning data to building comprehensive dashboards and reports, I turn complex datasets into clear, actionable strategies. My expertise spans statistical analysis, predictive modeling, and business intelligence tools.",
     skills: ["Data Analysis", "SQL", "Python", "Data Visualization", "Excel", "Business Intelligence"],
     services: [
@@ -210,6 +218,7 @@ export const teamMembers: TeamMember[] = [
     role: "AI & Software Engineer",
     tagline: "Building intelligence into everything",
     shortBio: "Building intelligent solutions with cutting-edge AI technology.",
+    layoutVariant: "futuristic",
     fullBio: "I'm an AI and Software Engineer specializing in developing intelligent applications and scalable software solutions. From machine learning models to full-stack applications, I create technology that solves real-world problems. My expertise spans AI/ML development, backend systems, and building robust software architectures that power modern businesses.",
     skills: ["Artificial Intelligence", "Machine Learning", "Python", "Software Architecture", "Deep Learning", "API Development"],
     services: [
