@@ -204,22 +204,6 @@ const TeamMemberProfile = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 md:py-28 relative">
-        <div className="container mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {member.stats.map((stat, index) => (
-              <AnimatedStatCard
-                key={stat.label}
-                value={stat.value}
-                label={stat.label}
-                gradient={member.gradient}
-                delay={index * 150}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Services Section */}
       <section className="py-20 md:py-28 relative">
