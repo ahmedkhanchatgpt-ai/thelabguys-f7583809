@@ -1,4 +1,4 @@
-import { Palette, Film, Camera, Layers, Sparkles } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 interface CreativeShowcaseProps {
   gradient: string;
@@ -6,87 +6,90 @@ interface CreativeShowcaseProps {
 }
 
 const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
-  const showcaseItems = [
-    { title: "Brand Identity", category: "Design", icon: Palette },
-    { title: "Motion Graphics", category: "Animation", icon: Sparkles },
-    { title: "Video Production", category: "Film", icon: Film },
-    { title: "Photo Editing", category: "Photography", icon: Camera },
-    { title: "Social Content", category: "Marketing", icon: Layers },
-    { title: "Visual Effects", category: "VFX", icon: Sparkles },
+  const tools = [
+    "Premiere Pro", "After Effects", "Photoshop", "Illustrator", 
+    "DaVinci Resolve", "Figma", "Blender", "Cinema 4D"
+  ];
+
+  const testimonials = [
+    {
+      quote: "Exceptional work that exceeded our expectations. The attention to detail is remarkable.",
+      author: "Creative Director",
+      company: "Brand Agency",
+    },
+    {
+      quote: "Transformed our vision into stunning visuals. Highly professional and creative.",
+      author: "Marketing Lead",
+      company: "Tech Startup",
+    },
   ];
 
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
-      {/* Background decorations */}
-      <div className={`absolute top-0 right-0 w-96 h-96 bg-gradient-to-br ${gradient} rounded-full blur-[150px] opacity-10`} />
-      <div className={`absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-br ${gradient} rounded-full blur-[150px] opacity-10`} />
+      {/* Background */}
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br ${gradient} rounded-full blur-[200px] opacity-10`} />
 
       <div className="container mx-auto max-w-7xl px-6">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
-          <div>
-            <div className="inline-flex items-center gap-2 mb-4">
-              <div className={`h-px w-12 bg-gradient-to-r ${gradient}`} />
-              <span className="text-sm uppercase tracking-widest text-muted-foreground">Portfolio</span>
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold">
-              Creative <span className="text-gradient">Showcase</span>
-            </h2>
+        {/* Tools Marquee */}
+        <div className="mb-20">
+          <div className="text-center mb-10">
+            <p className="text-sm uppercase tracking-widest text-muted-foreground mb-2">Creative Toolkit</p>
+            <h3 className="font-display text-2xl md:text-3xl font-semibold">Tools I Master</h3>
           </div>
-          <p className="text-muted-foreground max-w-md text-lg">
-            A glimpse into the diverse range of creative work spanning multiple disciplines
-          </p>
-        </div>
-
-        {/* Bento grid showcase */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {showcaseItems.map((item, index) => {
-            const Icon = item.icon;
-            const isLarge = index === 0 || index === 3;
+          
+          {/* Infinite scroll marquee */}
+          <div className="relative overflow-hidden py-4">
+            {/* Fade edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
             
-            return (
-              <div
-                key={item.title}
-                className={`group relative overflow-hidden rounded-3xl glass border border-white/10 hover:border-white/20 transition-all duration-500 cursor-pointer ${
-                  isLarge ? 'md:col-span-2 aspect-[2/1]' : 'aspect-square'
-                } opacity-0 animate-fade-up`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Gradient background on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
-                
-                {/* Noise texture */}
-                <div className="absolute inset-0 noise opacity-30" />
-                
-                {/* Content */}
-                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between">
-                  {/* Icon */}
-                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl ${iconBg} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                  </div>
-                  
-                  {/* Title */}
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-xs md:text-sm text-muted-foreground uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {item.category}
-                    </p>
-                    <h3 className="font-display text-xl md:text-2xl font-semibold group-hover:text-gradient transition-all">
-                      {item.title}
-                    </h3>
-                  </div>
+            <div className="flex animate-marquee">
+              {[...tools, ...tools, ...tools].map((tool, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 mx-4 px-8 py-4 rounded-full glass border border-white/10 hover:border-white/20 transition-colors cursor-default"
+                >
+                  <span className="font-display font-medium text-lg whitespace-nowrap">{tool}</span>
                 </div>
-                
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-            );
-          })}
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* View all work CTA */}
-        <div className="mt-12 text-center opacity-0 animate-fade-up" style={{ animationDelay: '600ms' }}>
-          <p className="text-muted-foreground">
-            Want to see more? <span className="text-purple-400 font-medium cursor-pointer hover:underline">View full portfolio →</span>
-          </p>
+        {/* Testimonials */}
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="group relative glass rounded-3xl p-8 md:p-10 border border-white/10 hover:border-white/20 transition-all duration-500"
+            >
+              {/* Quote icon */}
+              <div className={`w-12 h-12 rounded-2xl ${iconBg} flex items-center justify-center mb-6`}>
+                <Quote className="w-6 h-6 text-white" />
+              </div>
+              
+              {/* Stars */}
+              <div className="flex gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              
+              {/* Quote text */}
+              <p className="text-lg md:text-xl font-light leading-relaxed mb-6 text-foreground/90">
+                "{testimonial.quote}"
+              </p>
+              
+              {/* Author */}
+              <div className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-full ${iconBg} opacity-50`} />
+                <div>
+                  <p className="font-display font-semibold">{testimonial.author}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.company}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
