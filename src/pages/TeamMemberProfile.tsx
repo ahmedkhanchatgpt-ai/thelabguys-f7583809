@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/MagneticButton";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import ServiceCard from "@/components/ServiceCard";
+import CreativeShowcase from "@/components/CreativeShowcase";
 import {
   HeroMinimal,
   HeroTech,
@@ -80,7 +81,10 @@ const TeamMemberProfile = () => {
       {/* Dynamic Hero Section */}
       {renderHero()}
 
-      {/* Services Section */}
+      {/* Creative Showcase - Only for creative profiles */}
+      {member.layoutVariant === "creative" && (
+        <CreativeShowcase gradient={member.gradient} iconBg={member.iconBg} />
+      )}
       <section className="py-20 md:py-28 relative">
         <div className="container mx-auto max-w-7xl px-6">
           <div className="max-w-3xl mb-16">

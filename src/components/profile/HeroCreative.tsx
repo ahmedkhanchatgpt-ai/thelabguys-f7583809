@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Mail, Linkedin, Github, Calendar, MessageCircle, Play, Palette } from "lucide-react";
+import { ArrowLeft, Mail, Linkedin, Github, Calendar, MessageCircle, Play, Palette, Film, Sparkles, Layers, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/MagneticButton";
 import type { TeamMember } from "@/data/teamMembers";
@@ -11,11 +11,36 @@ interface HeroCreativeProps {
 const HeroCreative = ({ member }: HeroCreativeProps) => {
   return (
     <section className="min-h-screen flex items-center relative pt-20 overflow-hidden">
-      {/* Animated gradient blobs */}
-      <div className={`absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-br ${member.gradient} rounded-full blur-3xl opacity-20 animate-pulse-slow`} />
-      <div className={`absolute bottom-1/4 -right-20 w-80 h-80 bg-gradient-to-br ${member.gradient} rounded-full blur-3xl opacity-15 animate-pulse-slow`} style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white/5 rounded-full" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/5 rounded-full" />
+      {/* Animated color blobs - more vibrant */}
+      <div className={`absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-purple-500 via-fuchsia-500 to-pink-500 rounded-full blur-[150px] opacity-20 animate-pulse-slow`} />
+      <div className={`absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-pink-500 via-rose-500 to-orange-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow`} style={{ animationDelay: '2s' }} />
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-br from-violet-500 to-purple-600 rounded-full blur-[120px] opacity-10 animate-pulse-slow`} style={{ animationDelay: '4s' }} />
+      
+      {/* Floating design elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Color swatches floating */}
+        <div className="absolute top-20 left-[10%] w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-pink-500 shadow-lg animate-float opacity-60" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-40 right-[15%] w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 shadow-lg animate-float opacity-50" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-32 left-[20%] w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-red-500 shadow-lg animate-float opacity-40" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/3 left-[5%] w-5 h-5 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 shadow-lg animate-float opacity-50" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-1/4 right-[8%] w-7 h-7 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg animate-float opacity-40" style={{ animationDelay: '1.5s' }} />
+        
+        {/* Floating icons */}
+        <div className="absolute top-1/4 right-[20%] glass p-3 rounded-xl border border-white/10 animate-float shadow-xl" style={{ animationDelay: '0.5s' }}>
+          <Film className="w-5 h-5 text-pink-400" />
+        </div>
+        <div className="absolute bottom-1/3 left-[8%] glass p-3 rounded-xl border border-white/10 animate-float shadow-xl" style={{ animationDelay: '2.5s' }}>
+          <Palette className="w-5 h-5 text-purple-400" />
+        </div>
+        <div className="absolute top-2/3 right-[12%] glass p-3 rounded-xl border border-white/10 animate-float shadow-xl" style={{ animationDelay: '1.5s' }}>
+          <Wand2 className="w-5 h-5 text-fuchsia-400" />
+        </div>
+      </div>
+
+      {/* Decorative circles */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border border-white/[0.03] rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-white/[0.05] rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-white/[0.03] rounded-full" />
 
       <div className="container mx-auto max-w-7xl px-6">
         <Link
@@ -26,68 +51,144 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
           Back to Team
         </Link>
 
-        <div className="grid lg:grid-cols-5 gap-12 items-center">
-          {/* Left - Large visual */}
-          <div className="lg:col-span-3 order-1 opacity-0 animate-fade-up">
-            <div className="relative aspect-video rounded-3xl overflow-hidden group cursor-pointer">
-              {/* Gradient background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-30`} />
-              <div className="absolute inset-0 noise opacity-40" />
-              
-              {/* Animated bars - like audio visualizer */}
-              <div className="absolute inset-0 flex items-end justify-center gap-2 p-8">
-                {[...Array(12)].map((_, i) => (
-                  <div
-                    key={i}
-                    className={`w-4 md:w-6 ${member.iconBg} rounded-t-full opacity-60 group-hover:opacity-80 transition-all`}
-                    style={{
-                      height: `${20 + Math.sin(i * 0.5) * 30 + Math.random() * 30}%`,
-                      animation: `float ${2 + i * 0.1}s ease-in-out infinite`,
-                      animationDelay: `${i * 0.1}s`,
-                    }}
-                  />
-                ))}
-              </div>
-              
-              {/* Play button overlay */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className={`w-20 h-20 md:w-24 md:h-24 rounded-full ${member.iconBg} flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform`}>
-                  <Play className="w-8 h-8 md:w-10 md:h-10 text-white fill-white ml-1" />
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left - Stacked visual showcase */}
+          <div className="lg:col-span-7 order-1 opacity-0 animate-fade-up">
+            <div className="relative">
+              {/* Main showcase card */}
+              <div className="relative group cursor-pointer">
+                {/* Glow effect */}
+                <div className={`absolute -inset-4 bg-gradient-to-br ${member.gradient} blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-700`} />
+                
+                {/* Main card */}
+                <div className="relative aspect-[16/10] rounded-3xl overflow-hidden glass border border-white/10 group-hover:border-white/20 transition-all duration-500">
+                  {/* Gradient background with mesh */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-40`} />
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                                      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%)`,
+                  }} />
+                  <div className="absolute inset-0 noise opacity-30" />
+                  
+                  {/* Animated equalizer bars */}
+                  <div className="absolute inset-0 flex items-end justify-center gap-1.5 md:gap-2 p-8 pb-12">
+                    {[...Array(16)].map((_, i) => {
+                      const heights = [40, 65, 55, 80, 70, 90, 60, 85, 75, 95, 50, 70, 85, 60, 75, 45];
+                      return (
+                        <div
+                          key={i}
+                          className="flex-1 max-w-4 rounded-t-full bg-white/80 group-hover:bg-white transition-all duration-300"
+                          style={{
+                            height: `${heights[i]}%`,
+                            animation: `pulse ${1.5 + (i % 3) * 0.3}s ease-in-out infinite`,
+                            animationDelay: `${i * 0.1}s`,
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                  
+                  {/* Play button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative">
+                      <div className={`absolute inset-0 ${member.iconBg} blur-xl opacity-50 scale-150 group-hover:scale-[2] transition-transform duration-700`} />
+                      <div className={`relative w-20 h-20 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300`}>
+                        <Play className="w-8 h-8 md:w-12 md:h-12 text-purple-600 fill-purple-600 ml-1" />
+                      </div>
+                      {/* Ripple effect */}
+                      <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping" />
+                    </div>
+                  </div>
+                  
+                  {/* Bottom info bar */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/60 to-transparent">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-white/70 text-sm">Latest Showreel</p>
+                        <p className="text-white font-display font-semibold">Creative Portfolio 2024</p>
+                      </div>
+                      <div className="flex items-center gap-2 text-white/80 text-sm">
+                        <Film className="w-4 h-4" />
+                        <span>2:45</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              {/* Initials watermark */}
-              <div className="absolute bottom-6 right-6 text-8xl font-display font-bold text-white/10">
-                {member.initials || member.name.split(" ").map((n) => n[0]).join("")}
+              {/* Floating mini cards */}
+              <div className="absolute -bottom-8 -left-4 md:-left-8 w-32 md:w-44 glass rounded-2xl p-3 md:p-4 border border-white/10 shadow-2xl opacity-0 animate-fade-up stagger-3 z-10">
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl ${member.iconBg} flex items-center justify-center`}>
+                    <Layers className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Projects</p>
+                    <p className="font-display font-bold text-lg">200+</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="absolute -top-4 -right-4 md:-right-8 w-36 md:w-48 glass rounded-2xl p-3 md:p-4 border border-white/10 shadow-2xl opacity-0 animate-fade-up stagger-4 z-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Views</p>
+                    <p className="font-display font-bold text-lg">5M+</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Right - Content */}
-          <div className="lg:col-span-2 order-2 flex flex-col justify-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10 w-fit mb-6 opacity-0 animate-fade-up stagger-1">
-              <Palette className="w-4 h-4" style={{ color: 'hsl(var(--primary))' }} />
+          <div className="lg:col-span-5 order-2 flex flex-col justify-center">
+            {/* Creative badge with animation */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-purple-500/30 w-fit mb-6 opacity-0 animate-fade-up stagger-1 group">
+              <div className="relative">
+                <Palette className="w-4 h-4 text-purple-400" />
+                <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-pink-400 animate-pulse" />
+              </div>
               <span className="text-sm text-muted-foreground">Creative Director</span>
+              <span className="flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-purple-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+              </span>
             </div>
 
-            {/* Name with creative typography */}
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 leading-tight">
+            {/* Name with creative staggered typography */}
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 leading-[0.95]">
               {member.name.split(' ').map((word, i) => (
-                <span key={i} className={`block ${i > 0 ? 'text-gradient' : ''}`} style={{ marginLeft: i > 0 ? `${i * 20}px` : 0 }}>
+                <span 
+                  key={i} 
+                  className={`block transform transition-transform duration-300 ${i === 0 ? '' : i === 1 ? 'ml-4 md:ml-8 text-gradient' : i === 2 ? 'ml-8 md:ml-16 text-gradient' : 'ml-12 md:ml-24 text-gradient'}`}
+                  style={{ 
+                    background: i > 0 ? `linear-gradient(135deg, hsl(280, 100%, 70%), hsl(320, 100%, 60%))` : undefined,
+                    WebkitBackgroundClip: i > 0 ? 'text' : undefined,
+                    WebkitTextFillColor: i > 0 ? 'transparent' : undefined,
+                  }}
+                >
                   {word}
                 </span>
               ))}
             </h1>
 
-            {/* Role */}
-            <p className="text-lg text-muted-foreground mb-4 opacity-0 animate-fade-up stagger-2 italic">
-              {member.role}
-            </p>
+            {/* Role with icon */}
+            <div className="flex items-center gap-3 mb-6 opacity-0 animate-fade-up stagger-2">
+              <div className={`h-px w-12 bg-gradient-to-r ${member.gradient}`} />
+              <span className="text-lg text-muted-foreground flex items-center gap-2">
+                <Film className="w-4 h-4 text-purple-400" />
+                {member.role}
+              </span>
+            </div>
 
-            {/* Tagline */}
-            <p className="text-xl md:text-2xl font-light mb-6 opacity-0 animate-fade-up stagger-3">
-              "{member.tagline}"
+            {/* Tagline - larger and more prominent */}
+            <p className="text-xl md:text-2xl font-light mb-6 opacity-0 animate-fade-up stagger-3 leading-relaxed">
+              <span className="text-purple-400">"</span>
+              {member.tagline}
+              <span className="text-purple-400">"</span>
             </p>
 
             {/* Bio */}
@@ -95,37 +196,53 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
               {member.fullBio}
             </p>
 
-            {/* CTAs */}
+            {/* CTAs with gradient hover */}
             <div className="flex flex-wrap gap-4 opacity-0 animate-fade-up stagger-5">
               <MagneticButton>
-                <Button asChild size="lg" className={`gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-8 py-6 text-base shadow-lg`}>
+                <Button asChild size="lg" className={`gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-8 py-6 text-base shadow-xl hover:shadow-purple-500/25 transition-all`}>
                   <a href={`mailto:${member.email}`}>
                     <MessageCircle className="w-5 h-5" />
-                    Let's Create
+                    Let's Create Magic
                   </a>
                 </Button>
               </MagneticButton>
+              <Button asChild variant="outline" size="lg" className="gap-2 glass border-purple-500/30 hover:border-purple-500/50 hover:bg-purple-500/10 px-8 py-6 text-base transition-all">
+                <a href={`mailto:${member.email}?subject=Project Inquiry`}>
+                  <Calendar className="w-5 h-5" />
+                  Book a Call
+                </a>
+              </Button>
             </div>
 
-            {/* Social Links */}
+            {/* Social Links with hover colors */}
             <div className="flex gap-3 mt-8 opacity-0 animate-fade-up stagger-5">
               {member.linkedin && (
-                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full glass border border-white/10 flex items-center justify-center hover:border-white/30 hover:bg-white/5 transition-all hover:scale-110">
-                  <Linkedin className="w-5 h-5" />
+                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full glass border border-white/10 flex items-center justify-center hover:border-purple-500/50 hover:bg-purple-500/10 transition-all hover:scale-110 group">
+                  <Linkedin className="w-5 h-5 group-hover:text-purple-400 transition-colors" />
                 </a>
               )}
               {member.twitter && (
-                <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full glass border border-white/10 flex items-center justify-center hover:border-white/30 hover:bg-white/5 transition-all hover:scale-110">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full glass border border-white/10 flex items-center justify-center hover:border-pink-500/50 hover:bg-pink-500/10 transition-all hover:scale-110 group">
+                  <svg className="w-5 h-5 group-hover:text-pink-400 transition-colors" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
               )}
               {member.github && (
-                <a href={member.github} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full glass border border-white/10 flex items-center justify-center hover:border-white/30 hover:bg-white/5 transition-all hover:scale-110">
-                  <Github className="w-5 h-5" />
+                <a href={member.github} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full glass border border-white/10 flex items-center justify-center hover:border-fuchsia-500/50 hover:bg-fuchsia-500/10 transition-all hover:scale-110 group">
+                  <Github className="w-5 h-5 group-hover:text-fuchsia-400 transition-colors" />
                 </a>
               )}
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0 animate-fade-up stagger-5 hidden md:block">
+          <div className="flex flex-col items-center gap-2 text-muted-foreground">
+            <span className="text-xs uppercase tracking-widest">Explore Work</span>
+            <div className="w-6 h-10 rounded-full border-2 border-purple-500/30 flex items-start justify-center p-1">
+              <div className="w-1.5 h-3 rounded-full bg-purple-400 animate-bounce" />
             </div>
           </div>
         </div>
