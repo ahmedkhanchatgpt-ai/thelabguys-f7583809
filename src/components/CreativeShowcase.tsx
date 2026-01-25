@@ -6,9 +6,11 @@ interface CreativeShowcaseProps {
 }
 
 const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
-  const tools = [
-    "Premiere Pro", "After Effects", "Photoshop", "Illustrator", 
-    "DaVinci Resolve", "Figma", "Blender", "Cinema 4D"
+  const stats = [
+    { value: "100+", label: "Projects Completed", icon: "🎬" },
+    { value: "50+", label: "Happy Clients", icon: "⭐" },
+    { value: "5", label: "Years Experience", icon: "🏆" },
+    { value: "24h", label: "Avg. Delivery", icon: "⚡" },
   ];
 
   const testimonials = [
@@ -38,29 +40,27 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br ${gradient} rounded-full blur-[200px] opacity-10`} />
 
       <div className="container mx-auto max-w-7xl px-6">
-        {/* Tools Marquee */}
+        {/* Stats Grid */}
         <div className="mb-20">
           <div className="text-center mb-10">
-            <p className="text-sm uppercase tracking-widest text-muted-foreground mb-2">Creative Toolkit</p>
-            <h3 className="font-display text-2xl md:text-3xl font-semibold">Tools I Master</h3>
+            <p className="text-sm uppercase tracking-widest text-muted-foreground mb-2">Track Record</p>
+            <h3 className="font-display text-2xl md:text-3xl font-semibold">Proven Results</h3>
           </div>
           
-          {/* Infinite scroll marquee */}
-          <div className="relative overflow-hidden py-4">
-            {/* Fade edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
-            
-            <div className="flex animate-marquee">
-              {[...tools, ...tools, ...tools].map((tool, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 mx-4 px-8 py-4 rounded-full glass border border-white/10 hover:border-white/20 transition-colors cursor-default"
-                >
-                  <span className="font-display font-medium text-lg whitespace-nowrap">{tool}</span>
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="group relative glass rounded-2xl p-6 md:p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 text-center"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity`} />
+                <span className="text-3xl mb-3 block">{stat.icon}</span>
+                <p className={`font-display text-3xl md:text-4xl font-bold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+                  {stat.value}
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
 
