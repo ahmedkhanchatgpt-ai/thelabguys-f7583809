@@ -14,22 +14,21 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
   const testimonials = [
     {
       quote: "His editing skills are next level and he is a very fast worker. He is better than a lot of people on here.",
-      author: "TikTok Video Client",
       project: "20 TikTok Video Edits",
       rating: 5,
+      location: "United Kingdom",
     },
     {
       quote: "It was my first time working with you, and the experience was pleasant and fruitful. Very responsive and patient vendor. I am looking forward to more of your editing skills.",
-      author: "heyrama123",
       project: "Video Editing Project",
       rating: 5,
       location: "Singapore",
     },
     {
       quote: "Very professional.",
-      author: "Repeat Client",
       project: "Video Create and Edit",
       rating: 5,
+      location: "United States",
     },
   ];
 
@@ -94,13 +93,10 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
                 "{testimonial.quote}"
               </p>
               
-              {/* Author & Project */}
+              {/* Project & Location */}
               <div className="pt-4 border-t border-white/10">
-                <p className="font-display font-semibold text-sm">{testimonial.author}</p>
-                <p className="text-xs text-muted-foreground mt-1">{testimonial.project}</p>
-                {testimonial.location && (
-                  <p className="text-xs text-muted-foreground/70 mt-0.5">📍 {testimonial.location}</p>
-                )}
+                <p className="font-display font-semibold text-sm">{testimonial.project}</p>
+                <p className="text-xs text-muted-foreground mt-1">📍 {testimonial.location}</p>
               </div>
             </div>
           ))}
