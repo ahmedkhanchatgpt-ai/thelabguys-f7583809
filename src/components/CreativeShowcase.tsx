@@ -13,14 +13,23 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
 
   const testimonials = [
     {
-      quote: "Exceptional work that exceeded our expectations. The attention to detail is remarkable.",
-      author: "Creative Director",
-      company: "Brand Agency",
+      quote: "His editing skills are next level and he is a very fast worker. He is better than a lot of people on here.",
+      author: "TikTok Video Client",
+      project: "20 TikTok Video Edits",
+      rating: 5,
     },
     {
-      quote: "Transformed our vision into stunning visuals. Highly professional and creative.",
-      author: "Marketing Lead",
-      company: "Tech Startup",
+      quote: "It was my first time working with you, and the experience was pleasant and fruitful. Very responsive and patient vendor. I am looking forward to more of your editing skills.",
+      author: "heyrama123",
+      project: "Video Editing Project",
+      rating: 5,
+      location: "Singapore",
+    },
+    {
+      quote: "Very professional.",
+      author: "Repeat Client",
+      project: "Video Create and Edit",
+      rating: 5,
     },
   ];
 
@@ -57,36 +66,41 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
         </div>
 
         {/* Testimonials */}
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="text-center mb-10">
+          <p className="text-sm uppercase tracking-widest text-muted-foreground mb-2">Client Reviews</p>
+          <h3 className="font-display text-2xl md:text-3xl font-semibold">What Clients Say</h3>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="group relative glass rounded-3xl p-8 md:p-10 border border-white/10 hover:border-white/20 transition-all duration-500"
+              className="group relative glass rounded-3xl p-6 md:p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2"
             >
               {/* Quote icon */}
-              <div className={`w-12 h-12 rounded-2xl ${iconBg} flex items-center justify-center mb-6`}>
-                <Quote className="w-6 h-6 text-white" />
+              <div className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center mb-5`}>
+                <Quote className="w-5 h-5 text-white" />
               </div>
               
               {/* Stars */}
               <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                 ))}
               </div>
               
               {/* Quote text */}
-              <p className="text-lg md:text-xl font-light leading-relaxed mb-6 text-foreground/90">
+              <p className="text-base md:text-lg font-light leading-relaxed mb-5 text-foreground/90">
                 "{testimonial.quote}"
               </p>
               
-              {/* Author */}
-              <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-full ${iconBg} opacity-50`} />
-                <div>
-                  <p className="font-display font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.company}</p>
-                </div>
+              {/* Author & Project */}
+              <div className="pt-4 border-t border-white/10">
+                <p className="font-display font-semibold text-sm">{testimonial.author}</p>
+                <p className="text-xs text-muted-foreground mt-1">{testimonial.project}</p>
+                {testimonial.location && (
+                  <p className="text-xs text-muted-foreground/70 mt-0.5">📍 {testimonial.location}</p>
+                )}
               </div>
             </div>
           ))}
