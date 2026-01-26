@@ -70,46 +70,49 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
                   }} />
                   <div className="absolute inset-0 noise opacity-30" />
                   
-                  {/* Animated equalizer bars */}
-                  <div className="absolute inset-0 flex items-end justify-center gap-1.5 md:gap-2 p-8 pb-12">
-                    {[...Array(16)].map((_, i) => {
-                      const heights = [40, 65, 55, 80, 70, 90, 60, 85, 75, 95, 50, 70, 85, 60, 75, 45];
+                  {/* Animated equalizer bars - more refined */}
+                  <div className="absolute inset-0 flex items-end justify-center gap-1 md:gap-1.5 p-8 pb-16">
+                    {[...Array(20)].map((_, i) => {
+                      const heights = [35, 55, 45, 75, 60, 85, 50, 80, 70, 95, 40, 65, 80, 55, 70, 45, 60, 75, 50, 65];
                       return (
                         <div
                           key={i}
-                          className="flex-1 max-w-4 rounded-t-full bg-white/80 group-hover:bg-white transition-all duration-300"
+                          className="flex-1 max-w-3 rounded-full bg-gradient-to-t from-white/60 to-white group-hover:from-white/80 group-hover:to-white transition-all duration-500"
                           style={{
                             height: `${heights[i]}%`,
-                            animation: `pulse ${1.5 + (i % 3) * 0.3}s ease-in-out infinite`,
-                            animationDelay: `${i * 0.1}s`,
+                            animation: `equalizer ${1.2 + (i % 4) * 0.2}s ease-in-out infinite alternate`,
+                            animationDelay: `${i * 0.08}s`,
                           }}
                         />
                       );
                     })}
                   </div>
                   
-                  {/* Play button */}
+                  {/* Play button - more elegant */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative">
-                      <div className={`absolute inset-0 ${member.iconBg} blur-xl opacity-50 scale-150 group-hover:scale-[2] transition-transform duration-700`} />
-                      <div className={`relative w-20 h-20 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300`}>
-                        <Play className="w-8 h-8 md:w-12 md:h-12 text-purple-600 fill-purple-600 ml-1" />
+                    <div className="relative group/play cursor-pointer">
+                      {/* Outer glow */}
+                      <div className={`absolute inset-0 ${member.iconBg} blur-2xl opacity-40 scale-[1.8] group-hover/play:scale-[2.2] transition-transform duration-700`} />
+                      {/* Ripple rings */}
+                      <div className="absolute inset-0 rounded-full border-2 border-white/30 scale-[1.5] animate-ping" style={{ animationDuration: '2s' }} />
+                      <div className="absolute inset-0 rounded-full border border-white/20 scale-[2] animate-ping" style={{ animationDuration: '2.5s', animationDelay: '0.3s' }} />
+                      {/* Button */}
+                      <div className={`relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center shadow-2xl group-hover/play:scale-110 transition-all duration-300`}>
+                        <Play className="w-8 h-8 md:w-10 md:h-10 text-purple-600 fill-purple-600 ml-1" />
                       </div>
-                      {/* Ripple effect */}
-                      <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping" />
                     </div>
                   </div>
                   
-                  {/* Bottom info bar */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/60 to-transparent">
+                  {/* Bottom info bar - more refined */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-white/70 text-sm">Latest Showreel</p>
-                        <p className="text-white font-display font-semibold">Creative Portfolio 2024</p>
+                        <p className="text-white/60 text-xs uppercase tracking-widest mb-1">Latest Showreel</p>
+                        <p className="text-white font-display font-semibold text-lg">Creative Portfolio 2024</p>
                       </div>
-                      <div className="flex items-center gap-2 text-white/80 text-sm">
-                        <Film className="w-4 h-4" />
-                        <span>2:45</span>
+                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10">
+                        <Film className="w-4 h-4 text-white/80" />
+                        <span className="text-white/90 text-sm font-medium">2:45</span>
                       </div>
                     </div>
                   </div>
