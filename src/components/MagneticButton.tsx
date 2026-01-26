@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState, ReactNode } from "react";
+import { forwardRef, useRef, useState, ReactNode, useCallback } from "react";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -8,9 +8,23 @@ interface MagneticButtonProps {
 }
 
 const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
-  ({ children, className = "", onClick, strength = 0.3 }, ref) => {
+  function MagneticButton({ children, className = "", onClick, strength = 0.3 }, ref) {
     const innerRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    const setRefs = useCallback(
+      (node: HTMLDivElement | null) => {
+        // Set the inner ref
+        (innerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        // Forward the ref
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
       const element = innerRef.current;
@@ -32,15 +46,7 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
 
     return (
       <div
-        ref={(node) => {
-          // Handle both refs
-          (innerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
-          if (typeof ref === 'function') {
-            ref(node);
-          } else if (ref) {
-            ref.current = node;
-          }
-        }}
+        ref={setRefs}
         onClick={onClick}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -54,7 +60,5 @@ const MagneticButton = forwardRef<HTMLDivElement, MagneticButtonProps>(
     );
   }
 );
-
-MagneticButton.displayName = "MagneticButton";
 
 export default MagneticButton;

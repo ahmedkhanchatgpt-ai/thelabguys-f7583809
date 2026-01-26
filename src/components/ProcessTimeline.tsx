@@ -8,7 +8,7 @@ interface ProcessTimelineProps {
 }
 
 const ProcessTimeline = forwardRef<HTMLDivElement, ProcessTimelineProps>(
-  ({ steps, gradient, iconBg }, ref) => {
+  function ProcessTimeline({ steps, gradient, iconBg }, ref) {
     const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -111,7 +111,5 @@ const ProcessTimeline = forwardRef<HTMLDivElement, ProcessTimelineProps>(
     );
   }
 );
-
-ProcessTimeline.displayName = "ProcessTimeline";
 
 export default ProcessTimeline;

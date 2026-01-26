@@ -11,7 +11,7 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = forwardRef<HTMLAnchorElement, ServiceCardProps>(
-  ({ service, index, gradient, iconBg, email }, ref) => {
+  function ServiceCard({ service, index, gradient, iconBg, email }, ref) {
     return (
       <a
         ref={ref}
@@ -54,7 +54,5 @@ const ServiceCard = forwardRef<HTMLAnchorElement, ServiceCardProps>(
     );
   }
 );
-
-ServiceCard.displayName = "ServiceCard";
 
 export default ServiceCard;
