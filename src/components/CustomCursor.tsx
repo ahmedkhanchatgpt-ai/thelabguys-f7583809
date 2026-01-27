@@ -14,7 +14,7 @@ const CustomCursor = () => {
     !window.matchMedia("(hover: none)").matches;
 
   const onMouseMove = useCallback((e: MouseEvent) => {
-    if (rafRef.current) return; // Skip if already queued
+    if (rafRef.current) return;
 
     rafRef.current = requestAnimationFrame(() => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -37,7 +37,6 @@ const CustomCursor = () => {
   useEffect(() => {
     if (!shouldEnable) return;
 
-    // Hide native cursor when custom cursor is enabled
     document.body.style.cursor = 'none';
     document.documentElement.style.cursor = 'none';
 
@@ -46,7 +45,6 @@ const CustomCursor = () => {
     document.addEventListener("mouseenter", onMouseEnter);
 
     return () => {
-      // Restore native cursor on cleanup
       document.body.style.cursor = '';
       document.documentElement.style.cursor = '';
       document.removeEventListener("mousemove", onMouseMove);
@@ -56,48 +54,44 @@ const CustomCursor = () => {
     };
   }, [shouldEnable, onMouseMove, onMouseLeave, onMouseEnter]);
 
-  // Don't render on anything but high-performance devices
   if (!shouldEnable) return null;
+
+  const size = isPointer ? 16 : 8;
+  const outerSize = isPointer ? 32 : 24;
 
   return (
     <>
       <div
-        className={`fixed pointer-events-none z-[9999] transition-opacity duration-150 ${
-          isHidden ? "opacity-0" : "opacity-100"
-        }`}
+        className={`fixed pointer-events-none z-[9999] ${isHidden ? "opacity-0" : "opacity-100"}`}
         style={{
           left: position.x,
           top: position.y,
           transform: "translate(-50%, -50%)",
+          transition: "opacity 0.15s",
         }}
       >
         <div
-          className={`rounded-full bg-white ${
-            isPointer ? "w-4 h-4" : "w-2 h-2"
-          }`}
+          className="rounded-full bg-white"
+          style={{ width: size, height: size, transition: "width 0.15s, height 0.15s" }}
         />
       </div>
 
       <div
-        className={`fixed pointer-events-none z-[9998] transition-opacity duration-150 ${
-          isHidden ? "opacity-0" : "opacity-100"
-        }`}
+        className={`fixed pointer-events-none z-[9998] ${isHidden ? "opacity-0" : "opacity-100"}`}
         style={{
           left: position.x,
           top: position.y,
-          transform: `translate(-50%, -50%) scale(${isPointer ? 1.3 : 1})`,
+          transform: "translate(-50%, -50%)",
+          transition: "opacity 0.15s",
         }}
       >
         <div
-          className={`rounded-full border border-white/30 ${
-            isPointer ? "w-8 h-8" : "w-6 h-6"
-          }`}
+          className="rounded-full border border-white/30"
+          style={{ width: outerSize, height: outerSize, transition: "width 0.15s, height 0.15s" }}
         />
       </div>
 
-      <style>{`
-        * { cursor: none !important; }
-      `}</style>
+      <style>{`* { cursor: none !important; }`}</style>
     </>
   );
 };
