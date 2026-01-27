@@ -77,10 +77,10 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
-      {/* Animated background */}
-      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br ${gradient} rounded-full blur-[250px] opacity-[0.08] animate-pulse-slow`} />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+    <section className="py-20 md:py-28 relative overflow-hidden">
+      {/* Simplified background */}
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br ${gradient} rounded-full blur-[200px] opacity-[0.06]`} />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/15 to-transparent" />
 
       <div className="container mx-auto max-w-7xl px-6">
         {/* Section Header */}

@@ -2,10 +2,17 @@ import { useState, useEffect } from 'react';
 
 export type PerformanceLevel = 'high' | 'medium' | 'low' | 'minimal';
 
+let cachedLevel: PerformanceLevel | null = null;
+
 export function usePerformanceMode(): PerformanceLevel {
-  const [level, setLevel] = useState<PerformanceLevel>('high');
+  const [level, setLevel] = useState<PerformanceLevel>(cachedLevel || 'medium');
 
   useEffect(() => {
+    if (cachedLevel) {
+      setLevel(cachedLevel);
+      return;
+    }
+
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     
@@ -26,15 +33,19 @@ export function usePerformanceMode(): PerformanceLevel {
     const isSlowConnection = connection && (connection.saveData || connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g');
     
     // Determine performance level
+    let detectedLevel: PerformanceLevel;
     if (prefersReducedMotion || hasVeryLowMemory || hasVeryLowCores || isSlowConnection) {
-      setLevel('minimal');
+      detectedLevel = 'minimal';
     } else if (isMobile || (hasLowMemory && hasLowCores) || isTouchOnly) {
-      setLevel('low');
+      detectedLevel = 'low';
     } else if (hasLowMemory || hasLowCores) {
-      setLevel('medium');
+      detectedLevel = 'medium';
     } else {
-      setLevel('high');
+      detectedLevel = 'high';
     }
+    
+    cachedLevel = detectedLevel;
+    setLevel(detectedLevel);
   }, []);
 
   return level;
