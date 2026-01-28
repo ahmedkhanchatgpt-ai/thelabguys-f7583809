@@ -1,4 +1,3 @@
-import { forwardRef, useRef, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import type { TeamMember } from "@/data/teamMembers";
@@ -9,115 +8,34 @@ interface TeamMemberCardProps {
   variant?: "default" | "featured";
 }
 
-const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ member, index, variant = "default" }, ref) => {
+const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardProps) => {
   const isFeatured = variant === "featured";
-  const cardRef = useRef<HTMLAnchorElement>(null);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const lastUpdate = useRef(0);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-    
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (prefersReducedMotion) return;
-    
-    // Throttle to ~30fps for performance
-    const now = performance.now();
-    if (now - lastUpdate.current < 33) return;
-    lastUpdate.current = now;
-
-    const card = cardRef.current;
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    // Subtle tilt angles for smooth effect
-    const rotateX = ((y - centerY) / centerY) * -6;
-    const rotateY = ((x - centerX) / centerX) * 6;
-
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015) translateZ(0)`;
-
-    // Move the glow effect
-    const glowX = (x / rect.width) * 100;
-    const glowY = (y / rect.height) * 100;
-    card.style.setProperty("--glow-x", `${glowX}%`);
-    card.style.setProperty("--glow-y", `${glowY}%`);
-  }, [prefersReducedMotion]);
-
-  const handleMouseLeave = useCallback(() => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.transition = "transform 400ms cubic-bezier(0.22, 1, 0.36, 1)";
-    card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0)";
-  }, []);
-
-  const handleMouseEnter = useCallback(() => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.transition = "transform 150ms cubic-bezier(0.22, 1, 0.36, 1)";
-  }, []);
 
   return (
     <Link
-      ref={cardRef}
       to={`/team/${member.id}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
-      className={`group relative overflow-hidden rounded-3xl glass glow-border tilt-card opacity-0 animate-fade-up stagger-${Math.min(index + 1, 5)} ${
+      className={`group relative overflow-hidden rounded-3xl glass glow-border opacity-0 animate-fade-up stagger-${Math.min(index + 1, 5)} ${
         isFeatured ? "row-span-2" : ""
       }`}
-      style={{ 
-        transformStyle: "preserve-3d", 
-        willChange: "transform",
-        backfaceVisibility: "hidden",
-        WebkitBackfaceVisibility: "hidden",
-      }}
     >
-      {/* Dynamic glow effect that follows cursor */}
-      <div 
-        className={`absolute inset-0 bg-gradient-radial opacity-0 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none`}
-        style={{
-          background: `radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%), ${member.gradient.includes("cyan") ? "hsl(180 100% 50% / 0.3)" : member.gradient.includes("blue") ? "hsl(220 100% 60% / 0.3)" : member.gradient.includes("amber") ? "hsl(40 100% 50% / 0.3)" : member.gradient.includes("purple") ? "hsl(280 100% 60% / 0.3)" : member.gradient.includes("green") ? "hsl(150 100% 50% / 0.3)" : "hsl(350 100% 60% / 0.3)"}, transparent 60%)`,
-        }}
-      />
+      {/* Simple gradient background on hover */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-0 group-hover:opacity-15 transition-opacity duration-300`} />
       
-      {/* Animated gradient background */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
-      
-      {/* Noise texture */}
-      <div className="absolute inset-0 noise opacity-50" />
-
-      <div className={`relative p-3 sm:p-4 md:p-5 lg:p-6 flex flex-col h-[180px] sm:h-[220px] md:h-[280px] lg:h-[300px] xl:h-[320px]`} style={{ transform: "translateZ(20px)" }}>
+      <div className={`relative p-3 sm:p-4 md:p-5 lg:p-6 flex flex-col h-[180px] sm:h-[220px] md:h-[280px] lg:h-[300px] xl:h-[320px]`}>
         {/* Floating orb with initials */}
         <div className="flex-1 flex items-center justify-center relative">
           {/* Glow effect behind orb */}
-          <div className={`absolute w-16 sm:w-20 md:w-28 lg:w-32 h-16 sm:h-20 md:h-28 lg:h-32 ${member.iconBg} rounded-full blur-2xl md:blur-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-125`} />
-          
-          {/* Orbiting ring - hidden on mobile for cleaner look */}
-          <div className="absolute hidden sm:block w-24 md:w-32 lg:w-40 h-24 md:h-32 lg:h-40 rounded-full border border-white/10 animate-spin-slow group-hover:border-white/30 transition-colors" />
+          <div className={`absolute w-16 sm:w-20 md:w-28 lg:w-32 h-16 sm:h-20 md:h-28 lg:h-32 ${member.iconBg} rounded-full blur-2xl md:blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-300`} />
           
           {/* Main orb */}
-          <div className={`relative w-14 h-14 sm:w-18 sm:h-18 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full ${member.iconBg} flex items-center justify-center text-white text-base sm:text-xl md:text-2xl lg:text-3xl font-display font-bold shadow-lg group-hover:scale-110 group-hover:shadow-2xl transition-all duration-500`}>
+          <div className={`relative w-14 h-14 sm:w-18 sm:h-18 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full ${member.iconBg} flex items-center justify-center text-white text-base sm:text-xl md:text-2xl lg:text-3xl font-display font-bold shadow-lg group-hover:scale-105 transition-transform duration-300`}>
             {member.initials || member.name.split(' ').map(n => n[0]).join('')}
-            {/* Pulse ring on hover */}
-            <div className={`absolute inset-0 rounded-full ${member.iconBg} opacity-0 group-hover:opacity-50 group-hover:animate-ping`} />
           </div>
         </div>
 
-        <div className="relative mt-auto pt-2 md:pt-3 lg:pt-4 flex items-end justify-between gap-1.5 sm:gap-2" style={{ transform: "translateZ(30px)" }}>
+        <div className="relative mt-auto pt-2 md:pt-3 lg:pt-4 flex items-end justify-between gap-1.5 sm:gap-2">
           <div className="flex-1 min-w-0">
-            <h3 className="font-display text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-foreground mb-0.5 group-hover:text-gradient transition-all duration-300 leading-tight">
+            <h3 className="font-display text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-foreground mb-0.5 leading-tight">
               {member.name}
             </h3>
             <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground leading-tight line-clamp-1 lg:line-clamp-2">
@@ -125,16 +43,14 @@ const TeamMemberCard = forwardRef<HTMLAnchorElement, TeamMemberCardProps>(({ mem
             </p>
           </div>
           
-          {/* Arrow button - circular with colored background */}
-          <div className={`flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${member.iconBg} flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg`}>
+          {/* Arrow button */}
+          <div className={`flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${member.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
             <ArrowUpRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white" strokeWidth={2.5} />
           </div>
         </div>
       </div>
     </Link>
   );
-});
-
-TeamMemberCard.displayName = "TeamMemberCard";
+};
 
 export default TeamMemberCard;

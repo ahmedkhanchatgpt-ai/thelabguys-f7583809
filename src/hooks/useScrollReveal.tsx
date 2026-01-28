@@ -39,7 +39,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   return [ref, isVisible];
 }
 
-// Wrapper component for scroll reveal animations
+// Simplified wrapper component - minimal animations for performance
 interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
@@ -52,27 +52,8 @@ export function ScrollReveal({
   children,
   className = "",
   delay = 0,
-  direction = "up",
-  duration = 600,
 }: ScrollRevealProps) {
   const [ref, isVisible] = useScrollReveal<HTMLDivElement>();
-
-  const getTransform = () => {
-    switch (direction) {
-      case "up":
-        return "translateY(24px) translateZ(0)";
-      case "down":
-        return "translateY(-24px) translateZ(0)";
-      case "left":
-        return "translateX(24px) translateZ(0)";
-      case "right":
-        return "translateX(-24px) translateZ(0)";
-      case "scale":
-        return "scale(0.95) translateZ(0)";
-      default:
-        return "translateY(24px) translateZ(0)";
-    }
-  };
 
   return (
     <div
@@ -80,10 +61,8 @@ export function ScrollReveal({
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateZ(0)" : getTransform(),
-        transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
-        willChange: isVisible ? "auto" : "transform, opacity",
-        backfaceVisibility: "hidden",
+        transform: isVisible ? "none" : "translateY(16px)",
+        transition: `opacity 0.4s ease ${delay}ms, transform 0.4s ease ${delay}ms`,
       }}
     >
       {children}
