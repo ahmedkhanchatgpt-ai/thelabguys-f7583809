@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import ContactModal from "@/components/ContactModal";
-import AdaptiveScene3D from "@/components/AdaptiveScene3D";
 import StatsSection from "@/components/StatsSection";
 import FAQSection from "@/components/FAQSection";
 import { teamMembers } from "@/data/teamMembers";
@@ -33,20 +32,17 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Simplified background orbs - no fixed positioning */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/8 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-cyan-500/8 rounded-full blur-3xl" />
-      </div>
-
+    <div className="min-h-screen bg-background relative">
       <Header onContactClick={() => setContactOpen(true)} />
       <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-16 md:pt-20 px-4 md:px-6 relative">
-        {/* 3D Scene - Adaptive based on device performance */}
-        <AdaptiveScene3D />
+        {/* Simple background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-accent/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-accent/5 rounded-full blur-3xl" />
+        </div>
         
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-5xl mx-auto">
