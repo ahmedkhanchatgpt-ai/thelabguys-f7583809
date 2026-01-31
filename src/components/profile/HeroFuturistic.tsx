@@ -108,9 +108,19 @@ const HeroFuturistic = ({ member }: HeroFuturisticProps) => {
               {member.name.split(' ').map((word, i) => (
                 <span key={i} className="block">
                   {i === 0 ? (
-                    <span className="text-foreground">{word}</span>
+                    <span 
+                      className="text-foreground"
+                      style={{ textShadow: '0 0 40px rgba(251, 113, 133, 0.4), 0 0 80px rgba(251, 113, 133, 0.2)' }}
+                    >
+                      {word}
+                    </span>
                   ) : (
-                    <span className="text-gradient bg-gradient-to-r from-rose-400 via-pink-500 to-red-500 bg-clip-text text-transparent">{word}</span>
+                    <span 
+                      className="text-gradient bg-gradient-to-r from-rose-400 via-pink-500 to-red-500 bg-clip-text text-transparent"
+                      style={{ filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.5)) drop-shadow(0 0 40px rgba(251, 113, 133, 0.4))' }}
+                    >
+                      {word}
+                    </span>
                   )}
                 </span>
               ))}

@@ -40,7 +40,13 @@ const HeroMinimal = ({ member }: HeroMinimalProps) => {
           </div>
 
           {/* Name */}
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 opacity-0 animate-fade-up stagger-2 tracking-tight">
+          <h1 
+            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 opacity-0 animate-fade-up stagger-2 tracking-tight"
+            style={{ 
+              textShadow: '0 0 40px rgba(168, 85, 247, 0.3), 0 0 80px rgba(168, 85, 247, 0.15)',
+              filter: 'drop-shadow(0 0 30px rgba(168, 85, 247, 0.2))'
+            }}
+          >
             {member.name}
           </h1>
 
