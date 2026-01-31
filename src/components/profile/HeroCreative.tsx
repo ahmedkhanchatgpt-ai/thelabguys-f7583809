@@ -104,15 +104,21 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
                   </div>
                   
                   {/* Bottom info bar - more refined */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-white/60 text-xs uppercase tracking-widest mb-1">Latest Showreel</p>
-                        <p className="text-white font-display font-semibold text-lg">Creative Portfolio 2024</p>
+                        <p className="text-white/60 text-xs uppercase tracking-widest mb-1">Featured Showreel</p>
+                        <p className="text-white font-display font-semibold text-lg">2024 Demo Reel</p>
                       </div>
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10">
-                        <Film className="w-4 h-4 text-white/80" />
-                        <span className="text-white/90 text-sm font-medium">2:45</span>
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span className="text-emerald-400 text-xs font-medium">10M+ Views</span>
+                        </div>
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10">
+                          <Film className="w-3.5 h-3.5 text-white/80" />
+                          <span className="text-white/90 text-sm font-medium">2:45</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -120,26 +126,26 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
               </div>
               
               {/* Floating mini cards */}
-              <div className="absolute -bottom-8 -left-4 md:-left-8 w-32 md:w-44 glass rounded-2xl p-3 md:p-4 border border-white/10 shadow-2xl opacity-0 animate-fade-up stagger-3 z-10">
+              <div className="absolute -bottom-6 -left-4 md:-left-6 w-36 md:w-44 glass rounded-2xl p-3 md:p-4 border border-white/10 shadow-2xl opacity-0 animate-fade-up stagger-3 z-10">
                 <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl ${member.iconBg} flex items-center justify-center`}>
-                    <Layers className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  <div className={`w-10 h-10 md:w-11 md:h-11 rounded-xl ${member.iconBg} flex items-center justify-center shadow-lg`}>
+                    <Layers className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Projects</p>
-                    <p className="font-display font-bold text-lg">200+</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Delivered</p>
+                    <p className="font-display font-bold text-xl">500+</p>
                   </div>
                 </div>
               </div>
               
-              <div className="absolute -top-4 -right-4 md:-right-8 w-36 md:w-48 glass rounded-2xl p-3 md:p-4 border border-white/10 shadow-2xl opacity-0 animate-fade-up stagger-4 z-10">
+              <div className="absolute -top-4 -right-4 md:-right-6 w-40 md:w-48 glass rounded-2xl p-3 md:p-4 border border-white/10 shadow-2xl opacity-0 animate-fade-up stagger-4 z-10">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  <div className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg">
+                    <Sparkles className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Views</p>
-                    <p className="font-display font-bold text-lg">5M+</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Total Views</p>
+                    <p className="font-display font-bold text-xl">10M+</p>
                   </div>
                 </div>
               </div>
@@ -148,16 +154,16 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
 
           {/* Right - Content */}
           <div className="lg:col-span-5 order-2 flex flex-col justify-center">
-            {/* Creative badge with animation */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-purple-500/30 w-fit mb-6 opacity-0 animate-fade-up stagger-1 group">
-              <div className="relative">
-                <Palette className="w-4 h-4 text-purple-400" />
-                <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-pink-400 animate-pulse" />
+            {/* Professional badge */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border border-purple-500/30 w-fit mb-6 opacity-0 animate-fade-up stagger-1">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-medium text-emerald-400 uppercase tracking-wider">Available for Projects</span>
               </div>
-              <span className="text-sm text-muted-foreground">Creative Director</span>
-              <span className="flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-purple-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+              <div className="w-px h-4 bg-white/20" />
+              <span className="text-sm text-muted-foreground flex items-center gap-1.5">
+                <Film className="w-3.5 h-3.5 text-purple-400" />
+                Senior Video Editor
               </span>
             </div>
 

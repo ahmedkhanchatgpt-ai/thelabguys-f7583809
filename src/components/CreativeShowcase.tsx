@@ -49,30 +49,33 @@ const AnimatedNumber = ({ value, suffix = "", delay = 0 }: { value: number; suff
 
 const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
   const stats = [
-    { value: 100, suffix: "+", label: "Projects Delivered", icon: TrendingUp, color: "from-purple-500 to-pink-500" },
-    { value: 50, suffix: "+", label: "Happy Clients", icon: Users, color: "from-cyan-500 to-blue-500" },
-    { value: 5, suffix: "", label: "Years Experience", icon: Award, color: "from-amber-500 to-orange-500" },
-    { value: 24, suffix: "h", label: "Avg. Turnaround", icon: Clock, color: "from-emerald-500 to-teal-500" },
+    { value: 500, suffix: "+", label: "Videos Delivered", icon: TrendingUp, color: "from-purple-500 to-pink-500" },
+    { value: 100, suffix: "+", label: "Global Clients", icon: Users, color: "from-cyan-500 to-blue-500" },
+    { value: 5, suffix: "+", label: "Years Experience", icon: Award, color: "from-amber-500 to-orange-500" },
+    { value: 48, suffix: "h", label: "Fast Turnaround", icon: Clock, color: "from-emerald-500 to-teal-500" },
   ];
 
   const testimonials = [
     {
-      quote: "His editing skills are next level and he is a very fast worker. He is better than a lot of people on here.",
-      project: "20 TikTok Video Edits",
+      quote: "His editing skills are next level and he is a very fast worker. He is better than a lot of people on here. Highly recommend!",
+      project: "TikTok Content Package",
       rating: 5,
-      location: "United Kingdom",
+      location: "📍 London, UK",
+      client: "Social Media Agency",
     },
     {
-      quote: "It was my first time working with you, and the experience was pleasant and fruitful. Very responsive and patient vendor. I am looking forward to more of your editing skills.",
-      project: "Video Editing Project",
+      quote: "Outstanding work! The motion graphics exceeded our expectations. Very responsive, patient, and delivered ahead of schedule. Already booked for our next campaign.",
+      project: "Brand Commercial",
       rating: 5,
-      location: "Singapore",
+      location: "📍 Singapore",
+      client: "Marketing Director",
     },
     {
-      quote: "Very professional.",
-      project: "Video Create and Edit",
+      quote: "Exceptional quality and professionalism. The cinematic editing transformed our raw footage into something truly remarkable. A true creative partner.",
+      project: "Documentary Series",
       rating: 5,
-      location: "United States",
+      location: "📍 New York, USA",
+      client: "Production Studio",
     },
   ];
 
@@ -148,40 +151,36 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
               style={{ animationDelay: `${500 + index * 100}ms` }}
             >
               {/* Glow effect */}
-              <div className={`absolute -inset-px bg-gradient-to-br ${gradient} rounded-[1.75rem] opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-700`} />
+              <div className={`absolute -inset-px bg-gradient-to-br ${gradient} rounded-[1.75rem] opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`} />
               
               {/* Card */}
-              <div className="relative glass rounded-3xl p-6 md:p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 h-full flex flex-col">
-                {/* Quote icon */}
-                <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
-                  <Quote className="w-5 h-5 text-white" />
-                </div>
-                
-                {/* Stars with animation */}
-                <div className="flex gap-1 mb-5">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className="w-5 h-5 fill-amber-400 text-amber-400 transition-transform duration-300" 
-                      style={{ 
-                        animationDelay: `${i * 100}ms`,
-                      }}
-                    />
-                  ))}
+              <div className="relative glass rounded-3xl p-6 md:p-8 border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+                {/* Header with quote icon and stars */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center shadow-lg`}>
+                    <Quote className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="flex gap-0.5">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
                 </div>
                 
                 {/* Quote text */}
-                <p className="text-base md:text-lg leading-relaxed mb-6 text-foreground/90 flex-grow font-light italic">
+                <p className="text-base leading-relaxed mb-6 text-foreground/90 flex-grow">
                   "{testimonial.quote}"
                 </p>
                 
-                {/* Project & Location */}
-                <div className="pt-5 border-t border-white/10">
-                  <p className="font-display font-semibold text-sm mb-1">{testimonial.project}</p>
-                  <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                    {testimonial.location}
-                  </p>
+                {/* Footer with project info */}
+                <div className="pt-5 border-t border-white/10 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="font-display font-semibold text-sm">{testimonial.project}</p>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>{testimonial.client}</span>
+                    <span className="text-purple-400">{testimonial.location}</span>
+                  </div>
                 </div>
               </div>
             </div>
