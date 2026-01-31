@@ -167,9 +167,15 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
               </span>
             </div>
 
-            {/* Name - animated professional typography */}
+            {/* Name - animated professional typography with glow */}
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-[1.1]">
-              <span className="block text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+              <span 
+                className="block text-foreground opacity-0 animate-fade-up" 
+                style={{ 
+                  animationDelay: '0.1s',
+                  textShadow: '0 0 40px rgba(168, 85, 247, 0.4), 0 0 80px rgba(168, 85, 247, 0.2)',
+                }}
+              >
                 {"Muhammad".split('').map((char, i) => (
                   <span 
                     key={i} 
@@ -184,9 +190,7 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
                 className="block opacity-0 animate-fade-up"
                 style={{ 
                   animationDelay: '0.5s',
-                  background: `linear-gradient(135deg, hsl(280, 100%, 70%), hsl(320, 100%, 60%))`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.5)) drop-shadow(0 0 40px rgba(168, 85, 247, 0.4))',
                 }}
               >
                 {"Ahmed Khan".split('').map((char, i) => (
