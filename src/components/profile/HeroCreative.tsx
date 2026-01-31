@@ -167,21 +167,19 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
               </span>
             </div>
 
-            {/* Name with creative staggered typography */}
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 leading-[0.95]">
-              {member.name.split(' ').map((word, i) => (
-                <span 
-                  key={i} 
-                  className={`block transform transition-transform duration-300 ${i === 0 ? '' : i === 1 ? 'ml-4 md:ml-8 text-gradient' : i === 2 ? 'ml-8 md:ml-16 text-gradient' : 'ml-12 md:ml-24 text-gradient'}`}
-                  style={{ 
-                    background: i > 0 ? `linear-gradient(135deg, hsl(280, 100%, 70%), hsl(320, 100%, 60%))` : undefined,
-                    WebkitBackgroundClip: i > 0 ? 'text' : undefined,
-                    WebkitTextFillColor: i > 0 ? 'transparent' : undefined,
-                  }}
-                >
-                  {word}
-                </span>
-              ))}
+            {/* Name - clean professional typography */}
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 leading-[1.1]">
+              <span className="block text-foreground">Muhammad</span>
+              <span 
+                className="block"
+                style={{ 
+                  background: `linear-gradient(135deg, hsl(280, 100%, 70%), hsl(320, 100%, 60%))`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                Ahmed Khan
+              </span>
             </h1>
 
             {/* Role with icon */}
