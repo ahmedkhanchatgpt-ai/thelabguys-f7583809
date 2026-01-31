@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, RefObject } from "react";
+import { usePerformanceMode } from "./usePerformanceMode";
 
 interface ScrollRevealOptions {
   threshold?: number;
@@ -39,7 +40,6 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   return [ref, isVisible];
 }
 
-// Simplified wrapper component - minimal animations for performance
 interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
@@ -52,8 +52,29 @@ export function ScrollReveal({
   children,
   className = "",
   delay = 0,
+  direction = "up",
+  duration = 600,
 }: ScrollRevealProps) {
   const [ref, isVisible] = useScrollReveal<HTMLDivElement>();
+  const perfLevel = usePerformanceMode();
+  
+  // Simplified animations for low-performance devices
+  const isLowPerf = perfLevel === 'low' || perfLevel === 'minimal';
+
+  const getInitialTransform = () => {
+    if (isLowPerf) return "translateY(20px)";
+    
+    switch (direction) {
+      case "up": return "translateY(40px)";
+      case "down": return "translateY(-40px)";
+      case "left": return "translateX(40px)";
+      case "right": return "translateX(-40px)";
+      case "scale": return "scale(0.9)";
+      default: return "translateY(40px)";
+    }
+  };
+
+  const actualDuration = isLowPerf ? 300 : duration;
 
   return (
     <div
@@ -61,8 +82,9 @@ export function ScrollReveal({
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "none" : "translateY(16px)",
-        transition: `opacity 0.4s ease ${delay}ms, transform 0.4s ease ${delay}ms`,
+        transform: isVisible ? "none" : getInitialTransform(),
+        transition: `opacity ${actualDuration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${actualDuration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: isVisible ? "auto" : "opacity, transform",
       }}
     >
       {children}
