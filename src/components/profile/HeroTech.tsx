@@ -47,33 +47,33 @@ const HeroTech = ({ member }: HeroTechProps) => {
                 
                 {/* Terminal content */}
                 <div className="p-6 font-mono text-sm space-y-3">
-                  <div className="flex items-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+                  <div className="flex items-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
                     <span className="text-green-400">➜</span>
-                    <span className="text-muted-foreground">whoami</span>
+                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '0.3s' }}>whoami</span>
                   </div>
-                  <div className="pl-4 text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '0.4s' }}>
-                    <span className="text-green-400">{member.name}</span>
+                  <div className="pl-4 text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
+                    <span className="text-green-400 overflow-hidden whitespace-nowrap inline-block animate-typewriter" style={{ animationDelay: '0.9s' }}>{member.name}</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 pt-2 opacity-0 animate-fade-up" style={{ animationDelay: '0.6s' }}>
+                  <div className="flex items-center gap-2 pt-2 opacity-0 animate-fade-up" style={{ animationDelay: '1.4s', animationFillMode: 'forwards' }}>
                     <span className="text-green-400">➜</span>
-                    <span className="text-muted-foreground">cat role.txt</span>
+                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '1.5s' }}>cat role.txt</span>
                   </div>
-                  <div className="pl-4 text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '0.8s' }}>
-                    <span className="text-yellow-400">{member.role}</span>
+                  <div className="pl-4 text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '2s', animationFillMode: 'forwards' }}>
+                    <span className="text-yellow-400 overflow-hidden whitespace-nowrap inline-block animate-typewriter" style={{ animationDelay: '2.1s' }}>{member.role}</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 pt-2 opacity-0 animate-fade-up" style={{ animationDelay: '1s' }}>
+                  <div className="flex items-center gap-2 pt-2 opacity-0 animate-fade-up" style={{ animationDelay: '2.6s', animationFillMode: 'forwards' }}>
                     <span className="text-green-400">➜</span>
-                    <span className="text-muted-foreground">cat skills.json</span>
+                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '2.7s' }}>cat skills.json</span>
                   </div>
-                  <div className="pl-4 text-cyan-400 opacity-0 animate-fade-up" style={{ animationDelay: '1.2s' }}>
-                    ["{member.skills?.slice(0, 4).join('", "') || 'React", "TypeScript", "Node.js", "Next.js'}"]
+                  <div className="pl-4 text-cyan-400 opacity-0 animate-fade-up" style={{ animationDelay: '3.2s', animationFillMode: 'forwards' }}>
+                    <span className="overflow-hidden whitespace-nowrap inline-block animate-typewriter" style={{ animationDelay: '3.3s' }}>["{member.skills?.slice(0, 4).join('", "') || 'React", "TypeScript", "Node.js", "Next.js'}"]</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 pt-4 opacity-0 animate-fade-up" style={{ animationDelay: '1.4s' }}>
+                  <div className="flex items-center gap-2 pt-4 opacity-0 animate-fade-up" style={{ animationDelay: '4s', animationFillMode: 'forwards' }}>
                     <span className="text-green-400">➜</span>
-                    <span className="animate-pulse text-white">_</span>
+                    <span className="animate-blink text-white">_</span>
                   </div>
                 </div>
               </div>
