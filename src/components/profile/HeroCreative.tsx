@@ -167,18 +167,42 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
               </span>
             </div>
 
-            {/* Name - clean professional typography */}
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 leading-[1.1]">
-              <span className="block text-foreground">Muhammad</span>
+            {/* Name - animated professional typography */}
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-[1.1]">
+              <span className="block text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+                {"Muhammad".split('').map((char, i) => (
+                  <span 
+                    key={i} 
+                    className="inline-block opacity-0 animate-fade-up hover:text-purple-400 transition-colors duration-200 cursor-default"
+                    style={{ animationDelay: `${0.15 + i * 0.04}s` }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
               <span 
-                className="block"
+                className="block opacity-0 animate-fade-up"
                 style={{ 
+                  animationDelay: '0.5s',
                   background: `linear-gradient(135deg, hsl(280, 100%, 70%), hsl(320, 100%, 60%))`,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                Ahmed Khan
+                {"Ahmed Khan".split('').map((char, i) => (
+                  <span 
+                    key={i} 
+                    className="inline-block opacity-0 animate-fade-up hover:scale-110 transition-transform duration-200 cursor-default"
+                    style={{ 
+                      animationDelay: `${0.55 + i * 0.03}s`,
+                      background: `linear-gradient(135deg, hsl(280, 100%, 70%), hsl(320, 100%, 60%))`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </span>
+                ))}
               </span>
             </h1>
 
