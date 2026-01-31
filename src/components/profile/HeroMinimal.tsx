@@ -11,7 +11,7 @@ interface HeroMinimalProps {
 const HeroMinimal = ({ member }: HeroMinimalProps) => {
   return (
     <section className="min-h-screen flex items-center relative pt-20 overflow-hidden">
-      {/* Simple gradient orbs */}
+      {/* Gradient orbs */}
       <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-gradient-to-br from-purple-500 via-violet-500 to-indigo-500 rounded-full blur-[180px] opacity-10 animate-pulse-slow" />
       <div className="absolute bottom-1/4 -right-20 w-[400px] h-[400px] bg-gradient-to-br from-fuchsia-500 to-purple-500 rounded-full blur-[150px] opacity-8 animate-pulse-slow" style={{ animationDelay: '3s' }} />
 
@@ -28,18 +28,19 @@ const HeroMinimal = ({ member }: HeroMinimalProps) => {
           Back to Team
         </Link>
 
-        {/* Centered minimal layout */}
+        {/* Centered layout */}
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Avatar with glow */}
           <div className="relative mb-12 opacity-0 animate-fade-up">
             <div className={`absolute inset-0 ${member.iconBg} blur-3xl opacity-40 scale-[2]`} />
+            <div className={`absolute inset-0 ${member.iconBg} blur-xl opacity-30 scale-150`} />
             <div className={`relative w-36 h-36 md:w-44 md:h-44 rounded-full ${member.iconBg} flex items-center justify-center text-white text-5xl md:text-6xl font-display font-bold shadow-2xl group hover:scale-105 transition-transform`}>
               {member.initials || member.name.split(" ").map((n) => n[0]).join("")}
             </div>
           </div>
 
           {/* Status badge */}
-          <div className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-purple-500/30 mb-8 opacity-0 animate-fade-up stagger-1`}>
+          <div className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-white/20 mb-8 opacity-0 animate-fade-up stagger-1`}>
             <span className="relative flex h-2.5 w-2.5">
               <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${member.iconBg} opacity-75`}></span>
               <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${member.iconBg}`}></span>
@@ -47,17 +48,14 @@ const HeroMinimal = ({ member }: HeroMinimalProps) => {
             <span className="text-sm text-muted-foreground font-medium">{member.role}</span>
           </div>
 
-          {/* Name with glow effect */}
+          {/* Name with glow */}
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 opacity-0 animate-fade-up stagger-2 tracking-tight">
             {member.name.split(' ').map((word, i) => (
               <span 
                 key={i} 
-                className="block"
-                style={i > 0 ? { 
-                  filter: 'drop-shadow(0 0 30px rgba(168, 85, 247, 0.3))',
+                className="inline-block mr-4 last:mr-0"
+                style={{ 
                   textShadow: '0 0 40px rgba(168, 85, 247, 0.3), 0 0 80px rgba(168, 85, 247, 0.15)',
-                } : { 
-                  textShadow: '0 0 40px rgba(168, 85, 247, 0.3), 0 0 80px rgba(168, 85, 247, 0.15)' 
                 }}
               >
                 {word}
@@ -67,9 +65,7 @@ const HeroMinimal = ({ member }: HeroMinimalProps) => {
 
           {/* Tagline */}
           <p className="text-2xl md:text-3xl text-muted-foreground font-light mb-8 opacity-0 animate-fade-up stagger-3">
-            <span className="text-purple-400">"</span>
             {member.tagline}
-            <span className="text-purple-400">"</span>
           </p>
 
           {/* Gradient divider */}
@@ -90,7 +86,7 @@ const HeroMinimal = ({ member }: HeroMinimalProps) => {
                 </a>
               </Button>
             </MagneticButton>
-            <Button asChild variant="outline" size="lg" className="gap-2 glass border-purple-500/30 hover:border-purple-500/50 hover:bg-purple-500/10 px-8 py-6 text-base">
+            <Button asChild variant="outline" size="lg" className="gap-2 glass border-white/20 hover:border-white/40 hover:bg-white/5 px-8 py-6 text-base">
               <a href={`mailto:${member.email}?subject=Schedule a Call`}>
                 <Calendar className="w-5 h-5" />
                 Schedule Call
