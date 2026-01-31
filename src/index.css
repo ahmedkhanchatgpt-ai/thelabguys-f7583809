@@ -230,3 +230,34 @@
 .glow-pink {
   box-shadow: 0 0 40px -10px hsl(330 100% 60% / 0.5);
 }
+
+/* Terminal typewriter effect */
+@keyframes typewriter {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.animate-typewriter {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 0.4s steps(20) forwards;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
