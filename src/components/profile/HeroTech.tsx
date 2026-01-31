@@ -87,7 +87,15 @@ const HeroTech = ({ member }: HeroTechProps) => {
             {/* Name */}
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 tracking-tight">
               <span className="text-muted-foreground font-mono text-lg block mb-2">const name =</span>
-              <span className="text-gradient">"{member.name}"</span>
+              <span 
+                className="text-gradient"
+                style={{ 
+                  filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.5)) drop-shadow(0 0 40px rgba(16, 185, 129, 0.4))',
+                  textShadow: '0 0 30px rgba(34, 197, 94, 0.3)'
+                }}
+              >
+                "{member.name}"
+              </span>
             </h1>
 
             {/* Tagline */}

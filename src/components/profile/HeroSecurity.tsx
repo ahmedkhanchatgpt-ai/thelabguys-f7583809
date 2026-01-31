@@ -90,9 +90,20 @@ const HeroSecurity = ({ member }: HeroSecurityProps) => {
 
             {/* Name */}
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 tracking-tight">
-              <span className="block text-foreground">{member.name.split(' ')[0]}</span>
+              <span 
+                className="block text-foreground"
+                style={{ textShadow: '0 0 40px rgba(251, 146, 60, 0.4), 0 0 80px rgba(251, 146, 60, 0.2)' }}
+              >
+                {member.name.split(' ')[0]}
+              </span>
               {member.name.split(' ').slice(1).map((word, i) => (
-                <span key={i} className="block text-gradient">{word}</span>
+                <span 
+                  key={i} 
+                  className="block text-gradient"
+                  style={{ filter: 'drop-shadow(0 0 20px rgba(249, 115, 22, 0.5)) drop-shadow(0 0 40px rgba(251, 146, 60, 0.4))' }}
+                >
+                  {word}
+                </span>
               ))}
             </h1>
 

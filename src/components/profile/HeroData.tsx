@@ -42,7 +42,15 @@ const HeroData = ({ member }: HeroDataProps) => {
             {/* Name with data styling */}
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 tracking-tight">
               {member.name.split(' ').map((word, i) => (
-                <span key={i} className={`block ${i > 0 ? 'text-gradient' : ''}`}>
+                <span 
+                  key={i} 
+                  className={`block ${i > 0 ? 'text-gradient' : ''}`}
+                  style={i > 0 ? { 
+                    filter: 'drop-shadow(0 0 20px rgba(34, 197, 94, 0.5)) drop-shadow(0 0 40px rgba(16, 185, 129, 0.4))' 
+                  } : { 
+                    textShadow: '0 0 40px rgba(34, 197, 94, 0.3), 0 0 80px rgba(34, 197, 94, 0.15)' 
+                  }}
+                >
                   {word}
                 </span>
               ))}
