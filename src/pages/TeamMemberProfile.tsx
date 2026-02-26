@@ -117,32 +117,55 @@ const TeamMemberProfile = () => {
 
       {/* Skills Section */}
       <section className="py-20 md:py-28 relative overflow-hidden">
+        {/* Background accents */}
+        <div className={`absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-br ${member.gradient} rounded-full blur-[200px] opacity-[0.04]`} />
+        
         <div className="container mx-auto max-w-7xl px-6">
-          <div className="max-w-3xl mb-16">
-            <div className={`inline-flex items-center gap-2 mb-4`}>
-              <div className={`h-px w-12 bg-gradient-to-r ${member.gradient}`} />
-              <span className={`text-sm uppercase tracking-widest text-muted-foreground ${getSectionStyle()}`}>Expertise</span>
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold">
-              Technical <span className="text-gradient">Skills</span>
-            </h2>
-          </div>
-
-          {/* Skills with variant-specific styling */}
-          <div className="flex flex-wrap gap-3 md:gap-4">
-            {member.skills.map((skill, index) => (
-              <div
-                key={skill}
-                className={`group relative px-6 py-4 ${member.layoutVariant === 'tech' ? 'rounded-lg' : member.layoutVariant === 'creative' ? 'rounded-full' : 'rounded-2xl'} glass border border-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 cursor-default opacity-0 animate-fade-up`}
-                style={{ animationDelay: `${index * 80}ms` }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-0 group-hover:opacity-10 ${member.layoutVariant === 'tech' ? 'rounded-lg' : member.layoutVariant === 'creative' ? 'rounded-full' : 'rounded-2xl'} transition-opacity`} />
-                <div className="relative flex items-center gap-3">
-                  <div className={`w-2 h-2 rounded-full ${member.iconBg} group-hover:scale-150 transition-transform`} />
-                  <span className={`font-display font-medium text-lg ${member.layoutVariant === 'tech' ? 'font-mono text-base' : ''}`}>{skill}</span>
-                </div>
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-start">
+            {/* Left: Header + description */}
+            <div className="lg:w-1/3 lg:sticky lg:top-32">
+              <div className={`inline-flex items-center gap-2 mb-4`}>
+                <div className={`h-px w-12 bg-gradient-to-r ${member.gradient}`} />
+                <span className={`text-sm uppercase tracking-widest text-muted-foreground ${getSectionStyle()}`}>Toolkit</span>
               </div>
-            ))}
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                Tools I <span className="text-gradient">Master</span>
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Years of hands-on experience with industry-leading software to deliver exceptional results.
+              </p>
+              <div className={`mt-8 h-1 w-24 rounded-full bg-gradient-to-r ${member.gradient} opacity-60`} />
+            </div>
+
+            {/* Right: Skill cards grid */}
+            <div className="lg:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-4">
+              {member.skills.map((skill, index) => (
+                <div
+                  key={skill}
+                  className="group relative opacity-0 animate-fade-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className={`absolute -inset-px bg-gradient-to-br ${member.gradient} rounded-2xl opacity-0 group-hover:opacity-40 blur-xl transition-all duration-500`} />
+                  <div className="relative glass rounded-2xl p-6 border border-white/10 group-hover:border-white/25 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col justify-between min-h-[140px]">
+                    {/* Gradient hover overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-0 group-hover:opacity-[0.08] rounded-2xl transition-opacity duration-500`} />
+                    
+                    {/* Skill dot indicator */}
+                    <div className="relative flex items-center gap-3 mb-4">
+                      <div className={`w-3 h-3 rounded-full ${member.iconBg} shadow-lg group-hover:scale-125 transition-transform duration-300`}>
+                        <div className={`w-3 h-3 rounded-full ${member.iconBg} animate-ping opacity-0 group-hover:opacity-40`} />
+                      </div>
+                      <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+                    </div>
+                    
+                    {/* Skill name */}
+                    <p className={`relative font-display font-semibold text-lg text-foreground/90 group-hover:text-foreground transition-colors ${member.layoutVariant === 'tech' ? 'font-mono text-base' : ''}`}>
+                      {skill}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
