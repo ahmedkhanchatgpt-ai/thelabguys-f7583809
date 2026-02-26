@@ -73,7 +73,7 @@ const CustomCursor = () => {
         style={{
           left: position.x,
           top: position.y,
-          transform: `translate(-50%, -50%) scale(${isHovering ? 1.5 : isClicking ? 0.8 : 1})`,
+          transform: `translate(-50%, -50%) scale(${isHovering ? 1.15 : isClicking ? 0.8 : 1})`,
           opacity: isVisible ? 1 : 0,
           transition: "transform 0.2s ease-out, opacity 0.2s ease-out",
         }}
@@ -81,8 +81,8 @@ const CustomCursor = () => {
         <div
           className="rounded-full border-2 border-white"
           style={{
-            width: isHovering ? 48 : 32,
-            height: isHovering ? 48 : 32,
+            width: isHovering ? 38 : 32,
+            height: isHovering ? 38 : 32,
             transition: "width 0.2s ease-out, height 0.2s ease-out",
           }}
         />

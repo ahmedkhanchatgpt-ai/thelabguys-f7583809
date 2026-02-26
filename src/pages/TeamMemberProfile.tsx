@@ -1,4 +1,5 @@
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -19,7 +20,12 @@ import {
 
 const TeamMemberProfile = () => {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const member = id ? getTeamMember(id) : undefined;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   if (!member) {
     return <Navigate to="/" replace />;
