@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Linkedin, Github, Calendar, Brain, Sparkles } from "lucide-react";
+import { ArrowLeft, Linkedin, Github, Mail, Brain, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/MagneticButton";
 import type { TeamMember } from "@/data/teamMembers";
@@ -116,8 +116,8 @@ const HeroFuturistic = ({ member }: HeroFuturisticProps) => {
                 </Button>
               </MagneticButton>
               <Button asChild variant="outline" size="lg" className="gap-2 glass border-pink-500/30 hover:border-pink-500/50 hover:bg-pink-500/10 px-8 py-6 text-base">
-                <a href={`mailto:${member.email}?subject=AI Consultation`}>
-                  <Calendar className="w-5 h-5" />
+                <a href={`mailto:${member.email}?subject=AI Inquiry`}>
+                  <Mail className="w-5 h-5" />
                   Explore Possibilities
                 </a>
               </Button>

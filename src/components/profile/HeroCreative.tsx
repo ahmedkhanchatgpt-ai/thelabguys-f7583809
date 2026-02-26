@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Mail, Linkedin, Github, Calendar, MessageCircle, Play, Palette, Film, Sparkles, Layers, Wand2 } from "lucide-react";
+import { ArrowLeft, Mail, Linkedin, Github, MessageCircle, Play, Palette, Film, Sparkles, Layers, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/MagneticButton";
 import type { TeamMember } from "@/data/teamMembers";
@@ -243,8 +243,8 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
               </MagneticButton>
               <Button asChild variant="outline" size="lg" className="gap-2 glass border-purple-500/30 hover:border-purple-500/50 hover:bg-purple-500/10 px-8 py-6 text-base transition-all">
                 <a href={`mailto:${member.email}?subject=Project Inquiry`}>
-                  <Calendar className="w-5 h-5" />
-                  Book a Call
+                  <Mail className="w-5 h-5" />
+                  View Portfolio
                 </a>
               </Button>
             </div>

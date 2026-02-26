@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Linkedin, Github, Calendar, MessageCircle } from "lucide-react";
+import { ArrowLeft, Linkedin, Github, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/MagneticButton";
 import type { TeamMember } from "@/data/teamMembers";
@@ -87,9 +87,9 @@ const HeroMinimal = ({ member }: HeroMinimalProps) => {
               </Button>
             </MagneticButton>
             <Button asChild variant="outline" size="lg" className="gap-2 glass border-white/20 hover:border-white/40 hover:bg-white/5 px-8 py-6 text-base">
-              <a href={`mailto:${member.email}?subject=Schedule a Call`}>
-                <Calendar className="w-5 h-5" />
-                Schedule Call
+              <a href={`mailto:${member.email}?subject=Project Inquiry`}>
+                <Mail className="w-5 h-5" />
+                Send a Message
               </a>
             </Button>
           </div>

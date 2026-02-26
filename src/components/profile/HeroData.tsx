@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Linkedin, Github, Calendar, BarChart3, TrendingUp, PieChart, Database } from "lucide-react";
+import { ArrowLeft, Linkedin, Github, Mail, BarChart3, TrendingUp, PieChart, Database } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/MagneticButton";
 import type { TeamMember } from "@/data/teamMembers";
@@ -76,9 +76,9 @@ const HeroData = ({ member }: HeroDataProps) => {
                 </Button>
               </MagneticButton>
               <Button asChild variant="outline" size="lg" className="gap-2 glass border-green-500/30 hover:border-green-500/50 hover:bg-green-500/10 px-8 py-6 text-base">
-                <a href={`mailto:${member.email}?subject=Data Consultation`}>
-                  <Calendar className="w-5 h-5" />
-                  Book Consultation
+                <a href={`mailto:${member.email}?subject=Data Inquiry`}>
+                  <Mail className="w-5 h-5" />
+                  Get in Touch
                 </a>
               </Button>
             </div>
