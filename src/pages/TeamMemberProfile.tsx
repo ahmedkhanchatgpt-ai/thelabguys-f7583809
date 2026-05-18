@@ -117,8 +117,40 @@ const TeamMemberProfile = () => {
 
       {/* Skills Section */}
       <section className="py-20 md:py-28 relative overflow-hidden">
-        {/* Background accents */}
-        <div className={`absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-br ${member.gradient} rounded-full blur-[200px] opacity-[0.04]`} />
+        {/* Themed background — animated gradient blobs */}
+        <div className={`absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br ${member.gradient} rounded-full blur-[160px] opacity-25 animate-pulse-slow`} />
+        <div className={`absolute bottom-0 right-0 w-[700px] h-[700px] bg-gradient-to-tr ${member.gradient} rounded-full blur-[180px] opacity-20 animate-pulse-slow`} style={{ animationDelay: '2s' }} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br ${member.gradient} rounded-full blur-[200px] opacity-[0.12] animate-pulse-slow`} style={{ animationDelay: '4s' }} />
+
+        {/* Animated grid overlay */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.04]" style={{
+          backgroundImage: `linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+          maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 75%)',
+        }} />
+
+        {/* Floating accent orbs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={`orb-${i}`}
+              className={`absolute w-1.5 h-1.5 rounded-full bg-gradient-to-br ${member.gradient} animate-float`}
+              style={{
+                left: `${10 + (i * 13) % 80}%`,
+                top: `${15 + (i * 17) % 70}%`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${4 + (i % 3)}s`,
+                boxShadow: '0 0 12px currentColor',
+                opacity: 0.6,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Decorative rotating ring */}
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-current opacity-[0.04] rounded-full pointer-events-none`} style={{ animation: 'spin 50s linear infinite' }} />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-current opacity-[0.05] rounded-full pointer-events-none`} style={{ animation: 'spin 35s linear infinite reverse' }} />
         
         <div className="container mx-auto max-w-7xl px-6">
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-start">
