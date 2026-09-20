@@ -3,11 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-interface HeaderProps {
-  onContactClick?: () => void;
-}
-
-const Header = ({ onContactClick }: HeaderProps) => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -30,7 +26,8 @@ const Header = ({ onContactClick }: HeaderProps) => {
 
   const handleContactClick = () => {
     setIsMenuOpen(false);
-    onContactClick?.();
+    navigate('/contact');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

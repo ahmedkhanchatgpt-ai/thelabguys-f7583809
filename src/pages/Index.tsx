@@ -2,16 +2,16 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
-import ContactModal from "@/components/ContactModal";
 import StatsSection from "@/components/StatsSection";
 import FAQSection from "@/components/FAQSection";
 import { teamMembers } from "@/data/teamMembers";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollReveal";
 import MagneticButton from "@/components/MagneticButton";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
-  const [contactOpen, setContactOpen] = useState(false);
+  const navigate = useNavigate();
   
   const iconAnimations = [
     "animate-twinkle",      // Sparkles - twinkle effect
@@ -33,49 +33,48 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <Header onContactClick={() => setContactOpen(true)} />
-      <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
+      {/* Themed animated background for entire page */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[10%] left-[10%] w-[600px] h-[600px] bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 rounded-full blur-[160px] opacity-25 animate-pulse-slow" />
+        <div className="absolute bottom-[5%] right-[5%] w-[650px] h-[650px] bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 rounded-full blur-[180px] opacity-20 animate-pulse-slow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-pink-500 to-orange-500 rounded-full blur-[200px] opacity-[0.12] animate-pulse-slow" style={{ animationDelay: '4s' }} />
+
+        <div className="absolute inset-0 opacity-[0.05]" style={{
+          backgroundImage: `linear-gradient(rgba(168,85,247,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.6) 1px, transparent 1px)`,
+          backgroundSize: '70px 70px',
+          maskImage: 'radial-gradient(ellipse at center, black 20%, transparent 70%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, black 20%, transparent 70%)',
+        }} />
+
+        {[...Array(18)].map((_, i) => {
+          const colors = ['bg-purple-400', 'bg-pink-400', 'bg-cyan-400', 'bg-fuchsia-400'];
+          const shadows = ['rgba(168,85,247,0.7)', 'rgba(236,72,153,0.7)', 'rgba(34,211,238,0.7)', 'rgba(217,70,239,0.7)'];
+          const idx = i % colors.length;
+          return (
+            <div
+              key={`p-${i}`}
+              className={`absolute w-1 h-1 rounded-full ${colors[idx]} animate-float`}
+              style={{
+                left: `${5 + (i * 11) % 90}%`,
+                top: `${5 + (i * 17) % 90}%`,
+                animationDelay: `${i * 0.3}s`,
+                animationDuration: `${3 + (i % 4)}s`,
+                boxShadow: `0 0 8px ${shadows[idx]}`,
+                opacity: 0.7,
+              }}
+            />
+          );
+        })}
+
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border border-purple-500/[0.06] rounded-full" style={{ animation: 'spin 60s linear infinite' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-pink-500/[0.07] rounded-full" style={{ animation: 'spin 45s linear infinite reverse' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-cyan-500/[0.06] rounded-full" style={{ animation: 'spin 35s linear infinite' }} />
+      </div>
+
+      <Header />
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center pt-16 md:pt-20 px-4 md:px-6 relative overflow-hidden">
-        {/* Themed animated background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[10%] left-[10%] w-[600px] h-[600px] bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 rounded-full blur-[160px] opacity-25 animate-pulse-slow" />
-          <div className="absolute bottom-[5%] right-[5%] w-[650px] h-[650px] bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 rounded-full blur-[180px] opacity-20 animate-pulse-slow" style={{ animationDelay: '2s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-pink-500 to-orange-500 rounded-full blur-[200px] opacity-[0.12] animate-pulse-slow" style={{ animationDelay: '4s' }} />
-
-          <div className="absolute inset-0 opacity-[0.05]" style={{
-            backgroundImage: `linear-gradient(rgba(168,85,247,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.6) 1px, transparent 1px)`,
-            backgroundSize: '70px 70px',
-            maskImage: 'radial-gradient(ellipse at center, black 20%, transparent 70%)',
-            WebkitMaskImage: 'radial-gradient(ellipse at center, black 20%, transparent 70%)',
-          }} />
-
-          {[...Array(18)].map((_, i) => {
-            const colors = ['bg-purple-400', 'bg-pink-400', 'bg-cyan-400', 'bg-fuchsia-400'];
-            const shadows = ['rgba(168,85,247,0.7)', 'rgba(236,72,153,0.7)', 'rgba(34,211,238,0.7)', 'rgba(217,70,239,0.7)'];
-            const idx = i % colors.length;
-            return (
-              <div
-                key={`p-${i}`}
-                className={`absolute w-1 h-1 rounded-full ${colors[idx]} animate-float`}
-                style={{
-                  left: `${5 + (i * 11) % 90}%`,
-                  top: `${5 + (i * 17) % 90}%`,
-                  animationDelay: `${i * 0.3}s`,
-                  animationDuration: `${3 + (i % 4)}s`,
-                  boxShadow: `0 0 8px ${shadows[idx]}`,
-                  opacity: 0.7,
-                }}
-              />
-            );
-          })}
-
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border border-purple-500/[0.06] rounded-full" style={{ animation: 'spin 60s linear infinite' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-pink-500/[0.07] rounded-full" style={{ animation: 'spin 45s linear infinite reverse' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-cyan-500/[0.06] rounded-full" style={{ animation: 'spin 35s linear infinite' }} />
-        </div>
-        
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-5xl mx-auto">
             {/* Badge */}
@@ -204,7 +203,10 @@ const Index = () => {
                   creative design — let's build something amazing together.
                 </p>
                 <MagneticButton
-                  onClick={() => setContactOpen(true)}
+                  onClick={() => {
+                    navigate('/contact');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                   className="group relative inline-flex items-center justify-center px-6 md:px-10 py-3 md:py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-sm md:text-base font-semibold transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_15px_rgba(168,85,247,0.4),0_0_80px_30px_rgba(236,72,153,0.3)] shadow-[0_0_15px_2px_rgba(168,85,247,0.3)]"
                   strength={0.3}
                 >
