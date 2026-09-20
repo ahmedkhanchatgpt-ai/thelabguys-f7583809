@@ -30,10 +30,10 @@ const Contact = () => {
             <p className="text-sm md:text-base font-semibold text-purple-400 uppercase tracking-widest mb-3">
               CONTACTS
             </p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 tracking-tight px-2">
               Get in Touch with Us
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto px-4">
               Please fill out the form below to share your feedback or request information about our services.
             </p>
           </div>
@@ -43,7 +43,7 @@ const Contact = () => {
             <div className="absolute -inset-[2px] rounded-2xl bg-gradient-to-br from-purple-500/40 via-cyan-500/20 to-pink-500/40 blur-sm opacity-80" />
             <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-purple-500/60 via-cyan-500/30 to-pink-500/60" />
             
-            <div className="relative rounded-2xl p-8 md:p-12 lg:p-14 shadow-[0_8px_32px_rgba(0,0,0,0.4)] bg-black/40 backdrop-blur-2xl border border-white/10">
+            <div className="relative rounded-2xl p-5 sm:p-8 md:p-10 lg:p-12 shadow-[0_8px_32px_rgba(0,0,0,0.4)] bg-black/40 backdrop-blur-2xl border border-white/10 mx-2 sm:mx-0">
               <EnhancedContactForm />
             </div>
           </div>

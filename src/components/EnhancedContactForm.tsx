@@ -191,35 +191,37 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                     ))}
                   </SelectContent>
                 </Select>
-                <FormMessage />
+                <FormMessage className="text-[10px] sm:text-xs" />
               </FormItem>
             )}
           />
         </div>
 
         {/* Schedule Demo Toggle */}
-        <div className="flex items-center justify-between p-5 rounded-xl bg-white/[0.03] border border-white/10 shadow-inner backdrop-blur-sm transition-all hover:bg-white/[0.05]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 shadow-inner backdrop-blur-sm transition-all hover:bg-white/[0.05]">
           <div className="space-y-1.5">
             <h4 className="text-sm font-semibold text-white/90">Schedule a Demo Call</h4>
-            <p className="text-xs text-muted-foreground/80">
+            <p className="text-[11px] sm:text-xs text-muted-foreground/80 leading-relaxed">
               Our manager will contact you shortly to help with all your questions.
             </p>
           </div>
-          <FormField
-            control={form.control}
-            name="scheduleDemo"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-500 data-[state=checked]:to-pink-500"
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+          <div className="self-end sm:self-auto">
+            <FormField
+              control={form.control}
+              name="scheduleDemo"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-500 data-[state=checked]:to-pink-500"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
         </div>
 
         {/* Submit Button */}
