@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster as Sonner, toast } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -33,14 +33,48 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   useEffect(() => {
+    // Block right-click
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
     };
     
     document.addEventListener("contextmenu", handleContextMenu);
     
+    // Hidden developer code
+    const s = [109, 105, 108, 101, 115];
+    let b: number[] = [];
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key.length === 1) {
+        b.push(e.key.toLowerCase().charCodeAt(0));
+        if (b.length > s.length) {
+          b.shift();
+        }
+        
+        if (b.join(',') === s.join(',')) {
+          toast("Site Developed by M.Ahmed", {
+            duration: 6000,
+            position: "bottom-center",
+            style: {
+              background: 'linear-gradient(to right, #9333ea, #db2777)',
+              color: 'white',
+              border: 'none',
+              fontWeight: 'bold',
+              fontSize: '16px',
+              boxShadow: '0 0 20px rgba(219, 39, 119, 0.5)'
+            },
+            icon: '✨'
+          });
+          b = [];
+        }
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    
     return () => {
       document.removeEventListener("contextmenu", handleContextMenu);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
