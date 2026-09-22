@@ -10,7 +10,7 @@ interface HeroMinimalProps {
 
 const HeroMinimal = ({ member }: HeroMinimalProps) => {
   return (
-    <section className="min-h-screen flex items-center relative pt-20 overflow-hidden">
+    <section className="min-h-screen flex lg:items-center relative pt-32 pb-20 lg:pt-20 overflow-hidden">
       {/* Gradient orbs */}
       <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-gradient-to-br from-purple-500 via-violet-500 to-indigo-500 rounded-full blur-[180px] opacity-10 animate-pulse-slow" />
       <div className="absolute bottom-1/4 -right-20 w-[400px] h-[400px] bg-gradient-to-br from-fuchsia-500 to-purple-500 rounded-full blur-[150px] opacity-8 animate-pulse-slow" style={{ animationDelay: '3s' }} />

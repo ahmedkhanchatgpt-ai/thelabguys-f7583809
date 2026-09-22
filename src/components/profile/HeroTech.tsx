@@ -10,9 +10,8 @@ interface HeroTechProps {
 
 const HeroTech = ({ member }: HeroTechProps) => {
   return (
-    <section className="min-h-screen flex items-center relative pt-20 overflow-hidden">
+    <section className="min-h-screen flex lg:items-center relative pt-32 pb-20 lg:pt-20 overflow-hidden">
       {/* Gradient orbs */}
-      <div className="absolute top-1/4 -left-20 w-[400px] h-[400px] bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow" />
       <div className="absolute bottom-1/4 -right-20 w-[300px] h-[300px] bg-gradient-to-br from-cyan-500 to-green-500 rounded-full blur-[120px] opacity-10 animate-pulse-slow" style={{ animationDelay: '2s' }} />
 
       <div className="container mx-auto max-w-7xl px-6">
@@ -26,7 +25,7 @@ const HeroTech = ({ member }: HeroTechProps) => {
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Terminal */}
-          <div className="order-1 opacity-0 animate-fade-up stagger-1">
+          <div className="order-2 lg:order-1 opacity-0 animate-fade-up stagger-1">
             <div className="relative">
               <div className={`absolute -inset-4 bg-gradient-to-br ${member.gradient} blur-2xl opacity-20`} />
               
@@ -81,7 +80,7 @@ const HeroTech = ({ member }: HeroTechProps) => {
           </div>
 
           {/* Right - Content */}
-          <div className="flex flex-col justify-center order-2">
+          <div className="flex flex-col justify-center order-1 lg:order-2">
             {/* Badge */}
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border border-green-500/30 w-fit mb-6 opacity-0 animate-fade-up stagger-2">
               <Terminal className="w-4 h-4 text-green-400" />

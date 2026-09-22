@@ -10,7 +10,7 @@ interface HeroFuturisticProps {
 
 const HeroFuturistic = ({ member }: HeroFuturisticProps) => {
   return (
-    <section className="min-h-screen flex items-center relative pt-20 overflow-hidden">
+    <section className="min-h-screen flex lg:items-center relative pt-32 pb-20 lg:pt-20 overflow-hidden">
       {/* Gradient orbs */}
       <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-gradient-to-br from-pink-500 via-rose-500 to-red-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow" />
       <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-gradient-to-br from-fuchsia-500 to-purple-500 rounded-full blur-[120px] opacity-10 animate-pulse-slow" style={{ animationDelay: '2s' }} />
@@ -24,9 +24,9 @@ const HeroFuturistic = ({ member }: HeroFuturisticProps) => {
           Back to Team
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left - Brain visual */}
-          <div className="order-1 opacity-0 animate-fade-up stagger-1">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left - Cyber Visual */}
+          <div className="order-2 lg:order-1 opacity-0 animate-fade-up stagger-1">
             <div className="relative flex items-center justify-center">
               {/* Rotating rings */}
               <div className="absolute w-[300px] h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-pink-500/10 animate-spin-slow" style={{ animationDuration: '30s' }} />
@@ -54,7 +54,7 @@ const HeroFuturistic = ({ member }: HeroFuturisticProps) => {
           </div>
 
           {/* Right - Content */}
-          <div className="flex flex-col justify-center order-2">
+          <div className="flex flex-col justify-center order-1 lg:order-2">
             {/* Badge */}
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border border-pink-500/30 w-fit mb-6 opacity-0 animate-fade-up stagger-2">
               <Brain className="w-4 h-4 text-pink-400" />
