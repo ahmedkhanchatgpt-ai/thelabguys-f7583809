@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Instagram, Facebook, Twitter } from "lucide-react";
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   return (
@@ -21,10 +21,23 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
             </p>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <span>© {new Date().getFullYear()} The Lab Guys</span>
-            <span className="hidden md:inline text-border">•</span>
-            <span className="hidden md:inline">All rights reserved</span>
+          <div className="flex flex-col items-center md:items-end gap-4">
+            <div className="flex items-center gap-4">
+              <a href="https://www.instagram.com/thelabguysofficial/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
+                <Instagram className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61594154595588" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
+                <Facebook className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
+              </a>
+              <a href="https://x.com/thelabguysofc" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
+                <Twitter className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
+              </a>
+            </div>
+            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+              <span>© {new Date().getFullYear()} The Lab Guys</span>
+              <span className="hidden md:inline text-border">•</span>
+              <span className="hidden md:inline">All rights reserved</span>
+            </div>
           </div>
         </div>
       </div>
