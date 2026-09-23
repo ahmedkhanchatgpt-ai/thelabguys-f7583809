@@ -41,10 +41,11 @@ const CustomCursor = () => {
     document.addEventListener("mouseout", handleHoverEnd, { passive: true });
 
     // Hide native cursor
+    document.documentElement.style.cursor = "none";
     document.body.style.cursor = "none";
     const style = document.createElement("style");
     style.id = "custom-cursor-style";
-    style.textContent = "a, button, input, textarea, select, [role='button'] { cursor: none !important; }";
+    style.textContent = "* { cursor: none !important; }";
     document.head.appendChild(style);
 
     return () => {
@@ -55,6 +56,7 @@ const CustomCursor = () => {
       document.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("mouseover", handleHoverStart);
       document.removeEventListener("mouseout", handleHoverEnd);
+      document.documentElement.style.cursor = "";
       document.body.style.cursor = "";
       document.getElementById("custom-cursor-style")?.remove();
     };

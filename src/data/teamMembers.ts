@@ -215,7 +215,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "muhammad-altaf",
     name: "Muhammad Altaf",
-    role: "AI & Software Engineer",
+    role: "Machine Learning and Software Engineering",
     tagline: "Building intelligence into everything",
     shortBio: "Building intelligent solutions with cutting-edge AI technology.",
     layoutVariant: "futuristic",
