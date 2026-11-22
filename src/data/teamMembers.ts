@@ -249,6 +249,26 @@ export const teamMembers: TeamMember[] = [
   },
 ];
 
+export const GLOBAL_MEMBER_IDS = [
+  "muhammad-ahmed-khan",
+  "joshua",
+  "sumair-ahmed",
+] as const;
+
+export const isGlobalMember = (id: string): boolean => {
+  return (GLOBAL_MEMBER_IDS as readonly string[]).includes(id);
+};
+
+export const getFilteredTeamMembers = (isPakistan: boolean): TeamMember[] => {
+  if (isPakistan) {
+    return teamMembers;
+  }
+  return GLOBAL_MEMBER_IDS.map((id) => teamMembers.find((m) => m.id === id)).filter(
+    (m): m is TeamMember => Boolean(m)
+  );
+};
+
 export const getTeamMember = (id: string): TeamMember | undefined => {
   return teamMembers.find((member) => member.id === id);
 };
+

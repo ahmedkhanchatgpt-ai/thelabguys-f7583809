@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getTeamMember, teamMembers } from "@/data/teamMembers";
+import { getTeamMember } from "@/data/teamMembers";
+import { useGeoLocation } from "@/hooks/useGeoLocation";
 import { Button } from "@/components/ui/button";
 import MagneticButton from "@/components/MagneticButton";
 import ProcessTimeline from "@/components/ProcessTimeline";
@@ -21,20 +22,21 @@ import {
 const TeamMemberProfile = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
+  const { visibleMembers, isMemberVisible } = useGeoLocation();
   const member = id ? getTeamMember(id) : undefined;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  if (!member) {
+  if (!member || !isMemberVisible(member.id)) {
     return <Navigate to="/" replace />;
   }
 
-  const currentIndex = teamMembers.findIndex((m) => m.id === member.id);
-  const nextMember = teamMembers[(currentIndex + 1) % teamMembers.length];
+  const currentIndex = visibleMembers.findIndex((m) => m.id === member.id);
+  const nextMember = visibleMembers[(currentIndex + 1) % visibleMembers.length];
   const prevMember =
-    teamMembers[(currentIndex - 1 + teamMembers.length) % teamMembers.length];
+    visibleMembers[(currentIndex - 1 + visibleMembers.length) % visibleMembers.length];
 
   // Select hero component based on layout variant
   const renderHero = () => {

@@ -4,32 +4,55 @@ import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import StatsSection from "@/components/StatsSection";
 import FAQSection from "@/components/FAQSection";
-import { teamMembers } from "@/data/teamMembers";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollReveal";
 import MagneticButton from "@/components/MagneticButton";
 import { useNavigate } from "react-router-dom";
+import { useGeoLocation } from "@/hooks/useGeoLocation";
+
+const getMemberIconConfig = (id: string) => {
+  switch (id) {
+    case "sumair-ahmed":
+      return {
+        animation: "animate-twinkle",
+        icon: <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
+      };
+    case "jawad-ahmed":
+      return {
+        animation: "animate-zap",
+        icon: <Zap className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
+      };
+    case "joshua":
+      return {
+        animation: "animate-shield-pulse",
+        icon: <Shield className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
+      };
+    case "muhammad-ahmed-khan":
+      return {
+        animation: "animate-palette-spin",
+        icon: <Palette className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
+      };
+    case "kamran-khan":
+      return {
+        animation: "animate-chart-rise",
+        icon: <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
+      };
+    case "muhammad-altaf":
+      return {
+        animation: "animate-brain-think",
+        icon: <Brain className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
+      };
+    default:
+      return {
+        animation: "animate-twinkle",
+        icon: <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
+      };
+  }
+};
 
 const Index = () => {
   const navigate = useNavigate();
-  
-  const iconAnimations = [
-    "animate-twinkle",      // Sparkles - twinkle effect
-    "animate-zap",          // Zap - quick shake
-    "animate-shield-pulse", // Shield - breathing pulse
-    "animate-chart-rise",   // TrendingUp - rising motion
-    "animate-palette-spin", // Palette - slow rotation
-    "animate-brain-think",  // Brain - thinking pulse
-  ];
-
-  const icons = [
-    <Sparkles key="1" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
-    <Zap key="2" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
-    <Shield key="3" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
-    <TrendingUp key="4" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
-    <Palette key="5" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
-    <Brain key="6" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />,
-  ];
+  const { visibleMembers, isPakistan } = useGeoLocation();
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -117,7 +140,7 @@ const Index = () => {
             </h1>
 
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 md:mb-12 px-2 opacity-0 animate-fade-up stagger-2">
-              {teamMembers.length} digital experts. One mission. Transforming ideas into
+              {visibleMembers.length} digital experts. One mission. Transforming ideas into
               extraordinary digital experiences.
             </p>
 
@@ -140,17 +163,24 @@ const Index = () => {
 
             {/* Floating expertise icons */}
             <div className="flex justify-center items-center gap-2 sm:gap-3 md:gap-6 flex-wrap opacity-0 animate-fade-up stagger-4">
-              {teamMembers.map((member, i) => (
-                <div
-                  key={member.id}
-                  className={`w-11 h-11 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer`}
-                  title={member.role}
-                >
-                  <div className={iconAnimations[i]}>
-                    {icons[i]}
+              {visibleMembers.map((member) => {
+                const config = getMemberIconConfig(member.id);
+                return (
+                  <div
+                    key={member.id}
+                    onClick={() => {
+                      navigate(`/team/${member.id}`);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className={`w-11 h-11 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer`}
+                    title={`${member.name} - ${member.role}`}
+                  >
+                    <div className={config.animation}>
+                      {config.icon}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -168,9 +198,13 @@ const Index = () => {
             </p>
           </ScrollReveal>
 
-          {/* Team Grid - Single Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5">
-            {teamMembers.map((member, index) => (
+          {/* Team Grid */}
+          <div className={
+            visibleMembers.length <= 3 
+              ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-5xl mx-auto gap-4 sm:gap-6" 
+              : "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5"
+          }>
+            {visibleMembers.map((member, index) => (
               <ScrollReveal key={member.id} delay={index * 100} direction="up">
                 <TeamMemberCard member={member} index={index} />
               </ScrollReveal>

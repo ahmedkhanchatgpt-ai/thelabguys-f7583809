@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import CustomCursor from "./components/CustomCursor";
 import { PageTransition } from "./components/PageTransition";
 import { InitialLoader } from "./components/InitialLoader";
+import { GeoLocationProvider } from "./context/GeoLocationContext";
 
 const queryClient = new QueryClient();
 
@@ -80,16 +81,18 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <CustomCursor />
-        <Toaster />
-        <Sonner />
-        <InitialLoader>
-          <BrowserRouter>
-            <AnimatedRoutes />
-          </BrowserRouter>
-        </InitialLoader>
-      </TooltipProvider>
+      <GeoLocationProvider>
+        <TooltipProvider>
+          <CustomCursor />
+          <Toaster />
+          <Sonner />
+          <InitialLoader>
+            <BrowserRouter>
+              <AnimatedRoutes />
+            </BrowserRouter>
+          </InitialLoader>
+        </TooltipProvider>
+      </GeoLocationProvider>
     </QueryClientProvider>
   );
 };

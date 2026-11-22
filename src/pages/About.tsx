@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ScrollReveal } from "@/hooks/useScrollReveal";
 import { Target, Lightbulb, Users, Shield, Rocket, Heart } from "lucide-react";
+import { useGeoLocation } from "@/hooks/useGeoLocation";
 
 const values = [
   {
@@ -43,6 +44,8 @@ const values = [
 ];
 
 const About = () => {
+  const { visibleMembers } = useGeoLocation();
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated background */}
@@ -65,7 +68,7 @@ const About = () => {
               We Are <span className="text-gradient">The Lab Guys</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              A collective of 6 digital experts united by a shared vision: to transform ideas into 
+              A collective of {visibleMembers.length} digital experts united by a shared vision: to transform ideas into 
               extraordinary digital experiences that drive real business results.
             </p>
           </ScrollReveal>
@@ -117,7 +120,7 @@ const About = () => {
                     for fragmented solutions.
                   </p>
                   <p>
-                    We came together as six specialists, each bringing deep expertise in our respective 
+                    We came together as specialists, each bringing deep expertise in our respective 
                     fields, united by a common goal—to provide comprehensive, cohesive digital solutions 
                     under one roof. Our diverse backgrounds span SEO, web development, cybersecurity, 
                     creative design, data science, and AI engineering.
