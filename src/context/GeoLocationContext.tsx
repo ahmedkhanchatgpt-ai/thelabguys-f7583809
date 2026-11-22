@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react";
+import React, { createContext, useEffect, useState, useMemo, useCallback } from "react";
 import { teamMembers, TeamMember, GLOBAL_MEMBER_IDS, isGlobalMember } from "@/data/teamMembers";
 import { toast } from "sonner";
 
-interface GeoLocationContextType {
+export interface GeoLocationContextType {
   countryCode: string | null;
   countryName: string | null;
   isPakistan: boolean;
@@ -13,7 +13,7 @@ interface GeoLocationContextType {
   overrideActive: boolean;
 }
 
-const GeoLocationContext = createContext<GeoLocationContextType | undefined>(undefined);
+export const GeoLocationContext = createContext<GeoLocationContextType | undefined>(undefined);
 
 const CACHE_KEY = "labguys_geo_cache_v2";
 const OVERRIDE_KEY = "labguys_geo_override";
@@ -30,7 +30,7 @@ const isPakistanTimezone = (): boolean => {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     return tz === "Asia/Karachi";
-  } catch {
+  } catch (_e) {
     return false;
   }
 };
@@ -63,7 +63,7 @@ const detectCountryFromIP = async (): Promise<{ code: string; name: string } | n
         };
       }
     }
-  } catch (e) {
+  } catch (_e) {
     // Continue to Tier 2
   }
 
@@ -79,7 +79,7 @@ const detectCountryFromIP = async (): Promise<{ code: string; name: string } | n
         };
       }
     }
-  } catch (e) {
+  } catch (_e) {
     // Continue to Tier 3
   }
 
@@ -95,7 +95,7 @@ const detectCountryFromIP = async (): Promise<{ code: string; name: string } | n
         };
       }
     }
-  } catch (e) {
+  } catch (_e) {
     // All remote APIs failed
   }
 
@@ -124,7 +124,7 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
         }
       }
       return sessionStorage.getItem(OVERRIDE_KEY);
-    } catch {
+    } catch (_e) {
       return null;
     }
   };
@@ -148,7 +148,7 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
           return { code: cached.countryCode, name: cached.countryName, isPk };
         }
       }
-    } catch {
+    } catch (_e) {
       // Ignore cache read errors
     }
 
@@ -166,37 +166,6 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [countryName, setCountryName] = useState<string | null>(initial.name);
   const [isPakistan, setIsPakistan] = useState<boolean>(initial.isPk);
   const [isLoading, setIsLoading] = useState<boolean>(!initial.code && !override);
-
-  // Set country override (for testing or dev)
-  const setCountryOverride = useCallback((code: string | null) => {
-    if (!code) {
-      try {
-        sessionStorage.removeItem(OVERRIDE_KEY);
-      } catch {}
-      setOverride(null);
-      // Re-trigger live detection
-      detectLocation();
-      toast.info("Geolocation override cleared. Using detected location.");
-      return;
-    }
-
-    const norm = code.toUpperCase();
-    try {
-      sessionStorage.setItem(OVERRIDE_KEY, norm);
-    } catch {}
-    setOverride(norm);
-    const isPk = norm === "PK" || norm === "PAKISTAN";
-    setCountryCode(norm);
-    setCountryName(isPk ? "Pakistan" : "Global");
-    setIsPakistan(isPk);
-    setIsLoading(false);
-
-    toast.success(
-      isPk 
-        ? "Preview mode: Pakistan (All 6 team members visible)" 
-        : "Preview mode: Global (3 core members visible: Muhammad Ahmed, Joshua, Sumair Ahmed)"
-    );
-  }, []);
 
   const detectLocation = useCallback(async () => {
     if (override) {
@@ -222,7 +191,9 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
           return;
         }
       }
-    } catch {}
+    } catch (_e) {
+      // Storage access failed
+    }
 
     setIsLoading(true);
 
@@ -243,7 +214,9 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
           };
           sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
           localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
-        } catch {}
+        } catch (_e) {
+          // Cache write failed
+        }
       } else {
         // Fallback: use timezone hint if all remote IP APIs were unreachable
         const tzPk = isPakistanTimezone();
@@ -251,7 +224,7 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
         setCountryCode(tzPk ? "PK" : "INTL");
         setCountryName(tzPk ? "Pakistan" : "International");
       }
-    } catch {
+    } catch (_e) {
       const tzPk = isPakistanTimezone();
       setIsPakistan(tzPk);
       setCountryCode(tzPk ? "PK" : "INTL");
@@ -260,6 +233,40 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
       setIsLoading(false);
     }
   }, [override]);
+
+  // Set country override (for testing or dev)
+  const setCountryOverride = useCallback((code: string | null) => {
+    if (!code) {
+      try {
+        sessionStorage.removeItem(OVERRIDE_KEY);
+      } catch (_e) {
+        // Storage access failed
+      }
+      setOverride(null);
+      detectLocation();
+      toast.info("Geolocation override cleared. Using detected location.");
+      return;
+    }
+
+    const norm = code.toUpperCase();
+    try {
+      sessionStorage.setItem(OVERRIDE_KEY, norm);
+    } catch (_e) {
+      // Storage access failed
+    }
+    setOverride(norm);
+    const isPk = norm === "PK" || norm === "PAKISTAN";
+    setCountryCode(norm);
+    setCountryName(isPk ? "Pakistan" : "Global");
+    setIsPakistan(isPk);
+    setIsLoading(false);
+
+    toast.success(
+      isPk 
+        ? "Preview mode: Pakistan (All 6 team members visible)" 
+        : "Preview mode: Global (3 core members visible: Muhammad Ahmed, Joshua, Sumair Ahmed)"
+    );
+  }, [detectLocation]);
 
   useEffect(() => {
     detectLocation();
@@ -316,12 +323,4 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
       {children}
     </GeoLocationContext.Provider>
   );
-};
-
-export const useGeoLocation = (): GeoLocationContextType => {
-  const context = useContext(GeoLocationContext);
-  if (!context) {
-    throw new Error("useGeoLocation must be used within a GeoLocationProvider");
-  }
-  return context;
 };

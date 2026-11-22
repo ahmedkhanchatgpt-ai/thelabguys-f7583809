@@ -18,19 +18,23 @@ export function usePerformanceMode(): PerformanceLevel {
     
     // Check for mobile or low-end device indicators
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const deviceMemory = (navigator as any).deviceMemory;
-    const hasLowMemory = deviceMemory && deviceMemory < 4;
-    const hasVeryLowMemory = deviceMemory && deviceMemory < 2;
+    const nav = navigator as Navigator & {
+      deviceMemory?: number;
+      connection?: { saveData?: boolean; effectiveType?: string };
+    };
+    const deviceMemory = nav.deviceMemory;
+    const hasLowMemory = deviceMemory !== undefined && deviceMemory < 4;
+    const hasVeryLowMemory = deviceMemory !== undefined && deviceMemory < 2;
     const cores = navigator.hardwareConcurrency;
-    const hasLowCores = cores && cores < 4;
-    const hasVeryLowCores = cores && cores < 2;
+    const hasLowCores = cores !== undefined && cores < 4;
+    const hasVeryLowCores = cores !== undefined && cores < 2;
     
     // Check if device has touch only (likely mobile/tablet)
     const isTouchOnly = window.matchMedia("(hover: none)").matches;
     
     // Check for battery saver mode (if available)
-    const connection = (navigator as any).connection;
-    const isSlowConnection = connection && (connection.saveData || connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g');
+    const connection = nav.connection;
+    const isSlowConnection = Boolean(connection && (connection.saveData || connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g'));
     
     // Determine performance level
     let detectedLevel: PerformanceLevel;

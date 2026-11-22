@@ -12,10 +12,11 @@ const AnimatedSkillBar = ({ skill, gradient, delay = 0 }: AnimatedSkillBarProps)
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), delay);
+          timeoutId = setTimeout(() => setIsVisible(true), delay);
           observer.disconnect();
         }
       },
@@ -26,7 +27,10 @@ const AnimatedSkillBar = ({ skill, gradient, delay = 0 }: AnimatedSkillBarProps)
       observer.observe(ref.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [delay]);
 
   return (

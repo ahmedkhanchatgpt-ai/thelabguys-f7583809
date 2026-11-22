@@ -18,10 +18,11 @@ const AnimatedStatCard = ({ value, label, gradient, delay = 0 }: AnimatedStatCar
   const suffix = numericMatch ? numericMatch[2] : value;
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), delay);
+          timeoutId = setTimeout(() => setIsVisible(true), delay);
           observer.disconnect();
         }
       },
@@ -32,7 +33,10 @@ const AnimatedStatCard = ({ value, label, gradient, delay = 0 }: AnimatedStatCar
       observer.observe(cardRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [delay]);
 
   useEffect(() => {

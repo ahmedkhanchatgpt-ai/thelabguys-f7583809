@@ -13,17 +13,21 @@ const AnimatedNumber = ({ value, suffix = "", delay = 0 }: { value: number; suff
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), delay);
+          timeoutId = setTimeout(() => setIsVisible(true), delay);
           observer.disconnect();
         }
       },
       { threshold: 0.3 }
     );
     if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [delay]);
 
   useEffect(() => {

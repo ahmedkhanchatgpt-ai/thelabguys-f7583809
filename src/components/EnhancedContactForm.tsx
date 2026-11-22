@@ -65,7 +65,6 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
     
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form submitted:", data);
     
     setIsSubmitting(false);
     setIsSubmitted(true);
@@ -238,7 +237,7 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
         </Button>
 
         <p className="text-[11px] text-muted-foreground text-center pt-2">
-          By contacting with us you agree to our <a href="#" className="text-white hover:underline">Terms</a> and <a href="#" className="text-white hover:underline">Privacy Policy</a>
+          By contacting with us you agree to our <a href="#contact" onClick={(e) => e.preventDefault()} className="text-white hover:underline">Terms</a> and <a href="#contact" onClick={(e) => e.preventDefault()} className="text-white hover:underline">Privacy Policy</a>
         </p>
       </form>
     </Form>

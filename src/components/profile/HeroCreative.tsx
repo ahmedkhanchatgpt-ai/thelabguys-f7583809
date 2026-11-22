@@ -22,7 +22,7 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
         y: (e.clientY - rect.top) / rect.height,
       });
     };
-    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mousemove', handleMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMove);
   }, []);
 

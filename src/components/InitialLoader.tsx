@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import { FlaskConical } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
 
 export const InitialLoader = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
@@ -12,6 +11,7 @@ export const InitialLoader = ({ children }: { children: React.ReactNode }) => {
     const interval = 20;
     const steps = duration / interval;
     let currentStep = 0;
+    let pauseTimer: ReturnType<typeof setTimeout> | undefined;
 
     const timer = setInterval(() => {
       currentStep++;
@@ -24,21 +24,24 @@ export const InitialLoader = ({ children }: { children: React.ReactNode }) => {
       
       if (currentStep >= steps) {
         clearInterval(timer);
-        setTimeout(() => setLoading(false), 400); // brief pause at 100%
+        pauseTimer = setTimeout(() => setLoading(false), 400); // brief pause at 100%
       }
     }, interval);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      if (pauseTimer) clearTimeout(pauseTimer);
+    };
   }, []);
 
-  // Generate some random bubbles for the lab effect
-  const bubbles = Array.from({ length: 5 }).map((_, i) => ({
+  // Generate random bubbles for the lab effect once
+  const bubbles = useMemo(() => Array.from({ length: 5 }).map((_, i) => ({
     id: i,
     size: Math.random() * 4 + 2,
     left: Math.random() * 20 - 10,
     delay: Math.random() * 1.5,
     duration: Math.random() * 1 + 1.5
-  }));
+  })), []);
 
   return (
     <>
