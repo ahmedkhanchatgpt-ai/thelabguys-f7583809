@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, Instagram, Facebook, Twitter, Youtube, Linkedin, Mail } from "lucide-react";
+import { Sparkles, Instagram, Facebook, Twitter } from "lucide-react";
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   return (
@@ -22,7 +22,7 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-4">
-            <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
+            <div className="flex items-center gap-4">
               <a href="https://www.instagram.com/thelabguysofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
                 <Instagram className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
               </a>
@@ -31,15 +31,6 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
               </a>
               <a href="https://x.com/thelabguysofc" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
                 <Twitter className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-red-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
-                <Youtube className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-blue-600 hover:to-cyan-500 transition-all duration-300 hover:shadow-glow-purple group/social">
-                <Linkedin className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
-              </a>
-              <a href="mailto:contact@thelabguys.com" aria-label="Email" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-500 transition-all duration-300 hover:shadow-glow-purple group/social">
-                <Mail className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
               </a>
             </div>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
