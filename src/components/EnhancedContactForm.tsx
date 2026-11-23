@@ -2,61 +2,54 @@ import { useState, useRef, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle, Loader2, User, Mail, Building2 } from "lucide-react";
+import { CheckCircle, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { toast } from "sonner";
 
-// Strict validation and XSS prevention
+// Strict validation & security schema matching the SS form fields
 const contactSchema = z.object({
-  firstName: z
+  fullName: z
     .string()
     .trim()
-    .min(2, "First name is required")
-    .max(60, "First name must be under 60 characters")
+    .min(2, "Full name is required")
+    .max(80, "Name must be under 80 characters")
     .regex(/^[^<>'"`;]+$/, "Special characters are not allowed"),
-  lastName: z
+  email: z
     .string()
     .trim()
-    .min(2, "Last name is required")
-    .max(60, "Last name must be under 60 characters")
-    .regex(/^[^<>'"`;]+$/, "Special characters are not allowed"),
-  workEmail: z
-    .string()
-    .trim()
-    .email("Please enter a valid work email")
+    .email("Please enter a valid email address")
     .max(100, "Email must be under 100 characters"),
-  companySize: z.string().min(1, "Please select a company size").max(30),
-  scheduleDemo: z.boolean().default(false),
-  // Honeypot field (hidden from humans, filled by bots)
+  phone: z
+    .string()
+    .trim()
+    .min(6, "Please enter a valid phone number")
+    .max(25, "Phone number is too long")
+    .regex(/^[+0-9\s\-()]+$/, "Please enter a valid phone number format"),
+  subject: z
+    .string()
+    .trim()
+    .min(2, "Subject is required")
+    .max(120, "Subject must be under 120 characters")
+    .regex(/^[^<>'"`;]+$/, "Special characters are not allowed"),
+  message: z
+    .string()
+    .trim()
+    .min(5, "Message must be at least 5 characters")
+    .max(2000, "Message must be under 2000 characters"),
+  // Invisible bot honeypot field
   hp_website_trap: z.string().max(0, "Bot detected").optional().default(""),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
-
-const companySizes = [
-  { value: "1-10", label: "1-10 employees" },
-  { value: "11-50", label: "11-50 employees" },
-  { value: "51-200", label: "51-200 employees" },
-  { value: "201-500", label: "201-500 employees" },
-  { value: "500+", label: "500+ employees" },
-];
 
 interface EnhancedContactFormProps {
   onSuccess?: () => void;
@@ -75,30 +68,29 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      workEmail: "",
-      companySize: "",
-      scheduleDemo: true,
+      fullName: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
       hp_website_trap: "",
     },
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // 1. Anti-Bot Honeypot check
+    // 1. Anti-bot honeypot check
     if (data.hp_website_trap && data.hp_website_trap.trim().length > 0) {
-      // Silently discard automated bot submission
       setIsSubmitted(true);
       return;
     }
 
-    // 2. Fast-submission bot trap (humans take at least 1.2s to fill the form)
+    // 2. Fast-submit bot check
     if (Date.now() - formLoadTimeRef.current < 1200) {
       toast.error("Submission was too fast. Please take your time.");
       return;
     }
 
-    // 3. Client-side Rate Limiting (5-second cooldown between submissions)
+    // 3. Rate limiting (5s cooldown)
     const now = Date.now();
     if (now - lastSubmitTimeRef.current < 5000) {
       toast.warning("Please wait a few seconds before submitting again.");
@@ -107,14 +99,11 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
     lastSubmitTimeRef.current = now;
 
     setIsSubmitting(true);
-    
-    // Simulate secure API call
     await new Promise((resolve) => setTimeout(resolve, 1200));
-    
     setIsSubmitting(false);
     setIsSubmitted(true);
-    toast.success("Message sent successfully! We'll get back to you shortly.");
-    
+    toast.success("Message sent successfully! We will get back to you shortly.");
+
     if (onSuccess) {
       setTimeout(onSuccess, 2000);
     }
@@ -122,153 +111,126 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
 
   if (isSubmitted) {
     return (
-      <div className="text-center py-12 px-4">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 mb-6">
-          <CheckCircle className="w-8 h-8 text-green-500" />
+      <div className="py-10 px-4 text-center">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 mb-6">
+          <CheckCircle className="w-8 h-8 text-blue-400" />
         </div>
-        <h3 className="font-display text-2xl font-bold mb-2">Thank you!</h3>
-        <p className="text-muted-foreground">
-          Our manager will contact you shortly and help with all your questions.
+        <h3 className="font-display text-2xl font-bold mb-2 text-white">Thank You!</h3>
+        <p className="text-muted-foreground text-sm max-w-sm mx-auto mb-6">
+          Your message has been received. Our team will get back to you promptly.
         </p>
+        <Button
+          type="button"
+          onClick={() => {
+            setIsSubmitted(false);
+            form.reset();
+          }}
+          variant="outline"
+          className="rounded-full px-6 border-white/20 hover:border-white/40"
+        >
+          Send Another Message
+        </Button>
       </div>
     );
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* First Name */}
-          <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 ml-1">First name</FormLabel>
-                <FormControl>
-                  <div className="relative group">
-                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground/50 transition-colors group-focus-within:text-purple-400">
-                      <User className="w-4 h-4" />
-                    </div>
-                    <Input 
-                      placeholder="Enter your first name" 
-                      className="h-12 pl-10 bg-white/5 border-white/10 hover:bg-white/10 focus-visible:bg-white/[0.15] focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:border-purple-500/50 rounded-xl transition-all duration-300 backdrop-blur-sm shadow-inner"
-                      {...field} 
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {/* Full Name */}
+        <FormField
+          control={form.control}
+          name="fullName"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder="Full Name*"
+                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                />
+              </FormControl>
+              <FormMessage className="text-[11px] text-red-400" />
+            </FormItem>
+          )}
+        />
 
-          {/* Last Name */}
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 ml-1">Last name</FormLabel>
-                <FormControl>
-                  <div className="relative group">
-                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground/50 transition-colors group-focus-within:text-purple-400">
-                      <User className="w-4 h-4" />
-                    </div>
-                    <Input 
-                      placeholder="Enter your last name" 
-                      className="h-12 pl-10 bg-white/5 border-white/10 hover:bg-white/10 focus-visible:bg-white/[0.15] focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:border-purple-500/50 rounded-xl transition-all duration-300 backdrop-blur-sm shadow-inner"
-                      {...field} 
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        {/* Email */}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  {...field}
+                  type="email"
+                  placeholder="Email*"
+                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                />
+              </FormControl>
+              <FormMessage className="text-[11px] text-red-400" />
+            </FormItem>
+          )}
+        />
 
-          {/* Work Email */}
-          <FormField
-            control={form.control}
-            name="workEmail"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 ml-1">Work email</FormLabel>
-                <FormControl>
-                  <div className="relative group">
-                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground/50 transition-colors group-focus-within:text-purple-400">
-                      <Mail className="w-4 h-4" />
-                    </div>
-                    <Input 
-                      type="email"
-                      placeholder="Enter work email" 
-                      className="h-12 pl-10 bg-white/5 border-white/10 hover:bg-white/10 focus-visible:bg-white/[0.15] focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:border-purple-500/50 rounded-xl transition-all duration-300 backdrop-blur-sm shadow-inner"
-                      {...field} 
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        {/* Phone */}
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  {...field}
+                  type="tel"
+                  placeholder="Phone*"
+                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                />
+              </FormControl>
+              <FormMessage className="text-[11px] text-red-400" />
+            </FormItem>
+          )}
+        />
 
-          {/* Company Size */}
-          <FormField
-            control={form.control}
-            name="companySize"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 ml-1">Company size</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="h-12 bg-white/5 border-white/10 hover:bg-white/10 focus:bg-white/[0.15] focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 rounded-xl transition-all duration-300 backdrop-blur-sm shadow-inner">
-                      <div className="flex items-center gap-2.5">
-                        <Building2 className="w-4 h-4 text-muted-foreground/50" />
-                        <SelectValue placeholder="Select Company size" />
-                      </div>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="bg-background/95 border-white/10 rounded-xl backdrop-blur-xl">
-                    {companySizes.map((size) => (
-                      <SelectItem key={size.value} value={size.value} className="focus:bg-white/10 cursor-pointer">
-                        {size.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage className="text-[10px] sm:text-xs" />
-              </FormItem>
-            )}
-          />
-        </div>
+        {/* Subject */}
+        <FormField
+          control={form.control}
+          name="subject"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder="Subject*"
+                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                />
+              </FormControl>
+              <FormMessage className="text-[11px] text-red-400" />
+            </FormItem>
+          )}
+        />
 
-        {/* Schedule Demo Toggle */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 shadow-inner backdrop-blur-sm transition-all hover:bg-white/[0.05]">
-          <div className="space-y-1.5">
-            <h4 className="text-sm font-semibold text-white/90">Schedule a Demo Call</h4>
-            <p className="text-[11px] sm:text-xs text-muted-foreground/80 leading-relaxed">
-              Our manager will contact you shortly to help with all your questions.
-            </p>
-          </div>
-          <div className="self-end sm:self-auto">
-            <FormField
-              control={form.control}
-              name="scheduleDemo"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-500 data-[state=checked]:to-pink-500"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-        </div>
+        {/* Message */}
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  rows={4}
+                  placeholder="Message*"
+                  className="resize-none bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                />
+              </FormControl>
+              <FormMessage className="text-[11px] text-red-400" />
+            </FormItem>
+          )}
+        />
 
-        {/* Honeypot field - visually hidden, trapped for bots */}
+        {/* Honeypot field (hidden from human visitors) */}
         <div className="hidden opacity-0 h-0 w-0 pointer-events-none overflow-hidden" aria-hidden="true" tabIndex={-1}>
           <FormField
             control={form.control}
@@ -284,21 +246,25 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
         </div>
 
         {/* Submit Button */}
-        <Button 
-          type="submit" 
-          disabled={isSubmitting}
-          className="w-full h-14 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:opacity-90 text-white rounded-xl text-base font-semibold shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.5)] transition-all duration-500 hover:scale-[1.02]"
-        >
-          {isSubmitting ? (
-            <Loader2 className="w-5 h-5 animate-spin" />
-          ) : (
-            "Submit"
-          )}
-        </Button>
-
-        <p className="text-[11px] text-muted-foreground text-center pt-2">
-          By contacting with us you agree to our <a href="#contact" onClick={(e) => e.preventDefault()} className="text-white hover:underline">Terms</a> and <a href="#contact" onClick={(e) => e.preventDefault()} className="text-white hover:underline">Privacy Policy</a>
-        </p>
+        <div className="pt-2">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full sm:w-auto px-12 h-12 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold tracking-widest text-xs uppercase shadow-[0_0_25px_rgba(59,130,246,0.5)] hover:shadow-[0_0_35px_rgba(168,85,247,0.7)] hover:scale-105 transition-all duration-300"
+          >
+            {isSubmitting ? (
+              <span className="flex items-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin" />
+                SENDING...
+              </span>
+            ) : (
+              <span className="flex items-center gap-2">
+                SUBMIT
+                <Send className="w-3.5 h-3.5 ml-1" />
+              </span>
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   );
