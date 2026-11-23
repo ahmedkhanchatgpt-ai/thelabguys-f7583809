@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,12 +23,29 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 
+// Strict validation and XSS prevention
 const contactSchema = z.object({
-  firstName: z.string().trim().min(2, "First name is required"),
-  lastName: z.string().trim().min(2, "Last name is required"),
-  workEmail: z.string().trim().email("Please enter a valid work email"),
-  companySize: z.string().min(1, "Please select a company size"),
+  firstName: z
+    .string()
+    .trim()
+    .min(2, "First name is required")
+    .max(60, "First name must be under 60 characters")
+    .regex(/^[^<>'"`;]+$/, "Special characters are not allowed"),
+  lastName: z
+    .string()
+    .trim()
+    .min(2, "Last name is required")
+    .max(60, "Last name must be under 60 characters")
+    .regex(/^[^<>'"`;]+$/, "Special characters are not allowed"),
+  workEmail: z
+    .string()
+    .trim()
+    .email("Please enter a valid work email")
+    .max(100, "Email must be under 100 characters"),
+  companySize: z.string().min(1, "Please select a company size").max(30),
   scheduleDemo: z.boolean().default(false),
+  // Honeypot field (hidden from humans, filled by bots)
+  hp_website_trap: z.string().max(0, "Bot detected").optional().default(""),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -48,6 +65,12 @@ interface EnhancedContactFormProps {
 const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const lastSubmitTimeRef = useRef<number>(0);
+  const formLoadTimeRef = useRef<number>(Date.now());
+
+  useEffect(() => {
+    formLoadTimeRef.current = Date.now();
+  }, []);
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
@@ -57,14 +80,36 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
       workEmail: "",
       companySize: "",
       scheduleDemo: true,
+      hp_website_trap: "",
     },
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    // 1. Anti-Bot Honeypot check
+    if (data.hp_website_trap && data.hp_website_trap.trim().length > 0) {
+      // Silently discard automated bot submission
+      setIsSubmitted(true);
+      return;
+    }
+
+    // 2. Fast-submission bot trap (humans take at least 1.2s to fill the form)
+    if (Date.now() - formLoadTimeRef.current < 1200) {
+      toast.error("Submission was too fast. Please take your time.");
+      return;
+    }
+
+    // 3. Client-side Rate Limiting (5-second cooldown between submissions)
+    const now = Date.now();
+    if (now - lastSubmitTimeRef.current < 5000) {
+      toast.warning("Please wait a few seconds before submitting again.");
+      return;
+    }
+    lastSubmitTimeRef.current = now;
+
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // Simulate secure API call
+    await new Promise((resolve) => setTimeout(resolve, 1200));
     
     setIsSubmitting(false);
     setIsSubmitted(true);
@@ -221,6 +266,21 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
               )}
             />
           </div>
+        </div>
+
+        {/* Honeypot field - visually hidden, trapped for bots */}
+        <div className="hidden opacity-0 h-0 w-0 pointer-events-none overflow-hidden" aria-hidden="true" tabIndex={-1}>
+          <FormField
+            control={form.control}
+            name="hp_website_trap"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input {...field} tabIndex={-1} autoComplete="off" />
+                </FormControl>
+              </FormItem>
+            )}
+          />
         </div>
 
         {/* Submit Button */}
