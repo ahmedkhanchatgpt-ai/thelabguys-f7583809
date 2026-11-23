@@ -147,7 +147,7 @@ export const teamMembers: TeamMember[] = [
     role: "Senior Video Editor & Motion Designer",
     tagline: "Transforming visions into cinematic masterpieces",
     shortBio: "Award-winning video editor crafting viral content for global brands.",
-    layoutVariant: "creative",
+    layoutVariant: "minimal",
     fullBio: "I'm a senior video editor and motion designer with 5+ years of experience creating high-impact visual content for brands, influencers, and agencies worldwide. My work has generated over 10M+ views across platforms. I specialize in cinematic storytelling, dynamic motion graphics, and scroll-stopping social media content. From concept to color grade, I deliver broadcast-quality results with fast turnarounds.",
     skills: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Cinema 4D", "Motion Graphics", "Color Grading", "Sound Design", "Storyboarding"],
     services: [
@@ -164,8 +164,8 @@ export const teamMembers: TeamMember[] = [
     ],
     stats: [
       { label: "Videos Delivered", value: "500+" },
-      { label: "Global Clients", value: "100+" },
       { label: "Total Views", value: "10M+" },
+      { label: "Global Clients", value: "100+" },
       { label: "Years Experience", value: "5+" },
     ],
     email: "Mahmedkhan.personal@gmail.com",
