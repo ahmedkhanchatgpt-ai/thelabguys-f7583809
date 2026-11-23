@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, useMemo, useCallback } from "react";
+import React, { createContext, useEffect, useState, useMemo, useCallback, useRef } from "react";
 import { teamMembers, TeamMember, GLOBAL_MEMBER_IDS, isGlobalMember } from "@/data/teamMembers";
 import { toast } from "sonner";
 
@@ -11,13 +11,25 @@ export interface GeoLocationContextType {
   isMemberVisible: (id: string) => boolean;
   setCountryOverride: (code: string | null) => void;
   overrideActive: boolean;
+  refreshLocation: () => Promise<void>;
 }
 
 export const GeoLocationContext = createContext<GeoLocationContextType | undefined>(undefined);
 
-const CACHE_KEY = "labguys_geo_cache_v2";
-const OVERRIDE_KEY = "labguys_geo_override";
-const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+const SESSION_CACHE_KEY = "labguys_geo_session_v3";
+const OVERRIDE_KEY = "labguys_geo_override_v3";
+const SHORT_CACHE_TTL_MS = 2 * 60 * 1000; // 2 minutes (in-session only)
+
+// Clean up any legacy long-lived localStorage keys on startup
+try {
+  if (typeof window !== "undefined" && window.localStorage) {
+    localStorage.removeItem("labguys_geo_cache");
+    localStorage.removeItem("labguys_geo_cache_v2");
+    localStorage.removeItem("labguys_geo_override");
+  }
+} catch (_e) {
+  // Ignore storage access errors in restricted environments
+}
 
 interface CachedGeo {
   countryCode: string;
@@ -25,7 +37,7 @@ interface CachedGeo {
   timestamp: number;
 }
 
-// Quick check if local timezone is Pakistan
+// Quick check if local browser timezone is Pakistan
 const isPakistanTimezone = (): boolean => {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -35,12 +47,21 @@ const isPakistanTimezone = (): boolean => {
   }
 };
 
-// Fetch with timeout helper
+// Fetch helper with timeout and aggressive cache-busting
 const fetchWithTimeout = async (url: string, timeoutMs = 3500): Promise<Response> => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(url, { signal: controller.signal });
+    const separator = url.includes("?") ? "&" : "?";
+    const cacheBustedUrl = `${url}${separator}_t=${Date.now()}`;
+    const response = await fetch(cacheBustedUrl, {
+      signal: controller.signal,
+      cache: "no-store",
+      headers: {
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        Pragma: "no-cache",
+      },
+    });
     clearTimeout(timeoutId);
     return response;
   } catch (error) {
@@ -49,17 +70,18 @@ const fetchWithTimeout = async (url: string, timeoutMs = 3500): Promise<Response
   }
 };
 
-// Cascading multi-tier IP Geolocation fetcher
+// Cascading multi-tier IP Geolocation fetcher with cache-busting
 const detectCountryFromIP = async (): Promise<{ code: string; name: string } | null> => {
-  // Tier 1: api.country.is (Fastest, ~50ms, open CORS, high reliability)
+  // Tier 1: api.country.is (Fastest, ~50-100ms, open CORS)
   try {
     const res = await fetchWithTimeout("https://api.country.is/", 3000);
     if (res.ok) {
       const data = await res.json();
       if (data && typeof data.country === "string" && data.country.trim().length === 2) {
+        const code = data.country.toUpperCase();
         return {
-          code: data.country.toUpperCase(),
-          name: data.country.toUpperCase() === "PK" ? "Pakistan" : data.country.toUpperCase(),
+          code,
+          name: code === "PK" ? "Pakistan" : code,
         };
       }
     }
@@ -67,7 +89,7 @@ const detectCountryFromIP = async (): Promise<{ code: string; name: string } | n
     // Continue to Tier 2
   }
 
-  // Tier 2: ipwho.is (Reliable global CDN, returns full country info)
+  // Tier 2: ipwho.is (Reliable global CDN with detailed country info)
   try {
     const res = await fetchWithTimeout("https://ipwho.is/", 3500);
     if (res.ok) {
@@ -83,7 +105,7 @@ const detectCountryFromIP = async (): Promise<{ code: string; name: string } | n
     // Continue to Tier 3
   }
 
-  // Tier 3: freeipapi.com (Solid fallback)
+  // Tier 3: freeipapi.com (Reliable fallback)
   try {
     const res = await fetchWithTimeout("https://freeipapi.com/api/json", 3500);
     if (res.ok) {
@@ -96,33 +118,57 @@ const detectCountryFromIP = async (): Promise<{ code: string; name: string } | n
       }
     }
   } catch (_e) {
-    // All remote APIs failed
+    // Remote APIs unreachable
   }
 
   return null;
 };
 
 export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Check URL query params for manual test overrides: ?geo=pk, ?geo=global, ?country=pk
-  const getInitialOverride = (): string | null => {
+  // Parse explicit URL query parameters (?geo=pk, ?geo=global, ?geo=reset)
+  const getUrlOverride = (): string | null => {
     try {
+      if (typeof window === "undefined") return null;
       const params = new URLSearchParams(window.location.search);
       const geoParam = params.get("geo") || params.get("country");
       if (geoParam) {
         const normalized = geoParam.trim().toUpperCase();
         if (normalized === "PK" || normalized === "PAKISTAN") {
-          sessionStorage.setItem(OVERRIDE_KEY, "PK");
           return "PK";
         }
-        if (normalized === "GLOBAL" || normalized === "WORLD" || normalized === "US" || normalized === "INTERNATIONAL") {
-          sessionStorage.setItem(OVERRIDE_KEY, "GLOBAL");
+        if (
+          normalized === "GLOBAL" ||
+          normalized === "WORLD" ||
+          normalized === "US" ||
+          normalized === "INTL" ||
+          normalized === "INTERNATIONAL"
+        ) {
           return "GLOBAL";
         }
-        if (normalized === "RESET") {
+        if (normalized === "RESET" || normalized === "CLEAR") {
           sessionStorage.removeItem(OVERRIDE_KEY);
+          sessionStorage.removeItem(SESSION_CACHE_KEY);
           return null;
         }
       }
+      return null;
+    } catch (_e) {
+      return null;
+    }
+  };
+
+  const getInitialOverride = (): string | null => {
+    const urlOverride = getUrlOverride();
+    if (urlOverride) {
+      try {
+        sessionStorage.setItem(OVERRIDE_KEY, urlOverride);
+      } catch (_e) {
+        // Ignore session storage errors
+      }
+      return urlOverride;
+    }
+    try {
+      // If URL does not specify geo, only use sessionStorage if set manually in this session
       return sessionStorage.getItem(OVERRIDE_KEY);
     } catch (_e) {
       return null;
@@ -131,7 +177,7 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
   const [override, setOverride] = useState<string | null>(getInitialOverride);
 
-  // Initial country guess: cache -> timezone heuristic -> default
+  // Initial state estimation: override -> timezone heuristic -> default
   const getInitialState = (): { code: string | null; name: string | null; isPk: boolean } => {
     const activeOverride = getInitialOverride();
     if (activeOverride) {
@@ -139,11 +185,17 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
       return { code: activeOverride, name: isPk ? "Pakistan" : "Global", isPk };
     }
 
+    // Timezone check gives 0ms instant display for users in Pakistan (Asia/Karachi)
+    if (isPakistanTimezone()) {
+      return { code: "PK", name: "Pakistan", isPk: true };
+    }
+
+    // Check short session-only cache (< 2 mins)
     try {
-      const cachedStr = sessionStorage.getItem(CACHE_KEY) || localStorage.getItem(CACHE_KEY);
+      const cachedStr = sessionStorage.getItem(SESSION_CACHE_KEY);
       if (cachedStr) {
         const cached: CachedGeo = JSON.parse(cachedStr);
-        if (Date.now() - cached.timestamp < CACHE_TTL_MS) {
+        if (Date.now() - cached.timestamp < SHORT_CACHE_TTL_MS) {
           const isPk = cached.countryCode === "PK";
           return { code: cached.countryCode, name: cached.countryName, isPk };
         }
@@ -152,12 +204,7 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
       // Ignore cache read errors
     }
 
-    // Timezone heuristic for zero delay on first load in Pakistan
-    if (isPakistanTimezone()) {
-      return { code: "PK", name: "Pakistan", isPk: true };
-    }
-
-    // Default to international safe mode (3 members) until verified
+    // Safe international default until network verification completes
     return { code: null, name: null, isPk: false };
   };
 
@@ -167,7 +214,13 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [isPakistan, setIsPakistan] = useState<boolean>(initial.isPk);
   const [isLoading, setIsLoading] = useState<boolean>(!initial.code && !override);
 
-  const detectLocation = useCallback(async () => {
+  const isDetectingRef = useRef<boolean>(false);
+
+  // Live detection function — ALWAYS contacts IP API to revalidate, never blindly returns stale cache
+  const detectLocation = useCallback(async (force = false) => {
+    if (isDetectingRef.current) return;
+
+    // If an explicit override is active (e.g. from ?geo=global or setCountryOverride)
     if (override) {
       const isPk = override === "PK" || override === "PAKISTAN";
       setCountryCode(override);
@@ -177,24 +230,27 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
       return;
     }
 
-    // Check valid cache first
-    try {
-      const cachedStr = sessionStorage.getItem(CACHE_KEY) || localStorage.getItem(CACHE_KEY);
-      if (cachedStr) {
-        const cached: CachedGeo = JSON.parse(cachedStr);
-        if (Date.now() - cached.timestamp < CACHE_TTL_MS) {
-          const isPk = cached.countryCode === "PK";
-          setCountryCode(cached.countryCode);
-          setCountryName(cached.countryName);
-          setIsPakistan(isPk);
-          setIsLoading(false);
-          return;
+    // In-session cache check ONLY if not forced and within 2 minutes
+    if (!force) {
+      try {
+        const cachedStr = sessionStorage.getItem(SESSION_CACHE_KEY);
+        if (cachedStr) {
+          const cached: CachedGeo = JSON.parse(cachedStr);
+          if (Date.now() - cached.timestamp < SHORT_CACHE_TTL_MS) {
+            const isPk = cached.countryCode === "PK";
+            setCountryCode(cached.countryCode);
+            setCountryName(cached.countryName);
+            setIsPakistan(isPk);
+            setIsLoading(false);
+            return;
+          }
         }
+      } catch (_e) {
+        // Storage access failed
       }
-    } catch (_e) {
-      // Storage access failed
     }
 
+    isDetectingRef.current = true;
     setIsLoading(true);
 
     try {
@@ -205,20 +261,18 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
         setCountryName(result.name);
         setIsPakistan(isPk);
 
-        // Cache the verified detection
         try {
           const payload: CachedGeo = {
             countryCode: result.code,
             countryName: result.name,
             timestamp: Date.now(),
           };
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
-          localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+          sessionStorage.setItem(SESSION_CACHE_KEY, JSON.stringify(payload));
         } catch (_e) {
-          // Cache write failed
+          // Session storage write failed
         }
       } else {
-        // Fallback: use timezone hint if all remote IP APIs were unreachable
+        // Fallback: If all IP APIs were blocked or offline, use timezone heuristic
         const tzPk = isPakistanTimezone();
         setIsPakistan(tzPk);
         setCountryCode(tzPk ? "PK" : "INTL");
@@ -231,19 +285,21 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
       setCountryName(tzPk ? "Pakistan" : "International");
     } finally {
       setIsLoading(false);
+      isDetectingRef.current = false;
     }
   }, [override]);
 
-  // Set country override (for testing or dev)
+  // Set country override (for testing or previewing)
   const setCountryOverride = useCallback((code: string | null) => {
     if (!code) {
       try {
         sessionStorage.removeItem(OVERRIDE_KEY);
+        sessionStorage.removeItem(SESSION_CACHE_KEY);
       } catch (_e) {
         // Storage access failed
       }
       setOverride(null);
-      detectLocation();
+      detectLocation(true);
       toast.info("Geolocation override cleared. Using detected location.");
       return;
     }
@@ -268,11 +324,51 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
     );
   }, [detectLocation]);
 
-  useEffect(() => {
-    detectLocation();
+  // Manual refresh helper
+  const refreshLocation = useCallback(async () => {
+    try {
+      sessionStorage.removeItem(SESSION_CACHE_KEY);
+    } catch (_e) {
+      // ignore
+    }
+    await detectLocation(true);
   }, [detectLocation]);
 
-  // Listen for query params change (e.g., if user navigates with ?geo=pk)
+  // Run detection on mount and whenever override changes
+  useEffect(() => {
+    detectLocation(true);
+  }, [detectLocation]);
+
+  // Revalidate on tab focus, visibility change, and network reconnect
+  // (Detects immediately when a user turns off/on their VPN and returns to the tab)
+  useEffect(() => {
+    let lastCheck = Date.now();
+
+    const handleRevalidate = () => {
+      // Only revalidate if visible and at least 3 seconds have passed
+      if (document.visibilityState === "visible" && Date.now() - lastCheck > 3000) {
+        lastCheck = Date.now();
+        detectLocation(true);
+      }
+    };
+
+    const handleOnline = () => {
+      lastCheck = Date.now();
+      detectLocation(true);
+    };
+
+    window.addEventListener("focus", handleRevalidate);
+    document.addEventListener("visibilitychange", handleRevalidate);
+    window.addEventListener("online", handleOnline);
+
+    return () => {
+      window.removeEventListener("focus", handleRevalidate);
+      document.removeEventListener("visibilitychange", handleRevalidate);
+      window.removeEventListener("online", handleOnline);
+    };
+  }, [detectLocation]);
+
+  // Listen for query params in URL
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const geo = params.get("geo") || params.get("country");
@@ -280,13 +376,32 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
       const norm = geo.trim().toUpperCase();
       if (norm === "PK" || norm === "PAKISTAN") {
         setCountryOverride("PK");
-      } else if (norm === "GLOBAL" || norm === "US" || norm === "WORLD") {
+      } else if (norm === "GLOBAL" || norm === "US" || norm === "WORLD" || norm === "INTL") {
         setCountryOverride("GLOBAL");
-      } else if (norm === "RESET") {
+      } else if (norm === "RESET" || norm === "CLEAR") {
         setCountryOverride(null);
       }
     }
   }, [setCountryOverride]);
+
+  // Developer console helper for easy verification in browser DevTools
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      (window as unknown as { __labguys_geo: unknown }).__labguys_geo = {
+        status: () => ({
+          countryCode,
+          countryName,
+          isPakistan,
+          overrideActive: Boolean(override),
+          overrideValue: override,
+          visibleCount: isPakistan ? 6 : 3,
+        }),
+        override: (c: string) => setCountryOverride(c),
+        reset: () => setCountryOverride(null),
+        refresh: () => refreshLocation(),
+      };
+    }
+  }, [countryCode, countryName, isPakistan, override, setCountryOverride, refreshLocation]);
 
   // Compute visible team members based on Pakistan status
   const visibleMembers = useMemo(() => {
@@ -318,6 +433,7 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
         isMemberVisible,
         setCountryOverride,
         overrideActive: Boolean(override),
+        refreshLocation,
       }}
     >
       {children}

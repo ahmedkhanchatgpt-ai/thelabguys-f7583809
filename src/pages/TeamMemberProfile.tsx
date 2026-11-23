@@ -22,12 +22,20 @@ import {
 const TeamMemberProfile = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
-  const { visibleMembers, isMemberVisible } = useGeoLocation();
+  const { visibleMembers, isMemberVisible, isLoading } = useGeoLocation();
   const member = id ? getTeamMember(id) : undefined;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+      </div>
+    );
+  }
 
   if (!member || !isMemberVisible(member.id)) {
     return <Navigate to="/" replace />;
