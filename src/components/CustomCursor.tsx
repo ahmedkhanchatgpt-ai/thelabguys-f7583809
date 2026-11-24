@@ -71,13 +71,12 @@ const CustomCursor = () => {
     <>
       {/* Outer ring */}
       <div
-        className="fixed pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
         style={{
-          left: position.x,
-          top: position.y,
-          transform: `translate(-50%, -50%) scale(${isHovering ? 1.15 : isClicking ? 0.8 : 1})`,
+          transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%) scale(${isHovering ? 1.15 : isClicking ? 0.8 : 1})`,
           opacity: isVisible ? 1 : 0,
-          transition: "transform 0.2s ease-out, opacity 0.2s ease-out",
+          willChange: "transform",
+          transition: "transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease-out",
         }}
       >
         <div
@@ -92,12 +91,11 @@ const CustomCursor = () => {
 
       {/* Inner dot */}
       <div
-        className="fixed pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
         style={{
-          left: position.x,
-          top: position.y,
-          transform: "translate(-50%, -50%)",
+          transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`,
           opacity: isVisible ? 1 : 0,
+          willChange: "transform",
           transition: "opacity 0.2s ease-out",
         }}
       >

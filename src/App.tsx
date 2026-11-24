@@ -1,19 +1,26 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner, toast } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Index from "./pages/Index";
-import TeamMemberProfile from "./pages/TeamMemberProfile";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
 import CustomCursor from "./components/CustomCursor";
 import { PageTransition } from "./components/PageTransition";
 import { InitialLoader } from "./components/InitialLoader";
 import { GeoLocationProvider } from "./context/GeoLocationContext";
+
+const Index = lazy(() => import("./pages/Index"));
+const TeamMemberProfile = lazy(() => import("./pages/TeamMemberProfile"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+const PageFallback = () => (
+  <div className="min-h-screen w-full flex items-center justify-center bg-background">
+    <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+  </div>
+);
 
 const queryClient = new QueryClient();
 
@@ -22,11 +29,56 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><Index /></PageTransition>} />
-        <Route path="/team/:id" element={<PageTransition><TeamMemberProfile /></PageTransition>} />
-        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
-        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <Suspense fallback={<PageFallback />}>
+                <Index />
+              </Suspense>
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/team/:id"
+          element={
+            <PageTransition>
+              <Suspense fallback={<PageFallback />}>
+                <TeamMemberProfile />
+              </Suspense>
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <PageTransition>
+              <Suspense fallback={<PageFallback />}>
+                <About />
+              </Suspense>
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <PageTransition>
+              <Suspense fallback={<PageFallback />}>
+                <Contact />
+              </Suspense>
+            </PageTransition>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <Suspense fallback={<PageFallback />}>
+                <NotFound />
+              </Suspense>
+            </PageTransition>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );

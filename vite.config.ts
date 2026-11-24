@@ -13,6 +13,17 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          "vendor-motion": ["framer-motion"],
+          "vendor-ui": ["lucide-react", "@radix-ui/react-tooltip", "@radix-ui/react-dialog", "@radix-ui/react-slot"],
+          "vendor-query": ["@tanstack/react-query"],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {

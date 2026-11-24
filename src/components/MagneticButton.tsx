@@ -56,8 +56,9 @@ const MagneticButton = ({
       onClick={onClick}
       className={`inline-block ${className}`}
       style={{
-        transform: `translate(${translate.x}px, ${translate.y}px)`,
-        transition: translate.x === 0 && translate.y === 0 ? "transform 0.3s ease-out" : "none",
+        transform: `translate3d(${translate.x}px, ${translate.y}px, 0)`,
+        willChange: "transform",
+        transition: translate.x === 0 && translate.y === 0 ? "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)" : "none",
       }}
     >
       {children}

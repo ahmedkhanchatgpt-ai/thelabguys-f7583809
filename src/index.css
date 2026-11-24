@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -105,6 +103,13 @@
 
   .animate-fade-up {
     animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+  }
+
+  .ambient-bg-layer {
+    contain: paint layout;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
   }
 
   .stagger-1 { animation-delay: 0.1s; }
@@ -115,6 +120,7 @@
 
   .noise {
     position: relative;
+    transform: translate3d(0, 0, 0);
   }
   
   .noise::after {
@@ -124,6 +130,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     opacity: 0.03;
     pointer-events: none;
+    transform: translate3d(0, 0, 0);
   }
 
   .scrollbar-hide {
@@ -139,31 +146,31 @@
 @keyframes fadeUp {
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translate3d(0, 24px, 0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translate3d(0, 0px, 0) rotate(0deg);
   }
   50% {
-    transform: translateY(-20px) rotate(5deg);
+    transform: translate3d(0, -18px, 0) rotate(4deg);
   }
 }
 
 @keyframes pulse {
   0%, 100% {
     opacity: 0.3;
-    transform: scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
     opacity: 0.6;
-    transform: scale(1.2);
+    transform: translate3d(0, 0, 0) scale(1.15);
   }
 }
 
@@ -197,10 +204,14 @@
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .animate-pulse-slow {
   animation: pulse 4s ease-in-out infinite;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .animate-shimmer {

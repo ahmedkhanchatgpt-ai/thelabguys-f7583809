@@ -12,7 +12,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background relative flex flex-col justify-between overflow-x-hidden">
       {/* Signature The Lab Guys animated background matching website theme */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 ambient-bg-layer">
         <div className="absolute top-[10%] left-[10%] w-[600px] h-[600px] bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 rounded-full blur-[170px] opacity-25 animate-pulse-slow" />
         <div 
           className="absolute bottom-[5%] right-[5%] w-[650px] h-[650px] bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600 rounded-full blur-[180px] opacity-20 animate-pulse-slow" 
