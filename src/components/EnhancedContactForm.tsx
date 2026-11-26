@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle, Loader2, Send } from "lucide-react";
+import { CheckCircle, Loader2, Send, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -56,6 +57,11 @@ interface EnhancedContactFormProps {
 }
 
 const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialSubject = searchParams.get("subject") || "";
+  const initialExpert = searchParams.get("expert") || "";
+
+  const [selectedExpert, setSelectedExpert] = useState(initialExpert);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedData, setSubmittedData] = useState<ContactFormData | null>(null);
@@ -72,11 +78,38 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
       fullName: "",
       email: "",
       phone: "",
-      subject: "",
-      message: "",
+      subject: initialSubject,
+      message: initialExpert
+        ? `Hi ${initialExpert}, I'd love to discuss a project regarding ${initialSubject || "your services"}.`
+        : "",
       hp_website_trap: "",
     },
   });
+
+  // Sync if query params update while already on /contact
+  useEffect(() => {
+    const subj = searchParams.get("subject") || "";
+    const exp = searchParams.get("expert") || "";
+    if (subj) {
+      form.setValue("subject", subj);
+    }
+    if (exp) {
+      setSelectedExpert(exp);
+      if (!form.getValues("message")) {
+        form.setValue(
+          "message",
+          `Hi ${exp}, I'd love to discuss a project regarding ${subj || "your services"}.`
+        );
+      }
+    }
+  }, [searchParams, form]);
+
+  const clearExpert = () => {
+    setSelectedExpert("");
+    const next = new URLSearchParams(searchParams);
+    next.delete("expert");
+    setSearchParams(next, { replace: true });
+  };
 
   const onSubmit = async (data: ContactFormData) => {
     // 1. Anti-bot honeypot check
@@ -154,6 +187,23 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {selectedExpert && (
+          <div className="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-xs text-purple-200">
+            <span className="flex items-center gap-2 font-medium">
+              <Sparkles className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+              Direct Inquiry for: <strong className="text-white">{selectedExpert}</strong>
+            </span>
+            <button
+              type="button"
+              onClick={clearExpert}
+              aria-label="Clear selected expert"
+              className="p-1 rounded-full hover:bg-white/10 text-muted-foreground hover:text-white transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+
         {/* Full Name */}
         <FormField
           control={form.control}

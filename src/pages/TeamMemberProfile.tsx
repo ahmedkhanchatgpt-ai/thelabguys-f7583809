@@ -119,6 +119,7 @@ const TeamMemberProfile = () => {
                 gradient={member.gradient}
                 iconBg={member.iconBg}
                 email={member.email}
+                memberName={member.name}
               />
             ))}
           </div>
@@ -261,10 +262,12 @@ const TeamMemberProfile = () => {
               <div className="flex flex-wrap justify-center gap-4">
                 <MagneticButton className="w-full sm:w-auto">
                   <Button asChild size="lg" className={`w-full sm:w-auto gap-3 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-10 py-6 sm:py-7 text-base sm:text-lg shadow-xl`}>
-                    <a href={`mailto:${member.email}`}>
+                    <Link
+                      to={`/contact?subject=${encodeURIComponent(`Project Inquiry for ${member.name}`)}&expert=${encodeURIComponent(member.name)}`}
+                    >
                       <Mail className="w-5 h-5" />
                       Get in Touch
-                    </a>
+                    </Link>
                   </Button>
                 </MagneticButton>
               </div>

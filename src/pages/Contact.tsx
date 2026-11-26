@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EnhancedContactForm from "@/components/EnhancedContactForm";
-import { MapPin, Phone, Mail } from "lucide-react";
 
 const Contact = () => {
   useEffect(() => {
@@ -83,27 +82,6 @@ const Contact = () => {
                   alt="The Lab Guys 3D Telephone"
                   className="w-full max-w-[360px] sm:max-w-[560px] lg:max-w-[900px] xl:max-w-[980px] h-auto object-contain drop-shadow-[0_25px_60px_rgba(147,51,234,0.4)] select-none pointer-events-none transition-transform duration-700 ease-out hover:scale-[1.02]"
                 />
-              </div>
-
-              {/* Bottom Right Location & Contact Card (Matching Template SS) */}
-              <div className="w-full flex justify-center lg:justify-end mt-4 sm:mt-6 lg:pr-4">
-                <div className="flex items-start gap-3 glass p-4 sm:p-5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl w-full sm:w-auto max-w-sm lg:max-w-xs transition-all hover:border-purple-500/30">
-                  <div className="w-9 h-9 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center shrink-0 text-blue-400 mt-0.5 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-                    <MapPin className="w-4 h-4" />
-                  </div>
-                  <div className="space-y-1 text-left">
-                    <p className="text-white font-semibold text-xs sm:text-sm">
-                      The Lab Guys HQ
-                    </p>
-                    <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed">
-                      Islamabad / Rawalpindi, Pakistan & Worldwide
-                    </p>
-                    <div className="pt-1 flex flex-col gap-0.5 text-[11px] text-blue-300 font-mono">
-                      <span>contact@thelabguys.com</span>
-                      <span>+92 345 678 903</span>
-                    </div>
-                  </div>
-                </div>
               </div>
 
             </div>

@@ -13,8 +13,8 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://api.country.is https://ipwho.is https://freeipapi.com https://cdn.ipwhois.io; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;" />
-    <link rel="canonical" href="https://thelabguys.com" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com; media-src 'self' https: blob:; connect-src 'self' https://api.country.is https://ipwho.is https://freeipapi.com https://cdn.ipwhois.io; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;" />
+    <link rel="canonical" href="https://labguys.site/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=2" />
     <link rel="shortcut icon" href="/favicon.ico?v=2" />
@@ -22,13 +22,70 @@
     
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://labguys.site/" />
+    <meta property="og:site_name" content="The Lab Guys" />
     <meta property="og:title" content="The Lab Guys | Digital Experts Collective" />
-    <meta property="og:description" content="A collective of digital experts helping you navigate the digital landscape." />
-    <meta property="og:image" content="/favicon.png" />
+    <meta property="og:description" content="A collective of digital experts specializing in GEO & AI Search Optimization, Web Development, Cybersecurity, Video Editing & Motion Design, Data Analytics, and AI Engineering." />
+    <meta property="og:image" content="https://labguys.site/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@thelabguysofc" />
-    <meta name="twitter:image" content="/favicon.png" />
+    <meta name="twitter:title" content="The Lab Guys | Digital Experts Collective" />
+    <meta name="twitter:description" content="Transform ideas into extraordinary digital experiences with The Lab Guys." />
+    <meta name="twitter:image" content="https://labguys.site/og-image.png" />
+
+    <!-- GEO & SEO JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://labguys.site/#organization",
+            "name": "The Lab Guys",
+            "url": "https://labguys.site",
+            "logo": "https://labguys.site/favicon.png",
+            "image": "https://labguys.site/og-image.png",
+            "email": "contact@thelabguys.com",
+            "description": "A digital experts collective specializing in Generative Engine Optimization (GEO), Technical SEO, Full-Stack Web Development, Cybersecurity, Video Editing & Motion Graphics, Data Analysis, and AI Engineering.",
+            "sameAs": [
+              "https://www.instagram.com/thelabguysofficial/",
+              "https://www.facebook.com/profile.php?id=61594154595588",
+              "https://x.com/thelabguysofc"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://labguys.site/#website",
+            "url": "https://labguys.site",
+            "name": "The Lab Guys",
+            "publisher": { "@id": "https://labguys.site/#organization" }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://labguys.site/#service",
+            "name": "The Lab Guys Digital Studio",
+            "url": "https://labguys.site",
+            "provider": { "@id": "https://labguys.site/#organization" },
+            "areaServed": "Worldwide",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Digital Collective Services",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "GEO & AI Search Optimization" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full-Stack Web Development" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cybersecurity & Network Infrastructure" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Video Editing & 3D Motion Design" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data Analytics & BI Dashboards" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Machine Learning & AI Engineering" } }
+              ]
+            }
+          }
+        ]
+      }
+    </script>
     
     <!-- Preconnect & asynchronous font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

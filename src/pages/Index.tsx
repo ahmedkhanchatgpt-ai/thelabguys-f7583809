@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import StatsSection from "@/components/StatsSection";
 import FAQSection from "@/components/FAQSection";
+import TechMarquee from "@/components/TechMarquee";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollReveal";
 import MagneticButton from "@/components/MagneticButton";
@@ -226,6 +227,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Tech Stack Trust Marquee (below Experts) */}
+      <TechMarquee />
 
       {/* Stats Section */}
       <StatsSection />

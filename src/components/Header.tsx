@@ -103,7 +103,7 @@ const Header = () => {
             </Button>
           </nav>
 
-          {/* Mobile Menu Toggle - minimum 44x44px touch target */}
+          {/* Mobile Menu Toggle */}
           <button
             type="button"
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}

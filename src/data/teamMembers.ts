@@ -147,7 +147,7 @@ export const teamMembers: TeamMember[] = [
     role: "Senior Video Editor & Motion Designer",
     tagline: "Transforming visions into cinematic masterpieces",
     shortBio: "Award-winning video editor crafting viral content for global brands.",
-    layoutVariant: "minimal",
+    layoutVariant: "creative",
     fullBio: "I'm a senior video editor and motion designer with 5+ years of experience creating high-impact visual content for brands, influencers, and agencies worldwide. My work has generated over 10M+ views across platforms. I specialize in cinematic storytelling, dynamic motion graphics, and scroll-stopping social media content. From concept to color grade, I deliver broadcast-quality results with fast turnarounds.",
     skills: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Cinema 4D", "Motion Graphics", "Color Grading", "Sound Design", "Storyboarding"],
     services: [
