@@ -126,8 +126,8 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
         backgroundSize: '60px 60px',
       }} />
 
-      {/* Floating design elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Floating design elements (desktop only so they never overlap mobile text) */}
+      <div className="hidden lg:block absolute inset-0 overflow-hidden pointer-events-none">
         {/* Animated particles */}
         {[...Array(12)].map((_, i) => (
           <div
