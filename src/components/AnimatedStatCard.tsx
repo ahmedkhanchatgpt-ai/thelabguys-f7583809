@@ -13,9 +13,10 @@ const AnimatedStatCard = ({ value, label, gradient, delay = 0 }: AnimatedStatCar
   const cardRef = useRef<HTMLDivElement>(null);
   
   // Extract numeric part and suffix (e.g., "50+" -> 50, "+")
-  const numericMatch = value.match(/^([\d.]+)(.*)$/);
-  const targetNumber = numericMatch ? parseFloat(numericMatch[1]) : 0;
-  const suffix = numericMatch ? numericMatch[2] : value;
+  const parsedValue = value.match(/^([\d.]+)(.*)$/);
+  const matchedDigits = parsedValue ? parsedValue[1] : null;
+  const targetNumber = matchedDigits ? parseFloat(matchedDigits) : 0;
+  const suffix = parsedValue ? parsedValue[2] : value;
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
@@ -65,9 +66,8 @@ const AnimatedStatCard = ({ value, label, gradient, delay = 0 }: AnimatedStatCar
 
       if (currentStep >= steps) {
         clearInterval(timer);
-        // Set final value exactly as provided
-        if (numericMatch) {
-          setDisplayValue(numericMatch[1] + suffix);
+        if (matchedDigits) {
+          setDisplayValue(matchedDigits + suffix);
         } else {
           setDisplayValue(value);
         }
@@ -75,7 +75,7 @@ const AnimatedStatCard = ({ value, label, gradient, delay = 0 }: AnimatedStatCar
     }, stepDuration);
 
     return () => clearInterval(timer);
-  }, [isVisible, targetNumber, suffix, value, numericMatch]);
+  }, [isVisible, targetNumber, suffix, value, matchedDigits]);
 
   return (
     <div

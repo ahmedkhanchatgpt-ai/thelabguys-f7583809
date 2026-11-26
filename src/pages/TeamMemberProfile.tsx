@@ -281,6 +281,7 @@ const TeamMemberProfile = () => {
       </section>
 
       {/* Navigation to other members */}
+      {visibleMembers.length > 1 && prevMember && nextMember && (
       <section className="py-12 sm:py-16 border-t border-border">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6">
           <p className="text-center text-xs sm:text-sm text-muted-foreground uppercase tracking-widest mb-6 sm:mb-10">
@@ -327,6 +328,7 @@ const TeamMemberProfile = () => {
           </div>
         </div>
       </section>
+      )}
 
       <Footer />
     </div>

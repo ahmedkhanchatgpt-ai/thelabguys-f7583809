@@ -1,43 +1,55 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
 import { usePerformanceMode } from '@/hooks/usePerformanceMode';
 
 // Lazy load the 3D scene for better initial load
 const Scene3D = lazy(() => import('./Scene3D'));
 
 // CSS-only fallback for low-end devices
-const CSSFallback = () => (
-  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-    {/* Animated gradient orbs */}
-    <div 
-      className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-purple-500/15 blur-3xl"
-      style={{ animation: 'float 8s ease-in-out infinite' }}
-    />
-    <div 
-      className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl"
-      style={{ animation: 'float 10s ease-in-out infinite reverse' }}
-    />
-    <div 
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-pink-500/10 blur-3xl"
-      style={{ animation: 'float 12s ease-in-out infinite' }}
-    />
-    
-    {/* Subtle particle dots */}
-    <div className="absolute inset-0">
-      {[...Array(20)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-purple-400/30"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animation: `pulse 3s ease-in-out infinite`,
-            animationDelay: `${i * 0.2}s`,
-          }}
-        />
-      ))}
+const CSSFallback = () => {
+  const dots = useMemo(
+    () =>
+      Array.from({ length: 20 }).map((_, i) => ({
+        id: i,
+        left: `${(i * 19 + 7) % 94 + 3}%`,
+        top: `${(i * 23 + 11) % 90 + 5}%`,
+      })),
+    []
+  );
+
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      {/* Animated gradient orbs */}
+      <div 
+        className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-purple-500/15 blur-3xl"
+        style={{ animation: 'float 8s ease-in-out infinite' }}
+      />
+      <div 
+        className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl"
+        style={{ animation: 'float 10s ease-in-out infinite reverse' }}
+      />
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-pink-500/10 blur-3xl"
+        style={{ animation: 'float 12s ease-in-out infinite' }}
+      />
+      
+      {/* Subtle particle dots */}
+      <div className="absolute inset-0">
+        {dots.map((dot) => (
+          <div
+            key={dot.id}
+            className="absolute w-1 h-1 rounded-full bg-purple-400/30"
+            style={{
+              left: dot.left,
+              top: dot.top,
+              animation: `pulse 3s ease-in-out infinite`,
+              animationDelay: `${dot.id * 0.2}s`,
+            }}
+          />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Minimal fallback for very low-end devices
 const MinimalFallback = () => (

@@ -86,6 +86,18 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   useEffect(() => {
+    // Preload current/home route chunk immediately during the initial loader
+    const path = window.location.pathname;
+    if (path.startsWith("/about")) {
+      void import("./pages/About");
+    } else if (path.startsWith("/contact")) {
+      void import("./pages/Contact");
+    } else if (path.startsWith("/team/")) {
+      void import("./pages/TeamMemberProfile");
+    } else {
+      void import("./pages/Index");
+    }
+
     // Block right-click
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();

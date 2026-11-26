@@ -119,9 +119,9 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
                 {/* Main card with shimmer border */}
                 <div className="relative aspect-[16/10] rounded-3xl overflow-hidden glass border border-white/10 group-hover:border-purple-500/30 transition-all duration-500">
                   {/* Animated shimmer border */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" style={{
                     background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.3), transparent)',
-                    animation: 'shimmer 2s infinite',
+                    backgroundSize: '200% 100%',
                   }} />
                   
                   {/* Gradient background with mesh */}
@@ -304,9 +304,9 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
               </span>
             </h1>
 
-            {/* Role with animated line */}
+            {/* Role line */}
             <div className="flex items-center gap-3 mb-6 opacity-0 animate-fade-up stagger-2">
-              <div className={`h-px w-12 bg-gradient-to-r ${member.gradient} animate-draw-line`} />
+              <div className={`h-px w-12 bg-gradient-to-r ${member.gradient}`} />
               <span className="text-lg text-muted-foreground flex items-center gap-2">
                 <Film className="w-4 h-4 text-purple-400" />
                 {member.role}

@@ -41,7 +41,8 @@
         if (l.search) {
           var match = l.search.match(/[?&]p=([^&]*)/);
           if (match && match[1]) {
-            var path = '/' + decodeURIComponent(match[1]);
+            var decodedPath = decodeURIComponent(match[1]).replace(/^\/+/, '');
+            var path = '/' + decodedPath;
             var qMatch = l.search.match(/[?&]q=([^&]*)/);
             var query = qMatch && qMatch[1] ? '?' + decodeURIComponent(qMatch[1]) : '';
             window.history.replaceState(null, null, path + query + l.hash);

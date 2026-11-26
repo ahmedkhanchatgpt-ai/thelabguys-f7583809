@@ -58,6 +58,7 @@ interface EnhancedContactFormProps {
 const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedData, setSubmittedData] = useState<ContactFormData | null>(null);
   const lastSubmitTimeRef = useRef<number>(0);
   const formLoadTimeRef = useRef<number>(Date.now());
 
@@ -101,8 +102,9 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
     setIsSubmitting(true);
     await new Promise((resolve) => setTimeout(resolve, 1200));
     setIsSubmitting(false);
+    setSubmittedData(data);
     setIsSubmitted(true);
-    toast.success("Message sent successfully! We will get back to you shortly.");
+    toast.success("Message prepared! We will get back to you shortly.");
 
     if (onSuccess) {
       setTimeout(onSuccess, 2000);
@@ -110,6 +112,12 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
   };
 
   if (isSubmitted) {
+    const mailtoHref = submittedData
+      ? `mailto:contact@thelabguys.com?subject=${encodeURIComponent(submittedData.subject)}&body=${encodeURIComponent(
+          `Name: ${submittedData.fullName}\nEmail: ${submittedData.email}\nPhone: ${submittedData.phone}\n\n${submittedData.message}`
+        )}`
+      : "mailto:contact@thelabguys.com";
+
     return (
       <div className="py-10 px-4 text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 mb-6">
@@ -117,19 +125,28 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
         </div>
         <h3 className="font-display text-2xl font-bold mb-2 text-white">Thank You!</h3>
         <p className="text-muted-foreground text-sm max-w-sm mx-auto mb-6">
-          Your message has been received. Our team will get back to you promptly.
+          Your message has been received. You can also send a direct copy using your email client below.
         </p>
-        <Button
-          type="button"
-          onClick={() => {
-            setIsSubmitted(false);
-            form.reset();
-          }}
-          variant="outline"
-          className="rounded-full px-6 border-white/20 hover:border-white/40"
-        >
-          Send Another Message
-        </Button>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Button
+            asChild
+            className="w-full sm:w-auto rounded-full px-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0"
+          >
+            <a href={mailtoHref}>Open in Email App</a>
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              setIsSubmitted(false);
+              setSubmittedData(null);
+              form.reset();
+            }}
+            variant="outline"
+            className="w-full sm:w-auto rounded-full px-6 border-white/20 hover:border-white/40"
+          >
+            Send Another Message
+          </Button>
+        </div>
       </div>
     );
   }

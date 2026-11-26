@@ -101,10 +101,10 @@ const NotFound = () => {
               size="lg"
               className="w-full sm:w-auto gap-2 glass border-white/15 hover:border-white/30 hover:bg-white/5 text-foreground rounded-xl px-8 py-6 text-base font-medium transition-all"
             >
-              <a href="/#team">
+              <Link to="/#team">
                 <Users className="w-5 h-5" />
                 The Experts
-              </a>
+              </Link>
             </Button>
 
             <Button

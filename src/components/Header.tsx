@@ -40,10 +40,11 @@ const Header = () => {
   const handleTeamClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsMenuOpen(false);
-    navigate("/");
-    setTimeout(() => {
+    if (location.pathname === "/") {
       document.getElementById("team")?.scrollIntoView({ behavior: "smooth" });
-    }, 120);
+    } else {
+      navigate("/#team");
+    }
   };
 
   const handleContactClick = () => {

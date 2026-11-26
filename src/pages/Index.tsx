@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
@@ -7,7 +7,7 @@ import FAQSection from "@/components/FAQSection";
 import { ArrowDown, Sparkles, Zap, Shield, TrendingUp, Palette, Brain } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollReveal";
 import MagneticButton from "@/components/MagneticButton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useGeoLocation } from "@/hooks/useGeoLocation";
 
 const getMemberIconConfig = (id: string) => {
@@ -52,7 +52,19 @@ const getMemberIconConfig = (id: string) => {
 
 const Index = () => {
   const navigate = useNavigate();
-  const { visibleMembers, isPakistan } = useGeoLocation();
+  const location = useLocation();
+  const { visibleMembers } = useGeoLocation();
+
+  useEffect(() => {
+    if (location.hash === "#team") {
+      const timer = setTimeout(() => {
+        document.getElementById("team")?.scrollIntoView({ behavior: "smooth" });
+      }, 80);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.hash]);
 
   return (
     <div className="min-h-screen bg-background relative">

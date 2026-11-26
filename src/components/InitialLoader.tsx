@@ -6,6 +6,7 @@ export const InitialLoader = ({ children }: { children: React.ReactNode }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
     const duration = 1600; // 1.6s smooth duration
     const interval = 20;
     const steps = duration / interval;
@@ -24,11 +25,15 @@ export const InitialLoader = ({ children }: { children: React.ReactNode }) => {
       if (currentStep >= steps) {
         clearInterval(timer);
         // Brief pause at 100% before transition
-        pauseTimer = setTimeout(() => setLoading(false), 350);
+        pauseTimer = setTimeout(() => {
+          document.body.style.overflow = "";
+          setLoading(false);
+        }, 350);
       }
     }, interval);
 
     return () => {
+      document.body.style.overflow = "";
       clearInterval(timer);
       if (pauseTimer) clearTimeout(pauseTimer);
     };
@@ -36,11 +41,6 @@ export const InitialLoader = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      {/* Site pre-renders smoothly in background */}
-      <div className={loading ? "pointer-events-none select-none" : ""}>
-        {children}
-      </div>
-
       <AnimatePresence>
         {loading && (
           <motion.div
@@ -124,6 +124,7 @@ export const InitialLoader = ({ children }: { children: React.ReactNode }) => {
           </motion.div>
         )}
       </AnimatePresence>
+      {!loading && children}
     </>
   );
 };

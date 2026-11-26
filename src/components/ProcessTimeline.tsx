@@ -12,14 +12,16 @@ const ProcessTimeline = ({ steps, gradient, iconBg }: ProcessTimelineProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = [];
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Stagger the appearance of each step
+          // Stagger the appearance of each step cleanly without leaks or duplicates
           steps.forEach((_, index) => {
-            setTimeout(() => {
-              setVisibleSteps((prev) => [...prev, index]);
+            const timerId = setTimeout(() => {
+              setVisibleSteps((prev) => (prev.includes(index) ? prev : [...prev, index]));
             }, index * 200);
+            timers.push(timerId);
           });
           observer.disconnect();
         }
@@ -31,7 +33,10 @@ const ProcessTimeline = ({ steps, gradient, iconBg }: ProcessTimelineProps) => {
       observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      timers.forEach((id) => clearTimeout(id));
+    };
   }, [steps]);
 
   return (

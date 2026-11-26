@@ -178,11 +178,10 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [override, setOverride] = useState<string | null>(getInitialOverride);
 
   // Initial state estimation: override -> timezone heuristic -> default
-  const getInitialState = (): { code: string | null; name: string | null; isPk: boolean } => {
-    const activeOverride = getInitialOverride();
-    if (activeOverride) {
-      const isPk = activeOverride === "PK";
-      return { code: activeOverride, name: isPk ? "Pakistan" : "Global", isPk };
+  const initial = useMemo((): { code: string | null; name: string | null; isPk: boolean } => {
+    if (override) {
+      const isPk = override === "PK";
+      return { code: override, name: isPk ? "Pakistan" : "Global", isPk };
     }
 
     // Timezone check gives 0ms instant display for users in Pakistan (Asia/Karachi)
@@ -206,9 +205,8 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
     // Safe international default until network verification completes
     return { code: null, name: null, isPk: false };
-  };
-
-  const initial = getInitialState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [countryCode, setCountryCode] = useState<string | null>(initial.code);
   const [countryName, setCountryName] = useState<string | null>(initial.name);
   const [isPakistan, setIsPakistan] = useState<boolean>(initial.isPk);
@@ -368,21 +366,23 @@ export const GeoLocationProvider: React.FC<{ children: React.ReactNode }> = ({ c
     };
   }, [detectLocation]);
 
-  // Listen for query params in URL
+  // Sync initial URL query parameter once on mount without infinite override loops
+  const urlSyncedRef = useRef(false);
   useEffect(() => {
+    if (urlSyncedRef.current) return;
+    urlSyncedRef.current = true;
+
     const params = new URLSearchParams(window.location.search);
     const geo = params.get("geo") || params.get("country");
     if (geo) {
       const norm = geo.trim().toUpperCase();
       if (norm === "PK" || norm === "PAKISTAN") {
-        setCountryOverride("PK");
+        toast.info("Preview mode: Pakistan (All 6 team members visible)");
       } else if (norm === "GLOBAL" || norm === "US" || norm === "WORLD" || norm === "INTL") {
-        setCountryOverride("GLOBAL");
-      } else if (norm === "RESET" || norm === "CLEAR") {
-        setCountryOverride(null);
+        toast.info("Preview mode: Global (3 core members visible)");
       }
     }
-  }, [setCountryOverride]);
+  }, []);
 
   // Developer console helper for easy verification in browser DevTools
   useEffect(() => {
