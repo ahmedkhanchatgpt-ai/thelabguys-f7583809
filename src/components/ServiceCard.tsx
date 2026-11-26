@@ -13,7 +13,7 @@ const ServiceCard = ({ service, index, gradient, iconBg, email }: ServiceCardPro
   return (
     <a
       href={`mailto:${email}?subject=Inquiry about ${service.title}`}
-      className="group relative glass rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 block overflow-hidden"
+      className="group relative glass rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 active:scale-[0.99] block overflow-hidden"
       style={{ animationDelay: `${index * 100}ms` }}
     >
       {/* Background gradient on hover */}
@@ -23,26 +23,26 @@ const ServiceCard = ({ service, index, gradient, iconBg, email }: ServiceCardPro
       <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${gradient} opacity-10 blur-2xl group-hover:opacity-30 transition-opacity`} />
       
       {/* Number indicator */}
-      <div className="absolute top-6 right-6 text-5xl font-display font-bold text-white/5 group-hover:text-white/10 transition-colors">
+      <div className="absolute top-4 right-5 sm:top-6 sm:right-6 text-4xl sm:text-5xl font-display font-bold text-white/5 group-hover:text-white/10 transition-colors">
         {String(index + 1).padStart(2, '0')}
       </div>
 
       <div className="relative z-10">
         {/* Icon */}
-        <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-          <div className="w-5 h-5 rounded-full bg-white/90" />
+        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${iconBg} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform`}>
+          <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-white/90" />
         </div>
 
-        <h3 className="font-display text-xl font-semibold mb-3 group-hover:text-gradient transition-all">
+        <h3 className="font-display text-lg sm:text-xl font-semibold mb-2 sm:mb-3 group-hover:text-gradient transition-all">
           {service.title}
         </h3>
         
-        <p className="text-muted-foreground leading-relaxed mb-6">
+        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6">
           {service.description}
         </p>
 
-        {/* CTA */}
-        <div className="flex items-center gap-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+        {/* CTA - visible on mobile touch devices */}
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-medium opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
           <span>Learn more</span>
           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
         </div>

@@ -38,19 +38,19 @@ const Contact = () => {
       <Header />
 
       {/* Main Contact Section */}
-      <main className="flex-1 relative z-10 pt-28 pb-16 lg:pt-36 lg:pb-24 px-4 sm:px-6 lg:px-12 flex items-center">
+      <main className="flex-1 relative z-10 pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-36 lg:pb-24 px-0 sm:px-4 lg:px-12 flex items-center">
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Left Column: CONTACT US & Form (Matching Template SS) */}
             <div className="lg:col-span-5 z-10 opacity-0 animate-fade-up">
               {/* Heading */}
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-wider text-white mb-2">
+              <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-wider text-white mb-2">
                 CONTACT US
               </h1>
 
               {/* Glowing DROP A MESSAGE subtitle accent */}
-              <div className="inline-block mb-8">
+              <div className="inline-block mb-6 sm:mb-8">
                 <span className="text-xs sm:text-sm uppercase tracking-widest font-semibold text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]">
                   DROP A MESSAGE
                 </span>
@@ -64,7 +64,7 @@ const Contact = () => {
             </div>
 
             {/* Right Column: Big 3D Telephone Visual (Matching Template SS) */}
-            <div className="lg:col-span-7 flex flex-col items-center lg:items-end justify-center relative opacity-0 animate-fade-up stagger-2">
+            <div className="lg:col-span-7 flex flex-col items-center lg:items-end justify-center relative opacity-0 animate-fade-up stagger-2 mt-2 lg:mt-0">
               
               {/* Massive 3D Telephone Visual Container */}
               <div className="relative w-full flex items-center justify-center lg:justify-end">
@@ -81,13 +81,13 @@ const Contact = () => {
                     }
                   }}
                   alt="The Lab Guys 3D Telephone"
-                  className="w-full max-w-[650px] sm:max-w-[750px] lg:max-w-[900px] xl:max-w-[980px] h-auto object-contain drop-shadow-[0_25px_60px_rgba(147,51,234,0.4)] select-none pointer-events-none transition-transform duration-700 ease-out hover:scale-[1.02]"
+                  className="w-full max-w-[360px] sm:max-w-[560px] lg:max-w-[900px] xl:max-w-[980px] h-auto object-contain drop-shadow-[0_25px_60px_rgba(147,51,234,0.4)] select-none pointer-events-none transition-transform duration-700 ease-out hover:scale-[1.02]"
                 />
               </div>
 
               {/* Bottom Right Location & Contact Card (Matching Template SS) */}
-              <div className="w-full flex justify-end mt-4 sm:mt-6 pr-2 lg:pr-4">
-                <div className="flex items-start gap-3 glass p-4 sm:p-5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl max-w-xs transition-all hover:border-purple-500/30">
+              <div className="w-full flex justify-center lg:justify-end mt-4 sm:mt-6 lg:pr-4">
+                <div className="flex items-start gap-3 glass p-4 sm:p-5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl w-full sm:w-auto max-w-sm lg:max-w-xs transition-all hover:border-purple-500/30">
                   <div className="w-9 h-9 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center shrink-0 text-blue-400 mt-0.5 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                     <MapPin className="w-4 h-4" />
                   </div>

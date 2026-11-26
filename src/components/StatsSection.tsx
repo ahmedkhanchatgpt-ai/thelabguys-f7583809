@@ -10,7 +10,7 @@ const stats = [
 
 const StatsSection = () => {
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6 relative">
+    <section className="py-12 md:py-24 relative">
       <div className="container mx-auto">
         <ScrollReveal>
           <div className="relative rounded-2xl md:rounded-3xl glass overflow-hidden">
@@ -18,8 +18,8 @@ const StatsSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-cyan-500/5 to-pink-500/5" />
             <div className="absolute inset-0 noise" />
             
-            <div className="relative py-12 md:py-16 px-6">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+            <div className="relative py-10 sm:py-12 md:py-16 px-4 sm:px-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-12">
                 {stats.map((stat, index) => (
                   <ScrollReveal key={stat.label} delay={index * 150}>
                     <AnimatedCounter

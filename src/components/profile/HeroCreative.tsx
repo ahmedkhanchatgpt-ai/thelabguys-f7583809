@@ -27,7 +27,7 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="min-h-screen flex lg:items-center relative pt-32 pb-20 lg:pt-20 overflow-hidden">
+    <section ref={sectionRef} className="min-h-[100dvh] flex lg:items-center relative pt-24 pb-14 lg:pt-20 lg:pb-20 overflow-hidden">
       {/* Animated color blobs that follow mouse subtly */}
       <div 
         className="absolute w-[700px] h-[700px] bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 rounded-full blur-[180px] opacity-25 animate-pulse-slow"
@@ -94,14 +94,14 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
       </div>
 
       {/* Decorative rotating circles */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border border-purple-500/[0.04] rounded-full" style={{ animation: 'spin 60s linear infinite' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-pink-500/[0.06] rounded-full" style={{ animation: 'spin 45s linear infinite reverse' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-fuchsia-500/[0.04] rounded-full" style={{ animation: 'spin 30s linear infinite' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] sm:w-[700px] sm:h-[700px] lg:w-[900px] lg:h-[900px] border border-purple-500/[0.04] rounded-full pointer-events-none" style={{ animation: 'spin 60s linear infinite' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[290px] h-[290px] sm:w-[540px] sm:h-[540px] lg:w-[700px] lg:h-[700px] border border-pink-500/[0.06] rounded-full pointer-events-none" style={{ animation: 'spin 45s linear infinite reverse' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[380px] sm:h-[380px] lg:w-[500px] lg:h-[500px] border border-fuchsia-500/[0.04] rounded-full pointer-events-none" style={{ animation: 'spin 30s linear infinite' }} />
 
-      <div className="container mx-auto max-w-7xl px-6">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 opacity-0 animate-fade-up group absolute top-28 left-6 z-20"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 lg:mb-0 opacity-0 animate-fade-up group lg:absolute lg:-top-10 lg:left-6 z-20"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Team
@@ -160,36 +160,52 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
                       <div className="absolute inset-0 rounded-full border-2 border-white/30 scale-[1.5] animate-ping" style={{ animationDuration: '2s' }} />
                       <div className="absolute inset-0 rounded-full border border-white/20 scale-[2] animate-ping" style={{ animationDuration: '2.5s', animationDelay: '0.3s' }} />
                       <div className="absolute inset-0 rounded-full border border-white/10 scale-[2.5] animate-ping" style={{ animationDuration: '3s', animationDelay: '0.6s' }} />
-                      <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center shadow-2xl group-hover/play:scale-110 transition-all duration-300" style={{ boxShadow: '0 0 40px rgba(255,255,255,0.3), 0 0 80px rgba(168,85,247,0.2)' }}>
-                        <Play className="w-8 h-8 md:w-10 md:h-10 text-purple-600 fill-purple-600 ml-1" />
+                      <div className="relative w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center shadow-2xl group-hover/play:scale-110 transition-all duration-300" style={{ boxShadow: '0 0 40px rgba(255,255,255,0.3), 0 0 80px rgba(168,85,247,0.2)' }}>
+                        <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-purple-600 fill-purple-600 ml-1" />
                       </div>
                     </div>
                   </div>
                   
                   {/* Bottom info bar */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-                    <div className="flex items-center justify-between">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                       <div>
-                        <p className="text-white/50 text-xs uppercase tracking-widest mb-1">Featured Showreel</p>
-                        <p className="text-white font-display font-semibold text-lg">2024 Demo Reel</p>
+                        <p className="text-white/50 text-[10px] sm:text-xs uppercase tracking-widest mb-0.5 sm:mb-1">Featured Showreel</p>
+                        <p className="text-white font-display font-semibold text-sm sm:text-lg">2024 Demo Reel</p>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                          <span className="text-emerald-400 text-xs font-medium">10M+ Views</span>
+                          <span className="text-emerald-400 text-[10px] sm:text-xs font-medium">10M+ Views</span>
                         </div>
-                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10">
-                          <Film className="w-3.5 h-3.5 text-white/80" />
-                          <span className="text-white/90 text-sm font-medium">2:45</span>
+                        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10">
+                          <Film className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white/80" />
+                          <span className="text-white/90 text-xs sm:text-sm font-medium">2:45</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              {/* Mobile Stat Strip (cleanly replaces floating overlays on narrow viewports) */}
+              <div className="grid grid-cols-3 gap-2.5 mt-4 sm:hidden opacity-0 animate-fade-up stagger-3">
+                <div className="glass rounded-xl p-3 border border-purple-500/20 text-center">
+                  <p className="font-display font-bold text-base text-white">500+</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Delivered</p>
+                </div>
+                <div className="glass rounded-xl p-3 border border-emerald-500/20 text-center">
+                  <p className="font-display font-bold text-base text-emerald-400">10M+</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Total Views</p>
+                </div>
+                <div className="glass rounded-xl p-3 border border-yellow-500/20 text-center">
+                  <p className="font-display font-bold text-base text-yellow-400">12+</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Awards</p>
+                </div>
+              </div>
               
-              {/* Floating mini cards with enhanced glow */}
-              <div className="absolute -bottom-6 -left-4 md:-left-6 w-36 md:w-44 glass rounded-2xl p-3 md:p-4 border border-purple-500/20 shadow-2xl opacity-0 animate-fade-up stagger-3 z-10" style={{ boxShadow: '0 10px 40px rgba(168,85,247,0.15)' }}>
+              {/* Floating mini cards with enhanced glow (tablet/desktop) */}
+              <div className="hidden sm:block absolute -bottom-6 -left-4 md:-left-6 w-36 md:w-44 glass rounded-2xl p-3 md:p-4 border border-purple-500/20 shadow-2xl opacity-0 animate-fade-up stagger-3 z-10" style={{ boxShadow: '0 10px 40px rgba(168,85,247,0.15)' }}>
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 md:w-11 md:h-11 rounded-xl ${member.iconBg} flex items-center justify-center shadow-lg`}>
                     <Layers className="w-5 h-5 text-white" />
@@ -201,7 +217,7 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
                 </div>
               </div>
               
-              <div className="absolute -top-4 -right-4 md:-right-6 w-40 md:w-48 glass rounded-2xl p-3 md:p-4 border border-emerald-500/20 shadow-2xl opacity-0 animate-fade-up stagger-4 z-10" style={{ boxShadow: '0 10px 40px rgba(16,185,129,0.15)' }}>
+              <div className="hidden sm:block absolute -top-4 -right-4 md:-right-6 w-40 md:w-48 glass rounded-2xl p-3 md:p-4 border border-emerald-500/20 shadow-2xl opacity-0 animate-fade-up stagger-4 z-10" style={{ boxShadow: '0 10px 40px rgba(16,185,129,0.15)' }}>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-lg">
                     <Sparkles className="w-5 h-5 text-white" />
@@ -245,7 +261,7 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
             </div>
 
             {/* Name with enhanced glow */}
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-[1.1]">
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-[1.12]">
               <span 
                 className="block text-foreground opacity-0 animate-fade-up" 
                 style={{ 
@@ -310,9 +326,9 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
             </p>
 
             {/* CTAs with gradient hover */}
-            <div className="flex flex-wrap gap-4 opacity-0 animate-fade-up stagger-5">
-              <MagneticButton>
-                <Button asChild size="lg" className={`gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-8 py-6 text-base shadow-xl hover:shadow-purple-500/30 transition-all relative overflow-hidden group`}>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 opacity-0 animate-fade-up stagger-5">
+              <MagneticButton className="w-full sm:w-auto">
+                <Button asChild size="lg" className={`w-full sm:w-auto gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base shadow-xl hover:shadow-purple-500/30 transition-all relative overflow-hidden group`}>
                   <a href={`mailto:${member.email}`}>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                     <MessageCircle className="w-5 h-5 relative" />
@@ -320,7 +336,7 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
                   </a>
                 </Button>
               </MagneticButton>
-              <Button asChild variant="outline" size="lg" className="gap-2 glass border-purple-500/30 hover:border-purple-500/50 hover:bg-purple-500/10 px-8 py-6 text-base transition-all">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto gap-2 glass border-purple-500/30 hover:border-purple-500/50 hover:bg-purple-500/10 px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base transition-all">
                 <a href={`mailto:${member.email}?subject=Project Inquiry`}>
                   <Mail className="w-5 h-5" />
                   View Portfolio

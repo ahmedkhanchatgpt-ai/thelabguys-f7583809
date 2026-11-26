@@ -53,7 +53,7 @@ const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardPr
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`group relative overflow-hidden rounded-3xl glass glow-border opacity-0 animate-fade-up stagger-${Math.min(index + 1, 5)} ${
+      className={`group block relative overflow-hidden rounded-2xl sm:rounded-3xl glass glow-border opacity-0 animate-fade-up active:scale-[0.98] stagger-${Math.min(index + 1, 5)} ${
         isFeatured ? "row-span-2" : ""
       }`}
       style={{
@@ -77,11 +77,11 @@ const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardPr
         />
       )}
       
-      <div className={`relative p-3 sm:p-4 md:p-5 lg:p-6 flex flex-col h-[180px] sm:h-[220px] md:h-[280px] lg:h-[300px] xl:h-[320px]`}>
+      <div className={`relative p-3.5 sm:p-4 md:p-5 lg:p-6 flex flex-col min-h-[185px] sm:h-[220px] md:h-[280px] lg:h-[300px] xl:h-[320px]`}>
         {/* Floating orb with initials */}
-        <div className="flex-1 flex items-center justify-center relative">
+        <div className="flex-1 flex items-center justify-center relative py-2">
           {/* Glow effect behind orb */}
-          <div className={`absolute w-16 sm:w-20 md:w-28 lg:w-32 h-16 sm:h-20 md:h-28 lg:h-32 ${member.iconBg} rounded-full blur-2xl md:blur-3xl opacity-20 group-hover:opacity-50 transition-opacity duration-500`} />
+          <div className={`absolute w-16 sm:w-20 md:w-28 lg:w-32 h-16 sm:h-20 md:h-28 lg:h-32 ${member.iconBg} rounded-full blur-2xl md:blur-3xl opacity-25 group-hover:opacity-50 transition-opacity duration-500`} />
           
           {/* Main orb with 3D effect */}
           <div 
@@ -98,24 +98,24 @@ const TeamMemberCard = ({ member, index, variant = "default" }: TeamMemberCardPr
         </div>
 
         <div 
-          className="relative mt-auto pt-2 md:pt-3 lg:pt-4 flex items-end justify-between gap-1.5 sm:gap-2"
+          className="relative mt-auto pt-2 md:pt-3 lg:pt-4 flex items-end justify-between gap-2"
           style={{ transform: enableTilt ? "translateZ(20px)" : undefined }}
         >
           <div className="flex-1 min-w-0">
-            <h3 className="font-display text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-foreground mb-0.5 leading-tight">
+            <h3 className="font-display text-sm md:text-base lg:text-lg font-semibold text-foreground mb-0.5 leading-tight line-clamp-1">
               {member.name}
             </h3>
-            <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground leading-tight line-clamp-1 lg:line-clamp-2">
+            <p className="text-[11px] sm:text-xs md:text-xs lg:text-sm text-muted-foreground leading-snug line-clamp-1 lg:line-clamp-2">
               {member.role}
             </p>
           </div>
           
           {/* Arrow button */}
           <div 
-            className={`flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full ${member.iconBg} flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg`}
+            className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-full ${member.iconBg} flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg`}
             style={{ transform: enableTilt ? "translateZ(30px)" : undefined }}
           >
-            <ArrowUpRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 text-white" strokeWidth={2.5} />
+            <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-white" strokeWidth={2.5} />
           </div>
         </div>
       </div>

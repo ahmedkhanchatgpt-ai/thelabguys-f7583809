@@ -61,10 +61,10 @@ const AnimatedCounter = ({
 
   return (
     <div ref={ref} className="text-center group">
-      <div className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gradient mb-2 transition-transform duration-300 group-hover:scale-110">
+      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gradient mb-1.5 sm:mb-2 transition-transform duration-300 group-hover:scale-110">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-sm md:text-base text-muted-foreground uppercase tracking-widest">
+      <div className="text-[11px] sm:text-sm md:text-base text-muted-foreground uppercase tracking-wider sm:tracking-widest">
         {label}
       </div>
     </div>

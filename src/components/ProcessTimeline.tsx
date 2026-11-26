@@ -38,9 +38,9 @@ const ProcessTimeline = ({ steps, gradient, iconBg }: ProcessTimelineProps) => {
     <div ref={containerRef} className="relative">
       {/* Connecting line */}
       <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-white/20 via-white/10 to-transparent hidden md:block" />
-      <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-white/20 via-white/10 to-transparent md:hidden" />
+      <div className="absolute left-5 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-white/20 via-white/10 to-transparent md:hidden" />
 
-      <div className="space-y-8 md:space-y-12">
+      <div className="space-y-6 sm:space-y-8 md:space-y-12">
         {steps.map((step, index) => {
           const isVisible = visibleSteps.includes(index);
           const isEven = index % 2 === 0;
@@ -48,14 +48,14 @@ const ProcessTimeline = ({ steps, gradient, iconBg }: ProcessTimelineProps) => {
           return (
             <div
               key={step.step}
-              className={`relative flex items-center gap-6 md:gap-0 transition-all duration-700 ${
+              className={`relative flex items-center gap-4 md:gap-0 transition-all duration-700 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
               {/* Mobile layout */}
-              <div className="md:hidden flex items-start gap-6">
+              <div className="md:hidden flex items-start gap-4 sm:gap-6 w-full">
                 {/* Step number */}
-                <div className={`relative z-10 w-12 h-12 rounded-full ${iconBg} flex items-center justify-center text-white font-display font-bold text-lg shadow-lg flex-shrink-0`}>
+                <div className={`relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full ${iconBg} flex items-center justify-center text-white font-display font-bold text-base sm:text-lg shadow-lg flex-shrink-0`}>
                   {step.step}
                   {/* Pulse animation */}
                   {isVisible && (
@@ -64,9 +64,9 @@ const ProcessTimeline = ({ steps, gradient, iconBg }: ProcessTimelineProps) => {
                 </div>
 
                 {/* Content */}
-                <div className="glass rounded-2xl p-5 border border-white/10 flex-1 hover:border-white/20 transition-colors">
-                  <h4 className="font-display text-lg font-semibold mb-2">{step.title}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                <div className="glass rounded-2xl p-4 sm:p-5 border border-white/10 flex-1 hover:border-white/20 transition-colors">
+                  <h4 className="font-display text-base sm:text-lg font-semibold mb-1.5 sm:mb-2">{step.title}</h4>
+                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{step.description}</p>
                 </div>
               </div>
 

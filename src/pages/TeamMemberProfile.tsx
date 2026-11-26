@@ -95,22 +95,22 @@ const TeamMemberProfile = () => {
       {member.layoutVariant === "creative" && (
         <CreativeShowcase gradient={member.gradient} iconBg={member.iconBg} />
       )}
-      <section className="py-20 md:py-28 relative">
-        <div className="container mx-auto max-w-7xl px-6">
-          <div className="max-w-3xl mb-16">
-            <div className={`inline-flex items-center gap-2 mb-4`}>
-              <div className={`h-px w-12 bg-gradient-to-r ${member.gradient}`} />
-              <span className={`text-sm uppercase tracking-widest text-muted-foreground ${getSectionStyle()}`}>What I Offer</span>
+      <section className="py-14 md:py-28 relative">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="max-w-3xl mb-10 md:mb-16">
+            <div className={`inline-flex items-center gap-2 mb-3 sm:mb-4`}>
+              <div className={`h-px w-8 sm:w-12 bg-gradient-to-r ${member.gradient}`} />
+              <span className={`text-xs sm:text-sm uppercase tracking-widest text-muted-foreground ${getSectionStyle()}`}>What I Offer</span>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
               Services & <span className="text-gradient">Solutions</span>
             </h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-muted-foreground text-base sm:text-lg">
               Comprehensive expertise tailored to your unique needs. Each service is designed to deliver measurable impact.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
             {member.services.map((service, index) => (
               <ServiceCard
                 key={service.title}
@@ -126,7 +126,7 @@ const TeamMemberProfile = () => {
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 md:py-28 relative overflow-hidden">
+      <section className="py-14 md:py-28 relative overflow-hidden">
         {/* Themed background — animated gradient blobs */}
         <div className={`absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br ${member.gradient} rounded-full blur-[160px] opacity-25 animate-pulse-slow`} />
         <div className={`absolute bottom-0 right-0 w-[700px] h-[700px] bg-gradient-to-tr ${member.gradient} rounded-full blur-[180px] opacity-20 animate-pulse-slow`} style={{ animationDelay: '2s' }} />
@@ -162,25 +162,25 @@ const TeamMemberProfile = () => {
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-current opacity-[0.04] rounded-full pointer-events-none`} style={{ animation: 'spin 50s linear infinite' }} />
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-current opacity-[0.05] rounded-full pointer-events-none`} style={{ animation: 'spin 35s linear infinite reverse' }} />
         
-        <div className="container mx-auto max-w-7xl px-6">
-          <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-start">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex flex-col lg:flex-row gap-10 md:gap-16 lg:gap-20 items-start">
             {/* Left: Header + description */}
             <div className="lg:w-1/3 lg:sticky lg:top-32">
-              <div className={`inline-flex items-center gap-2 mb-4`}>
-                <div className={`h-px w-12 bg-gradient-to-r ${member.gradient}`} />
-                <span className={`text-sm uppercase tracking-widest text-muted-foreground ${getSectionStyle()}`}>Toolkit</span>
+              <div className={`inline-flex items-center gap-2 mb-3 sm:mb-4`}>
+                <div className={`h-px w-8 sm:w-12 bg-gradient-to-r ${member.gradient}`} />
+                <span className={`text-xs sm:text-sm uppercase tracking-widest text-muted-foreground ${getSectionStyle()}`}>Toolkit</span>
               </div>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
                 Tools I <span className="text-gradient">Master</span>
               </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
                 Years of hands-on experience with industry-leading software to deliver exceptional results.
               </p>
-              <div className={`mt-8 h-1 w-24 rounded-full bg-gradient-to-r ${member.gradient} opacity-60`} />
+              <div className={`mt-6 sm:mt-8 h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r ${member.gradient} opacity-60`} />
             </div>
 
             {/* Right: Skill cards grid */}
-            <div className="lg:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="w-full lg:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
               {member.skills.map((skill, index) => (
                 <div
                   key={skill}
@@ -188,20 +188,20 @@ const TeamMemberProfile = () => {
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className={`absolute -inset-px bg-gradient-to-br ${member.gradient} rounded-2xl opacity-0 group-hover:opacity-40 blur-xl transition-all duration-500`} />
-                  <div className="relative glass rounded-2xl p-6 border border-white/10 group-hover:border-white/25 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col justify-between min-h-[140px]">
+                  <div className="relative glass rounded-2xl p-4 sm:p-6 border border-white/10 group-hover:border-white/25 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col justify-between min-h-[108px] sm:min-h-[140px]">
                     {/* Gradient hover overlay */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-0 group-hover:opacity-[0.08] rounded-2xl transition-opacity duration-500`} />
                     
                     {/* Skill dot indicator */}
-                    <div className="relative flex items-center gap-3 mb-4">
-                      <div className={`w-3 h-3 rounded-full ${member.iconBg} shadow-lg group-hover:scale-125 transition-transform duration-300`}>
-                        <div className={`w-3 h-3 rounded-full ${member.iconBg} animate-ping opacity-0 group-hover:opacity-40`} />
+                    <div className="relative flex items-center gap-2.5 sm:gap-3 mb-3 sm:mb-4">
+                      <div className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full ${member.iconBg} shadow-lg group-hover:scale-125 transition-transform duration-300`}>
+                        <div className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full ${member.iconBg} animate-ping opacity-0 group-hover:opacity-40`} />
                       </div>
                       <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
                     </div>
                     
                     {/* Skill name */}
-                    <p className={`relative font-display font-semibold text-lg text-foreground/90 group-hover:text-foreground transition-colors ${member.layoutVariant === 'tech' ? 'font-mono text-base' : ''}`}>
+                    <p className={`relative font-display font-semibold text-sm sm:text-base md:text-lg text-foreground/90 group-hover:text-foreground transition-colors break-words ${member.layoutVariant === 'tech' ? 'font-mono text-xs sm:text-base' : ''}`}>
                       {skill}
                     </p>
                   </div>
@@ -213,18 +213,18 @@ const TeamMemberProfile = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 md:py-28 relative">
-        <div className="container mx-auto max-w-5xl px-6">
-          <div className="text-center mb-16">
-            <div className={`inline-flex items-center gap-2 mb-4 justify-center`}>
-              <div className={`h-px w-12 bg-gradient-to-r ${member.gradient}`} />
-              <span className={`text-sm uppercase tracking-widest text-muted-foreground ${getSectionStyle()}`}>How I Work</span>
-              <div className={`h-px w-12 bg-gradient-to-l ${member.gradient}`} />
+      <section className="py-14 md:py-28 relative">
+        <div className="container mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="text-center mb-10 md:mb-16">
+            <div className={`inline-flex items-center gap-2 mb-3 sm:mb-4 justify-center`}>
+              <div className={`h-px w-8 sm:w-12 bg-gradient-to-r ${member.gradient}`} />
+              <span className={`text-xs sm:text-sm uppercase tracking-widest text-muted-foreground ${getSectionStyle()}`}>How I Work</span>
+              <div className={`h-px w-8 sm:w-12 bg-gradient-to-l ${member.gradient}`} />
             </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
               My <span className="text-gradient">Process</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
               A proven methodology refined through experience to ensure consistent, high-quality outcomes.
             </p>
           </div>
@@ -238,9 +238,9 @@ const TeamMemberProfile = () => {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-20 md:py-28 relative">
-        <div className="container mx-auto max-w-5xl px-6">
-          <div className={`relative ${member.layoutVariant === 'tech' ? 'rounded-2xl' : member.layoutVariant === 'creative' ? 'rounded-[3rem]' : 'rounded-[2rem]'} overflow-hidden`}>
+      <section className="py-14 md:py-28 relative">
+        <div className="container mx-auto max-w-5xl px-4 sm:px-6">
+          <div className={`relative ${member.layoutVariant === 'tech' ? 'rounded-2xl' : member.layoutVariant === 'creative' ? 'rounded-3xl sm:rounded-[3rem]' : 'rounded-2xl sm:rounded-[2rem]'} overflow-hidden`}>
             {/* Background with gradient */}
             <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-20`} />
             <div className="absolute inset-0 glass" />
@@ -250,17 +250,17 @@ const TeamMemberProfile = () => {
             <div className={`absolute -top-20 -right-20 w-60 h-60 bg-gradient-to-br ${member.gradient} rounded-full blur-3xl opacity-30`} />
             <div className={`absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-br ${member.gradient} rounded-full blur-3xl opacity-20`} />
             
-            <div className="relative z-10 p-10 md:p-16 text-center">
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <div className="relative z-10 p-6 sm:p-10 md:p-16 text-center">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
                 Ready to <span className="text-gradient">Collaborate?</span>
               </h2>
-              <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10">
+              <p className="text-muted-foreground text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10">
                 Let's discuss how I can help bring your vision to life. I'm always excited to take on new challenges and create something extraordinary together.
               </p>
               
               <div className="flex flex-wrap justify-center gap-4">
-                <MagneticButton>
-                  <Button asChild size="lg" className={`gap-3 ${member.iconBg} border-0 hover:opacity-90 text-white px-10 py-7 text-lg shadow-xl`}>
+                <MagneticButton className="w-full sm:w-auto">
+                  <Button asChild size="lg" className={`w-full sm:w-auto gap-3 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-10 py-6 sm:py-7 text-base sm:text-lg shadow-xl`}>
                     <a href={`mailto:${member.email}`}>
                       <Mail className="w-5 h-5" />
                       Get in Touch
@@ -270,8 +270,8 @@ const TeamMemberProfile = () => {
               </div>
 
               {/* Quick contact info */}
-              <div className="mt-10 flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
-                <a href={`mailto:${member.email}`} className="hover:text-foreground transition-colors">
+              <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
+                <a href={`mailto:${member.email}`} className="hover:text-foreground transition-colors break-all">
                   {member.email}
                 </a>
               </div>
@@ -281,48 +281,48 @@ const TeamMemberProfile = () => {
       </section>
 
       {/* Navigation to other members */}
-      <section className="py-16 border-t border-border">
-        <div className="container mx-auto max-w-6xl px-6">
-          <p className="text-center text-sm text-muted-foreground uppercase tracking-widest mb-10">
+      <section className="py-12 sm:py-16 border-t border-border">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+          <p className="text-center text-xs sm:text-sm text-muted-foreground uppercase tracking-widest mb-6 sm:mb-10">
             Meet Other Experts
           </p>
-          <div className="flex flex-col sm:flex-row justify-between items-stretch gap-6">
+          <div className="flex flex-col sm:flex-row justify-between items-stretch gap-4 sm:gap-6">
             <Link
               to={`/team/${prevMember.id}`}
-              className="group flex items-center gap-5 glass rounded-2xl px-6 py-6 border border-white/10 hover:border-white/20 transition-all flex-1 hover:-translate-x-2"
+              className="group flex items-center gap-3.5 sm:gap-5 glass rounded-2xl p-4 sm:px-6 sm:py-6 border border-white/10 hover:border-white/20 transition-all flex-1 hover:-translate-x-2 active:scale-[0.98]"
             >
-              <div className={`w-16 h-16 rounded-2xl ${prevMember.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform text-white font-display font-bold text-lg shadow-lg`}>
+              <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${prevMember.iconBg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform text-white font-display font-bold text-base sm:text-lg shadow-lg`}>
                 {prevMember.initials || prevMember.name.split(' ').map(n => n[0]).join('')}
               </div>
-              <div className="flex-1">
-                <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">
+              <div className="flex-1 min-w-0">
+                <p className="text-[11px] sm:text-xs text-muted-foreground uppercase tracking-widest mb-0.5 sm:mb-1">
                   Previous Expert
                 </p>
-                <p className="font-display font-semibold text-xl mb-1">
+                <p className="font-display font-semibold text-base sm:text-xl mb-0.5 sm:mb-1 truncate">
                   {prevMember.name}
                 </p>
-                <p className="text-sm text-muted-foreground">{prevMember.role}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground truncate">{prevMember.role}</p>
               </div>
-              <ArrowLeft className="w-5 h-5 text-muted-foreground group-hover:-translate-x-1 transition-transform" />
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-muted-foreground group-hover:-translate-x-1 transition-transform" />
             </Link>
 
             <Link
               to={`/team/${nextMember.id}`}
-              className="group flex items-center gap-5 glass rounded-2xl px-6 py-6 border border-white/10 hover:border-white/20 transition-all flex-row-reverse flex-1 hover:translate-x-2"
+              className="group flex items-center gap-3.5 sm:gap-5 glass rounded-2xl p-4 sm:px-6 sm:py-6 border border-white/10 hover:border-white/20 transition-all flex-row-reverse flex-1 hover:translate-x-2 active:scale-[0.98]"
             >
-              <div className={`w-16 h-16 rounded-2xl ${nextMember.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform text-white font-display font-bold text-lg shadow-lg`}>
+              <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl ${nextMember.iconBg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform text-white font-display font-bold text-base sm:text-lg shadow-lg`}>
                 {nextMember.initials || nextMember.name.split(' ').map(n => n[0]).join('')}
               </div>
-              <div className="flex-1 text-right">
-                <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">
+              <div className="flex-1 text-right min-w-0">
+                <p className="text-[11px] sm:text-xs text-muted-foreground uppercase tracking-widest mb-0.5 sm:mb-1">
                   Next Expert
                 </p>
-                <p className="font-display font-semibold text-xl mb-1">
+                <p className="font-display font-semibold text-base sm:text-xl mb-0.5 sm:mb-1 truncate">
                   {nextMember.name}
                 </p>
-                <p className="text-sm text-muted-foreground">{nextMember.role}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground truncate">{nextMember.role}</p>
               </div>
-              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-muted-foreground group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>

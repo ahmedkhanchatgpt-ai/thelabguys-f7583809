@@ -89,25 +89,25 @@ const Index = () => {
           );
         })}
 
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border border-purple-500/[0.06] rounded-full" style={{ animation: 'spin 60s linear infinite' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-pink-500/[0.07] rounded-full" style={{ animation: 'spin 45s linear infinite reverse' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-cyan-500/[0.06] rounded-full" style={{ animation: 'spin 35s linear infinite' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] sm:w-[700px] sm:h-[700px] lg:w-[900px] lg:h-[900px] border border-purple-500/[0.06] rounded-full" style={{ animation: 'spin 60s linear infinite' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[290px] h-[290px] sm:w-[540px] sm:h-[540px] lg:w-[700px] lg:h-[700px] border border-pink-500/[0.07] rounded-full" style={{ animation: 'spin 45s linear infinite reverse' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[210px] h-[210px] sm:w-[380px] sm:h-[380px] lg:w-[500px] lg:h-[500px] border border-cyan-500/[0.06] rounded-full" style={{ animation: 'spin 35s linear infinite' }} />
       </div>
 
       <Header />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center pt-16 md:pt-20 px-4 md:px-6 relative overflow-hidden">
+      <section className="min-h-[100dvh] flex items-center justify-center pt-20 pb-12 md:pt-20 md:pb-0 relative overflow-hidden">
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-5xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full glass border border-white/10 mb-6 md:mb-8 opacity-0 animate-fade-up">
+            <div className="inline-flex items-center gap-2 px-3.5 md:px-4 py-1.5 md:py-2 rounded-full glass border border-white/10 mb-5 md:mb-8 opacity-0 animate-fade-up">
               <span className="w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 animate-pulse" />
               <span className="text-xs md:text-sm text-muted-foreground">Digital Experts Collective</span>
             </div>
 
             {/* Main heading */}
-            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] mb-6 md:mb-8 opacity-0 animate-fade-up stagger-1">
+            <h1 className="font-display text-[2.25rem] sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.12] mb-5 md:mb-8 opacity-0 animate-fade-up stagger-1">
               We Are{" "}
               <span className="relative inline-block">
                 <span className="text-gradient">The Lab Guys</span>
@@ -153,32 +153,34 @@ const Index = () => {
                     block: 'start'
                   });
                 }}
-                className="group inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white text-sm md:text-base font-medium hover:bg-[position:100%_0] transition-all duration-500 shadow-glow hover:shadow-[0_0_60px_-10px_hsl(270_95%_65%/0.6)]"
+                className="group inline-flex items-center justify-center gap-2.5 md:gap-3 px-7 md:px-8 py-3.5 md:py-4 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] text-white text-sm md:text-base font-medium hover:bg-[position:100%_0] active:scale-95 transition-all duration-500 shadow-glow hover:shadow-[0_0_60px_-10px_hsl(270_95%_65%/0.6)]"
                 strength={0.4}
               >
                 Meet the Team
-                <ArrowDown className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-y-1 transition-transform" />
+                <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
               </MagneticButton>
             </div>
 
             {/* Floating expertise icons */}
-            <div className="flex justify-center items-center gap-2 sm:gap-3 md:gap-6 flex-wrap opacity-0 animate-fade-up stagger-4">
+            <div className="flex justify-center items-center gap-2.5 sm:gap-3 md:gap-6 flex-wrap opacity-0 animate-fade-up stagger-4 max-w-xs sm:max-w-none mx-auto">
               {visibleMembers.map((member) => {
                 const config = getMemberIconConfig(member.id);
                 return (
-                  <div
+                  <button
+                    type="button"
                     key={member.id}
                     onClick={() => {
                       navigate(`/team/${member.id}`);
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className={`w-11 h-11 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer`}
+                    aria-label={`${member.name} - ${member.role}`}
+                    className={`w-12 h-12 sm:w-13 sm:h-13 md:w-16 md:h-16 rounded-xl md:rounded-2xl ${member.iconBg} flex items-center justify-center text-white shadow-lg hover:scale-110 active:scale-95 hover:shadow-xl transition-all duration-300 cursor-pointer`}
                     title={`${member.name} - ${member.role}`}
                   >
                     <div className={config.animation}>
                       {config.icon}
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -187,14 +189,14 @@ const Index = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-16 md:py-24 px-4 md:px-6 relative">
+      <section id="team" className="py-14 md:py-24 relative scroll-mt-16">
         <div className="container mx-auto">
-          <ScrollReveal className="text-center mb-10 md:mb-16">
+          <ScrollReveal className="text-center mb-8 md:mb-16">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4">
               The <span className="text-gradient">Experts</span>
             </h2>
             <p className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto px-2">
-              Click on any profile to discover their expertise and connect.
+              Tap on any profile to discover their expertise and connect.
             </p>
           </ScrollReveal>
 
@@ -202,7 +204,7 @@ const Index = () => {
           <div className={
             visibleMembers.length <= 3 
               ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-5xl mx-auto gap-4 sm:gap-6" 
-              : "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4 lg:gap-5"
+              : "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-5"
           }>
             {visibleMembers.map((member, index) => (
               <ScrollReveal key={member.id} delay={index * 100} direction="up">
@@ -220,7 +222,7 @@ const Index = () => {
       <FAQSection />
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6 relative">
+      <section className="py-12 md:py-24 relative">
         <div className="container mx-auto">
           <ScrollReveal direction="scale" duration={800}>
             <div className="relative rounded-2xl md:rounded-3xl glass overflow-hidden">
@@ -228,11 +230,11 @@ const Index = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10" />
               <div className="absolute inset-0 noise" />
               
-              <div className="relative text-center py-12 md:py-20 px-4 md:px-6">
+              <div className="relative text-center py-10 md:py-20 px-5 md:px-6">
                 <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
                   Ready to <span className="text-gradient">Collaborate?</span>
                 </h2>
-                <p className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto mb-6 md:mb-10 px-2">
+                <p className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto mb-6 md:mb-10 px-1">
                   Whether you need SEO, development, security, trading insights, or
                   creative design — let's build something amazing together.
                 </p>
@@ -241,7 +243,7 @@ const Index = () => {
                     navigate('/contact');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="group relative inline-flex items-center justify-center px-6 md:px-10 py-3 md:py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-sm md:text-base font-semibold transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_15px_rgba(168,85,247,0.4),0_0_80px_30px_rgba(236,72,153,0.3)] shadow-[0_0_15px_2px_rgba(168,85,247,0.3)]"
+                  className="group relative inline-flex items-center justify-center px-7 md:px-10 py-3.5 md:py-5 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-sm md:text-base font-semibold transition-all duration-500 hover:scale-105 active:scale-95 hover:shadow-[0_0_40px_15px_rgba(168,85,247,0.4),0_0_80px_30px_rgba(236,72,153,0.3)] shadow-[0_0_15px_2px_rgba(168,85,247,0.3)]"
                   strength={0.3}
                 >
                   Start a Conversation

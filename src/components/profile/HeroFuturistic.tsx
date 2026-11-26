@@ -10,45 +10,45 @@ interface HeroFuturisticProps {
 
 const HeroFuturistic = ({ member }: HeroFuturisticProps) => {
   return (
-    <section className="min-h-screen flex lg:items-center relative pt-32 pb-20 lg:pt-20 overflow-hidden">
+    <section className="min-h-[100dvh] flex lg:items-center relative pt-24 pb-14 lg:pt-20 lg:pb-20 overflow-hidden">
       {/* Gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-gradient-to-br from-pink-500 via-rose-500 to-red-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow" />
-      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-gradient-to-br from-fuchsia-500 to-purple-500 rounded-full blur-[120px] opacity-10 animate-pulse-slow" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/4 left-1/4 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-gradient-to-br from-pink-500 via-rose-500 to-red-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow" />
+      <div className="absolute bottom-1/4 right-1/4 w-[240px] sm:w-[300px] h-[240px] sm:h-[300px] bg-gradient-to-br from-fuchsia-500 to-purple-500 rounded-full blur-[120px] opacity-10 animate-pulse-slow" style={{ animationDelay: '2s' }} />
 
-      <div className="container mx-auto max-w-7xl px-6">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 opacity-0 animate-fade-up group absolute top-28 left-6 z-20"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 lg:mb-0 opacity-0 animate-fade-up group lg:absolute lg:-top-10 lg:left-6 z-20"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Team
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left - Cyber Visual */}
-          <div className="order-2 lg:order-1 opacity-0 animate-fade-up stagger-1">
-            <div className="relative flex items-center justify-center">
+          <div className="order-2 lg:order-1 opacity-0 animate-fade-up stagger-1 py-6 lg:py-0">
+            <div className="relative flex items-center justify-center min-h-[250px] sm:min-h-[320px]">
               {/* Rotating rings */}
-              <div className="absolute w-[300px] h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-pink-500/10 animate-spin-slow" style={{ animationDuration: '30s' }} />
-              <div className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-rose-500/10 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }} />
+              <div className="absolute w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-pink-500/10 animate-spin-slow" style={{ animationDuration: '30s' }} />
+              <div className="absolute w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-rose-500/10 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }} />
               
               {/* Central brain */}
               <div className="relative group">
                 <div className={`absolute inset-0 ${member.iconBg} blur-3xl opacity-50 group-hover:opacity-70 transition-opacity scale-150`} />
-                <div className={`relative w-40 h-40 md:w-48 md:h-48 rounded-full ${member.iconBg} flex items-center justify-center shadow-2xl shadow-pink-500/20 group-hover:scale-105 transition-transform`}>
-                  <Brain className="w-18 h-18 md:w-22 md:h-22 text-white" strokeWidth={1} />
+                <div className={`relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full ${member.iconBg} flex items-center justify-center shadow-2xl shadow-pink-500/20 group-hover:scale-105 transition-transform`}>
+                  <Brain className="w-14 h-14 sm:w-18 sm:h-18 md:w-22 md:h-22 text-white" strokeWidth={1} />
                 </div>
               </div>
               
               {/* Orbiting sparkles */}
-              <div className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] animate-spin-slow" style={{ animationDuration: '12s' }}>
-                <Sparkles className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-6 text-yellow-400" />
+              <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[360px] md:h-[360px] animate-spin-slow" style={{ animationDuration: '12s' }}>
+                <Sparkles className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
               </div>
-              <div className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] animate-spin-slow" style={{ animationDuration: '12s', animationDirection: 'reverse' }}>
-                <Sparkles className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-5 text-pink-400" />
+              <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[360px] md:h-[360px] animate-spin-slow" style={{ animationDuration: '12s', animationDirection: 'reverse' }}>
+                <Sparkles className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-4 sm:w-5 sm:h-5 text-pink-400" />
               </div>
-              <div className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] animate-spin-slow" style={{ animationDuration: '18s' }}>
-                <Sparkles className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-fuchsia-400" />
+              <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[360px] md:h-[360px] animate-spin-slow" style={{ animationDuration: '18s' }}>
+                <Sparkles className="absolute left-0 top-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 text-fuchsia-400" />
               </div>
             </div>
           </div>
@@ -56,14 +56,14 @@ const HeroFuturistic = ({ member }: HeroFuturisticProps) => {
           {/* Right - Content */}
           <div className="flex flex-col justify-center order-1 lg:order-2">
             {/* Badge */}
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border border-pink-500/30 w-fit mb-6 opacity-0 animate-fade-up stagger-2">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border border-pink-500/30 w-fit mb-5 sm:mb-6 opacity-0 animate-fade-up stagger-2">
               <Brain className="w-4 h-4 text-pink-400" />
-              <span className="text-sm text-muted-foreground">AI Engineer</span>
+              <span className="text-xs sm:text-sm text-muted-foreground">AI Engineer</span>
               <div className="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
             </div>
 
             {/* Name with glow */}
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 tracking-tight">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 tracking-tight">
               {member.name.split(' ').map((word, i) => (
                 <span key={i} className="block">
                   {i === 0 ? (
@@ -101,21 +101,21 @@ const HeroFuturistic = ({ member }: HeroFuturisticProps) => {
             </p>
 
             {/* Bio */}
-            <p className="text-muted-foreground text-lg leading-relaxed mb-10 opacity-0 animate-fade-up stagger-4">
+            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 opacity-0 animate-fade-up stagger-4">
               {member.fullBio}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 opacity-0 animate-fade-up stagger-5">
-              <MagneticButton>
-                <Button asChild size="lg" className={`gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-8 py-6 text-base shadow-xl shadow-pink-500/20`}>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 opacity-0 animate-fade-up stagger-5">
+              <MagneticButton className="w-full sm:w-auto">
+                <Button asChild size="lg" className={`w-full sm:w-auto gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base shadow-xl shadow-pink-500/20`}>
                   <a href={`mailto:${member.email}`}>
                     <Brain className="w-5 h-5" />
                     Build with AI
                   </a>
                 </Button>
               </MagneticButton>
-              <Button asChild variant="outline" size="lg" className="gap-2 glass border-pink-500/30 hover:border-pink-500/50 hover:bg-pink-500/10 px-8 py-6 text-base">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto gap-2 glass border-pink-500/30 hover:border-pink-500/50 hover:bg-pink-500/10 px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base">
                 <a href={`mailto:${member.email}?subject=AI Inquiry`}>
                   <Mail className="w-5 h-5" />
                   Explore Possibilities

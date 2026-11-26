@@ -84,26 +84,26 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
   ];
 
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden">
+    <section className="py-14 md:py-28 relative overflow-hidden">
       {/* Simplified background */}
-      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br ${gradient} rounded-full blur-[200px] opacity-[0.06]`} />
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-gradient-to-br ${gradient} rounded-full blur-[200px] opacity-[0.06]`} />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/15 to-transparent" />
 
-      <div className="container mx-auto max-w-7xl px-6">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16 opacity-0 animate-fade-up">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className={`h-px w-12 bg-gradient-to-r ${gradient}`} />
-            <span className="text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium">Track Record</span>
-            <div className={`h-px w-12 bg-gradient-to-l ${gradient}`} />
+        <div className="text-center mb-10 md:mb-16 opacity-0 animate-fade-up">
+          <div className="inline-flex items-center gap-3 mb-3 sm:mb-4">
+            <div className={`h-px w-8 sm:w-12 bg-gradient-to-r ${gradient}`} />
+            <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium">Track Record</span>
+            <div className={`h-px w-8 sm:w-12 bg-gradient-to-l ${gradient}`} />
           </div>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">
             Proven <span className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>Results</span>
           </h2>
         </div>
 
         {/* Stats Grid - More professional with icons and animations */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-14 md:mb-24">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
@@ -113,22 +113,22 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Card */}
-                <div className="relative glass rounded-2xl p-6 md:p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+                <div className="relative glass rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl h-full">
                   {/* Gradient overlay on hover */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`} />
                   
                   {/* Icon */}
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
-                    <Icon className="w-6 h-6 text-white" />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   
                   {/* Value */}
-                  <p className={`font-display text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
+                  <p className={`font-display text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-1 sm:mb-2`}>
                     <AnimatedNumber value={stat.value} suffix={stat.suffix} delay={index * 100} />
                   </p>
                   
                   {/* Label */}
-                  <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground font-medium">{stat.label}</p>
                 </div>
               </div>
             );
@@ -136,18 +136,18 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
         </div>
 
         {/* Testimonials Section */}
-        <div className="text-center mb-12 opacity-0 animate-fade-up" style={{ animationDelay: '400ms' }}>
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className={`h-px w-12 bg-gradient-to-r ${gradient}`} />
-            <span className="text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium">Client Reviews</span>
-            <div className={`h-px w-12 bg-gradient-to-l ${gradient}`} />
+        <div className="text-center mb-8 sm:mb-12 opacity-0 animate-fade-up" style={{ animationDelay: '400ms' }}>
+          <div className="inline-flex items-center gap-3 mb-3 sm:mb-4">
+            <div className={`h-px w-8 sm:w-12 bg-gradient-to-r ${gradient}`} />
+            <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium">Client Reviews</span>
+            <div className={`h-px w-8 sm:w-12 bg-gradient-to-l ${gradient}`} />
           </div>
-          <h3 className="font-display text-3xl md:text-4xl font-bold">
+          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold">
             What Clients <span className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>Say</span>
           </h3>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
@@ -158,10 +158,10 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
               <div className={`absolute -inset-px bg-gradient-to-br ${gradient} rounded-[1.75rem] opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`} />
               
               {/* Card */}
-              <div className="relative glass rounded-3xl p-6 md:p-8 border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+              <div className="relative glass rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
                 {/* Header with quote icon and stars */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center shadow-lg`}>
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                  <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl ${iconBg} flex items-center justify-center shadow-lg`}>
                     <Quote className="w-4 h-4 text-white" />
                   </div>
                   <div className="flex gap-0.5">
@@ -172,7 +172,7 @@ const CreativeShowcase = ({ gradient, iconBg }: CreativeShowcaseProps) => {
                 </div>
                 
                 {/* Quote text */}
-                <p className="text-base leading-relaxed mb-6 text-foreground/90 flex-grow">
+                <p className="text-sm sm:text-base leading-relaxed mb-5 sm:mb-6 text-foreground/90 flex-grow">
                   "{testimonial.quote}"
                 </p>
                 

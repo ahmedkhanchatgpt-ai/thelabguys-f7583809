@@ -12,25 +12,25 @@ const HeroData = ({ member }: HeroDataProps) => {
   const chartBars = [35, 58, 45, 72, 63, 88, 75, 92, 68, 85, 78, 95];
 
   return (
-    <section className="min-h-screen flex lg:items-center relative pt-32 pb-20 lg:pt-20 overflow-hidden">
+    <section className="min-h-[100dvh] flex lg:items-center relative pt-24 pb-14 lg:pt-20 lg:pb-20 overflow-hidden">
       {/* Gradient orbs */}
-      <div className="absolute top-1/4 -left-20 w-[400px] h-[400px] bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow" />
-      <div className="absolute bottom-1/4 -right-20 w-[300px] h-[300px] bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full blur-[120px] opacity-10 animate-pulse-slow" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/4 -left-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow" />
+      <div className="absolute bottom-1/4 -right-20 w-[260px] sm:w-[300px] h-[260px] sm:h-[300px] bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full blur-[120px] opacity-10 animate-pulse-slow" style={{ animationDelay: '2s' }} />
 
-      <div className="container mx-auto max-w-7xl px-6">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 opacity-0 animate-fade-up group absolute top-28 left-6 z-20"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 lg:mb-0 opacity-0 animate-fade-up group lg:absolute lg:-top-10 lg:left-6 z-20"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Team
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           {/* Left - Content */}
           <div className="flex flex-col justify-center order-1 lg:order-1">
             {/* Name with glow */}
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-1 tracking-tight">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-1 tracking-tight">
               {member.name.split(' ').map((word, i) => (
                 <span 
                   key={i} 
@@ -61,21 +61,21 @@ const HeroData = ({ member }: HeroDataProps) => {
             </p>
 
             {/* Bio */}
-            <p className="text-muted-foreground text-lg leading-relaxed mb-10 opacity-0 animate-fade-up stagger-4">
+            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 opacity-0 animate-fade-up stagger-4">
               {member.fullBio}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 opacity-0 animate-fade-up stagger-5">
-              <MagneticButton>
-                <Button asChild size="lg" className={`gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-8 py-6 text-base shadow-xl shadow-green-500/20`}>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 opacity-0 animate-fade-up stagger-5">
+              <MagneticButton className="w-full sm:w-auto">
+                <Button asChild size="lg" className={`w-full sm:w-auto gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base shadow-xl shadow-green-500/20`}>
                   <a href={`mailto:${member.email}`}>
                     <BarChart3 className="w-5 h-5" />
                     Analyze Your Data
                   </a>
                 </Button>
               </MagneticButton>
-              <Button asChild variant="outline" size="lg" className="gap-2 glass border-green-500/30 hover:border-green-500/50 hover:bg-green-500/10 px-8 py-6 text-base">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto gap-2 glass border-green-500/30 hover:border-green-500/50 hover:bg-green-500/10 px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base">
                 <a href={`mailto:${member.email}?subject=Data Inquiry`}>
                   <Mail className="w-5 h-5" />
                   Get in Touch
@@ -111,21 +111,21 @@ const HeroData = ({ member }: HeroDataProps) => {
               <div className={`absolute -inset-4 bg-gradient-to-br ${member.gradient} blur-2xl opacity-20`} />
               
               {/* Chart container */}
-              <div className="relative glass rounded-3xl border border-green-500/20 p-8 overflow-hidden shadow-2xl">
+              <div className="relative glass rounded-2xl sm:rounded-3xl border border-green-500/20 p-5 sm:p-8 overflow-hidden shadow-2xl">
                 {/* Chart header */}
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center justify-between mb-6 sm:mb-8">
                   <div>
-                    <h3 className="text-sm text-muted-foreground uppercase tracking-wider mb-1">Performance Metrics</h3>
-                    <p className="text-3xl font-display font-bold text-green-400">+127.4%</p>
+                    <h3 className="text-xs sm:text-sm text-muted-foreground uppercase tracking-wider mb-1">Performance Metrics</h3>
+                    <p className="text-2xl sm:text-3xl font-display font-bold text-green-400">+127.4%</p>
                   </div>
-                  <div className={`w-12 h-12 rounded-xl ${member.iconBg} flex items-center justify-center shadow-lg`}>
-                    <TrendingUp className="w-6 h-6 text-white" />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl ${member.iconBg} flex items-center justify-center shadow-lg`}>
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                 </div>
                 
                 {/* Bar chart */}
-                <div className="relative h-44 mb-4">
-                  <div className="absolute inset-0 flex items-end gap-2">
+                <div className="relative h-36 sm:h-44 mb-4">
+                  <div className="absolute inset-0 flex items-end gap-1.5 sm:gap-2">
                     {chartBars.map((height, i) => (
                       <div
                         key={i}

@@ -146,8 +146,9 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
               <FormControl>
                 <Input
                   {...field}
+                  autoComplete="name"
                   placeholder="Full Name*"
-                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-base sm:text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
                 />
               </FormControl>
               <FormMessage className="text-[11px] text-red-400" />
@@ -165,8 +166,10 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                 <Input
                   {...field}
                   type="email"
+                  inputMode="email"
+                  autoComplete="email"
                   placeholder="Email*"
-                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-base sm:text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
                 />
               </FormControl>
               <FormMessage className="text-[11px] text-red-400" />
@@ -184,8 +187,10 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                 <Input
                   {...field}
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   placeholder="Phone*"
-                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-base sm:text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
                 />
               </FormControl>
               <FormMessage className="text-[11px] text-red-400" />
@@ -203,7 +208,7 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                 <Input
                   {...field}
                   placeholder="Subject*"
-                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                  className="h-12 bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-base sm:text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
                 />
               </FormControl>
               <FormMessage className="text-[11px] text-red-400" />
@@ -222,7 +227,7 @@ const EnhancedContactForm = ({ onSuccess }: EnhancedContactFormProps) => {
                   {...field}
                   rows={4}
                   placeholder="Message*"
-                  className="resize-none bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
+                  className="resize-none bg-white/[0.03] border-white/10 rounded-lg text-white placeholder:text-muted-foreground/60 text-base sm:text-sm focus-visible:ring-1 focus-visible:ring-blue-500/60 focus-visible:border-blue-500/50 transition-all"
                 />
               </FormControl>
               <FormMessage className="text-[11px] text-red-400" />

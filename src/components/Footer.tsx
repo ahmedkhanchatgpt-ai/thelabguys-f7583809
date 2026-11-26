@@ -4,10 +4,10 @@ import { Sparkles, Instagram, Facebook, Twitter } from "lucide-react";
 
 const Footer = forwardRef<HTMLElement>((_, ref) => {
   return (
-    <footer className="border-t border-border glass-strong">
-      <div className="container mx-auto px-6 py-12">
+    <footer ref={ref} className="border-t border-border glass-strong pb-[env(safe-area-inset-bottom)]">
+      <div className="container mx-auto px-4 sm:px-6 py-10 md:py-12">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col items-center md:items-start gap-3">
+          <div className="flex flex-col items-center md:items-start gap-2.5 text-center md:text-left">
             <Link to="/" className="group flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 flex items-center justify-center transition-shadow duration-300 group-hover:shadow-glow-purple">
                 <Sparkles className="w-4 h-4 text-white" />
@@ -23,13 +23,13 @@ const Footer = forwardRef<HTMLElement>((_, ref) => {
 
           <div className="flex flex-col items-center md:items-end gap-4">
             <div className="flex items-center gap-4">
-              <a href="https://www.instagram.com/thelabguysofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
+              <a href="https://www.instagram.com/thelabguysofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-11 h-11 md:w-9 md:h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white active:scale-95 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
                 <Instagram className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
               </a>
-              <a href="https://www.facebook.com/profile.php?id=61594154595588" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
+              <a href="https://www.facebook.com/profile.php?id=61594154595588" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-11 h-11 md:w-9 md:h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white active:scale-95 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
                 <Facebook className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
               </a>
-              <a href="https://x.com/thelabguysofc" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
+              <a href="https://x.com/thelabguysofc" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="w-11 h-11 md:w-9 md:h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-white active:scale-95 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 transition-all duration-300 hover:shadow-glow-purple group/social">
                 <Twitter className="w-4 h-4 transition-transform duration-300 group-hover/social:scale-110" />
               </a>
             </div>

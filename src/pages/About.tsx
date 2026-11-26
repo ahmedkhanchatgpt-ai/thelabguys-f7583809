@@ -56,32 +56,32 @@ const About = () => {
 
       <Header />
 
-      <main className="pt-28 pb-16 px-6 relative z-10">
+      <main className="pt-24 pb-12 sm:pt-28 sm:pb-16 relative z-10">
         <div className="container mx-auto max-w-6xl">
           {/* Hero */}
-          <ScrollReveal className="text-center mb-16 md:mb-24">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/10 mb-6">
+          <ScrollReveal className="text-center mb-12 md:mb-24">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 sm:py-2 rounded-full glass border border-white/10 mb-5 sm:mb-6">
               <span className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 animate-pulse" />
-              <span className="text-sm text-muted-foreground">Our Story</span>
+              <span className="text-xs sm:text-sm text-muted-foreground">Our Story</span>
             </div>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">
               We Are <span className="text-gradient">The Lab Guys</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-2">
               A collective of {visibleMembers.length} digital experts united by a shared vision: to transform ideas into 
               extraordinary digital experiences that drive real business results.
             </p>
           </ScrollReveal>
 
           {/* Mission & Vision */}
-          <div className="grid md:grid-cols-2 gap-6 mb-16 md:mb-24">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-12 md:mb-24">
             <ScrollReveal delay={100}>
-              <div className="glass rounded-2xl p-8 border border-white/10 h-full hover:border-white/20 transition-colors">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-6">
-                  <Target className="w-6 h-6 text-white" />
+              <div className="glass rounded-2xl p-6 sm:p-8 border border-white/10 h-full hover:border-white/20 transition-colors">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 sm:mb-6">
+                  <Target className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h2 className="font-display text-2xl font-bold mb-4">Our Mission</h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <h2 className="font-display text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Our Mission</h2>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   To empower businesses with innovative digital solutions that accelerate growth, 
                   enhance efficiency, and create lasting competitive advantages. We combine technical 
                   expertise with creative thinking to deliver results that exceed expectations.
@@ -89,12 +89,12 @@ const About = () => {
               </div>
             </ScrollReveal>
             <ScrollReveal delay={200}>
-              <div className="glass rounded-2xl p-8 border border-white/10 h-full hover:border-white/20 transition-colors">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center mb-6">
-                  <Rocket className="w-6 h-6 text-white" />
+              <div className="glass rounded-2xl p-6 sm:p-8 border border-white/10 h-full hover:border-white/20 transition-colors">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center mb-4 sm:mb-6">
+                  <Rocket className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <h2 className="font-display text-2xl font-bold mb-4">Our Vision</h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <h2 className="font-display text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Our Vision</h2>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   To become the go-to digital partner for forward-thinking businesses worldwide. 
                   We envision a future where every business, regardless of size, has access to 
                   world-class digital expertise that helps them thrive in an increasingly digital world.
@@ -104,15 +104,15 @@ const About = () => {
           </div>
 
           {/* Story Section */}
-          <ScrollReveal className="mb-16 md:mb-24">
-            <div className="glass rounded-2xl md:rounded-3xl p-8 md:p-12 border border-white/10 relative overflow-hidden">
+          <ScrollReveal className="mb-12 md:mb-24">
+            <div className="glass rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 border border-white/10 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5" />
               <div className="absolute inset-0 noise" />
               <div className="relative">
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 text-center">
+                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-5 sm:mb-6 text-center">
                   How We <span className="text-gradient">Started</span>
                 </h2>
-                <div className="max-w-3xl mx-auto space-y-4 text-muted-foreground leading-relaxed">
+                <div className="max-w-3xl mx-auto space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
                   <p>
                     The Lab Guys was born from a simple observation: businesses often struggle to find 
                     reliable digital expertise that truly understands their unique challenges. Too often, 

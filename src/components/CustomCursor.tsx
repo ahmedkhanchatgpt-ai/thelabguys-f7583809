@@ -19,9 +19,9 @@ const CustomCursor = () => {
   const handleMouseUp = useCallback(() => setIsClicking(false), []);
 
   useEffect(() => {
-    // Only enable on high performance desktop devices with hover support
+    // Only enable on high performance desktop devices with fine pointer and hover support
     if (perfLevel !== 'high') return;
-    if (!window.matchMedia("(hover: hover)").matches) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
     const handleHoverStart = (e: Event) => {
       const target = e.target as HTMLElement;
@@ -63,7 +63,7 @@ const CustomCursor = () => {
   }, [perfLevel, handleMouseMove, handleMouseEnter, handleMouseLeave, handleMouseDown, handleMouseUp]);
 
   // Don't render on non-high-performance or touch devices
-  if (perfLevel !== 'high' || !window.matchMedia("(hover: hover)").matches) {
+  if (perfLevel !== 'high' || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     return null;
   }
 

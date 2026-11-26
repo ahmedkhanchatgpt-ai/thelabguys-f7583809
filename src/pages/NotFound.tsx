@@ -49,10 +49,10 @@ const NotFound = () => {
       <Header />
 
       {/* Main 404 Hero */}
-      <main className="flex-1 flex items-center justify-center pt-32 pb-20 px-6 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
+      <main className="flex-1 flex items-center justify-center pt-24 pb-14 sm:pt-32 sm:pb-20 px-4 sm:px-6 relative z-10">
+        <div className="max-w-3xl mx-auto text-center w-full">
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass border border-purple-500/20 mb-8 opacity-0 animate-fade-up">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass border border-purple-500/20 mb-6 sm:mb-8 opacity-0 animate-fade-up">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-pink-500"></span>
@@ -63,8 +63,8 @@ const NotFound = () => {
           </div>
 
           {/* Huge Glowing 404 */}
-          <div className="relative mb-6 opacity-0 animate-fade-up stagger-1">
-            <div className="text-8xl sm:text-9xl md:text-[12rem] font-display font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-white/20 select-none">
+          <div className="relative mb-5 sm:mb-6 opacity-0 animate-fade-up stagger-1">
+            <div className="text-7xl sm:text-9xl md:text-[12rem] font-display font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-white/20 select-none">
               404
             </div>
             {/* Ambient neon backglow behind numbers */}
@@ -72,21 +72,21 @@ const NotFound = () => {
           </div>
 
           {/* Title & Description */}
-          <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-4 opacity-0 animate-fade-up stagger-2">
+          <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 opacity-0 animate-fade-up stagger-2">
             Lost in the <span className="text-gradient">Digital Void</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed opacity-0 animate-fade-up stagger-3">
-            The page at <code className="text-xs sm:text-sm font-mono text-purple-300 bg-white/5 px-2 py-0.5 rounded border border-white/10">{location.pathname}</code> has been relocated, archived, or never synthesized in this timeline.
+          <p className="text-sm sm:text-lg text-muted-foreground max-w-xl mx-auto mb-8 sm:mb-10 leading-relaxed opacity-0 animate-fade-up stagger-3 px-2 break-words">
+            The page at <code className="text-xs sm:text-sm font-mono text-purple-300 bg-white/5 px-2 py-0.5 rounded border border-white/10 break-all">{location.pathname}</code> has been relocated, archived, or never synthesized in this timeline.
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-12 opacity-0 animate-fade-up stagger-4">
-            <MagneticButton>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-12 opacity-0 animate-fade-up stagger-4">
+            <MagneticButton className="w-full sm:w-auto">
               <Button
                 asChild
                 size="lg"
-                className="gap-2 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white rounded-xl px-8 py-6 text-base font-semibold shadow-xl shadow-purple-500/25 hover:opacity-90 hover:scale-105 transition-all"
+                className="w-full sm:w-auto gap-2 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white rounded-xl px-8 py-6 text-base font-semibold shadow-xl shadow-purple-500/25 hover:opacity-90 hover:scale-105 transition-all"
               >
                 <Link to="/">
                   <Home className="w-5 h-5" />
@@ -99,7 +99,7 @@ const NotFound = () => {
               asChild
               variant="outline"
               size="lg"
-              className="gap-2 glass border-white/15 hover:border-white/30 hover:bg-white/5 text-foreground rounded-xl px-8 py-6 text-base font-medium transition-all"
+              className="w-full sm:w-auto gap-2 glass border-white/15 hover:border-white/30 hover:bg-white/5 text-foreground rounded-xl px-8 py-6 text-base font-medium transition-all"
             >
               <a href="/#team">
                 <Users className="w-5 h-5" />
@@ -111,7 +111,7 @@ const NotFound = () => {
               variant="ghost"
               size="lg"
               onClick={() => navigate(-1)}
-              className="gap-2 text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-xl px-6 py-6 text-base"
+              className="w-full sm:w-auto gap-2 text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-xl px-6 py-5 sm:py-6 text-base"
             >
               <ArrowLeft className="w-4 h-4" />
               Previous Page

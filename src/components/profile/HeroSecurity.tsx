@@ -10,31 +10,31 @@ interface HeroSecurityProps {
 
 const HeroSecurity = ({ member }: HeroSecurityProps) => {
   return (
-    <section className="min-h-screen flex lg:items-center relative pt-32 pb-20 lg:pt-20 overflow-hidden">
+    <section className="min-h-[100dvh] flex lg:items-center relative pt-24 pb-14 lg:pt-20 lg:pb-20 overflow-hidden">
       {/* Gradient orbs */}
-      <div className="absolute top-1/4 -left-20 w-[400px] h-[400px] bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow" />
-      <div className="absolute bottom-1/4 -right-20 w-[300px] h-[300px] bg-gradient-to-br from-red-500 to-orange-500 rounded-full blur-[120px] opacity-10 animate-pulse-slow" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/4 -left-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow" />
+      <div className="absolute bottom-1/4 -right-20 w-[260px] sm:w-[300px] h-[260px] sm:h-[300px] bg-gradient-to-br from-red-500 to-orange-500 rounded-full blur-[120px] opacity-10 animate-pulse-slow" style={{ animationDelay: '2s' }} />
 
-      <div className="container mx-auto max-w-7xl px-6">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 opacity-0 animate-fade-up group absolute top-28 left-6 z-20"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 lg:mb-0 opacity-0 animate-fade-up group lg:absolute lg:-top-10 lg:left-6 z-20"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Team
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left - Content */}
           <div className="flex flex-col justify-center order-1 lg:order-1">
             {/* Badge */}
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border border-orange-500/30 w-fit mb-6 opacity-0 animate-fade-up stagger-1">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border border-orange-500/30 w-fit mb-5 sm:mb-6 opacity-0 animate-fade-up stagger-1">
               <Shield className="w-4 h-4 text-orange-400" />
-              <span className="text-sm text-muted-foreground">Security Expert</span>
+              <span className="text-xs sm:text-sm text-muted-foreground">Security Expert</span>
             </div>
 
             {/* Name with glow */}
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 tracking-tight">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2 tracking-tight">
               <span 
                 className="block text-foreground"
                 style={{ textShadow: '0 0 40px rgba(251, 146, 60, 0.4), 0 0 80px rgba(251, 146, 60, 0.2)' }}
@@ -69,21 +69,21 @@ const HeroSecurity = ({ member }: HeroSecurityProps) => {
             </p>
 
             {/* Bio */}
-            <p className="text-muted-foreground text-lg leading-relaxed mb-10 opacity-0 animate-fade-up stagger-4">
+            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 opacity-0 animate-fade-up stagger-4">
               {member.fullBio}
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 opacity-0 animate-fade-up stagger-5">
-              <MagneticButton>
-                <Button asChild size="lg" className={`gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-8 py-6 text-base shadow-xl shadow-orange-500/20`}>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 opacity-0 animate-fade-up stagger-5">
+              <MagneticButton className="w-full sm:w-auto">
+                <Button asChild size="lg" className={`w-full sm:w-auto gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base shadow-xl shadow-orange-500/20`}>
                   <a href={`mailto:${member.email}`}>
                     <Shield className="w-5 h-5" />
                     Secure Your Business
                   </a>
                 </Button>
               </MagneticButton>
-              <Button asChild variant="outline" size="lg" className="gap-2 glass border-orange-500/30 hover:border-orange-500/50 hover:bg-orange-500/10 px-8 py-6 text-base">
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto gap-2 glass border-orange-500/30 hover:border-orange-500/50 hover:bg-orange-500/10 px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base">
                 <a href={`mailto:${member.email}?subject=Security Assessment`}>
                   <Scan className="w-5 h-5" />
                   Request Assessment
@@ -114,35 +114,35 @@ const HeroSecurity = ({ member }: HeroSecurityProps) => {
           </div>
 
           {/* Right - Cyber Visual */}
-          <div className="order-2 lg:order-2 opacity-0 animate-fade-up stagger-1">
-            <div className="relative flex items-center justify-center">
+          <div className="order-2 lg:order-2 opacity-0 animate-fade-up stagger-1 py-6 lg:py-0">
+            <div className="relative flex items-center justify-center min-h-[260px] sm:min-h-[340px]">
               {/* Rotating rings */}
-              <div className="absolute w-[340px] h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-orange-500/10 animate-spin-slow" style={{ animationDuration: '30s' }} />
-              <div className="absolute w-[300px] h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-amber-500/10 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }} />
-              <div className="absolute w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-yellow-500/10 animate-spin-slow" style={{ animationDuration: '20s' }} />
+              <div className="absolute w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-orange-500/10 animate-spin-slow" style={{ animationDuration: '30s' }} />
+              <div className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-amber-500/10 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }} />
+              <div className="absolute w-[190px] h-[190px] sm:w-[260px] sm:h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-yellow-500/10 animate-spin-slow" style={{ animationDuration: '20s' }} />
               
               {/* Central shield */}
               <div className="relative group">
                 <div className={`absolute inset-0 ${member.iconBg} blur-3xl opacity-40 group-hover:opacity-60 transition-opacity scale-150`} />
-                <div className={`relative w-44 h-44 md:w-52 md:h-52 rounded-3xl ${member.iconBg} flex items-center justify-center shadow-2xl shadow-orange-500/20 group-hover:scale-105 transition-transform rotate-45`}>
-                  <Shield className="w-20 h-20 md:w-24 md:h-24 text-white -rotate-45" strokeWidth={1.5} />
+                <div className={`relative w-32 h-32 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-2xl sm:rounded-3xl ${member.iconBg} flex items-center justify-center shadow-2xl shadow-orange-500/20 group-hover:scale-105 transition-transform rotate-45`}>
+                  <Shield className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white -rotate-45" strokeWidth={1.5} />
                 </div>
               </div>
               
               {/* Orbiting icons */}
-              <div className="absolute w-[300px] h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow" style={{ animationDuration: '15s' }}>
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background glass border border-orange-500/30 flex items-center justify-center shadow-xl">
-                  <Lock className="w-4 h-4 text-orange-400" />
+              <div className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow" style={{ animationDuration: '15s' }}>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-orange-500/30 flex items-center justify-center shadow-xl">
+                  <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-400" />
                 </div>
               </div>
-              <div className="absolute w-[300px] h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow" style={{ animationDuration: '15s', animationDirection: 'reverse' }}>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-10 h-10 rounded-full bg-background glass border border-amber-500/30 flex items-center justify-center shadow-xl">
-                  <Eye className="w-4 h-4 text-amber-400" />
+              <div className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow" style={{ animationDuration: '15s', animationDirection: 'reverse' }}>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-amber-500/30 flex items-center justify-center shadow-xl">
+                  <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
                 </div>
               </div>
-              <div className="absolute w-[300px] h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow" style={{ animationDuration: '20s' }}>
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-background glass border border-yellow-500/30 flex items-center justify-center shadow-xl">
-                  <Fingerprint className="w-4 h-4 text-yellow-400" />
+              <div className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow" style={{ animationDuration: '20s' }}>
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-yellow-500/30 flex items-center justify-center shadow-xl">
+                  <Fingerprint className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-400" />
                 </div>
               </div>
             </div>

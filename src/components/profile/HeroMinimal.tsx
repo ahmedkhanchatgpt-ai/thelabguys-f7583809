@@ -10,24 +10,24 @@ interface HeroMinimalProps {
 
 const HeroMinimal = ({ member }: HeroMinimalProps) => {
   return (
-    <section className="min-h-screen flex lg:items-center relative pt-32 pb-20 lg:pt-20 overflow-hidden">
+    <section className="min-h-[100dvh] flex lg:items-center relative pt-24 pb-14 lg:pt-20 lg:pb-20 overflow-hidden">
       {/* Subtle dynamic ambient background */}
       <div 
-        className={`absolute top-1/4 -left-20 w-[550px] h-[550px] bg-gradient-to-br ${member.gradient} rounded-full blur-[180px] opacity-[0.10] animate-pulse-slow pointer-events-none`} 
+        className={`absolute top-1/4 -left-20 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-gradient-to-br ${member.gradient} rounded-full blur-[140px] sm:blur-[180px] opacity-[0.10] animate-pulse-slow pointer-events-none`} 
       />
       <div 
-        className={`absolute bottom-1/4 -right-20 w-[450px] h-[450px] bg-gradient-to-br ${member.gradient} rounded-full blur-[160px] opacity-[0.08] animate-pulse-slow pointer-events-none`} 
+        className={`absolute bottom-1/4 -right-20 w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] bg-gradient-to-br ${member.gradient} rounded-full blur-[120px] sm:blur-[160px] opacity-[0.08] animate-pulse-slow pointer-events-none`} 
         style={{ animationDelay: '3s' }} 
       />
 
       {/* Understated geometric backdrop */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] border border-white/[0.02] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] border border-white/[0.03] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] sm:w-[650px] sm:h-[650px] lg:w-[850px] lg:h-[850px] border border-white/[0.02] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] sm:w-[500px] sm:h-[500px] lg:w-[650px] lg:h-[650px] border border-white/[0.03] rounded-full pointer-events-none" />
 
-      <div className="container mx-auto max-w-7xl px-6 relative z-10">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 opacity-0 animate-fade-up group absolute top-28 left-6 z-20"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 lg:mb-0 opacity-0 animate-fade-up group lg:absolute lg:top-8 lg:left-6 z-20"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Team
@@ -91,16 +91,16 @@ const HeroMinimal = ({ member }: HeroMinimalProps) => {
           )}
 
           {/* CTAs */}
-          <div className="flex flex-wrap justify-center gap-4 opacity-0 animate-fade-up stagger-5">
-            <MagneticButton>
-              <Button asChild size="lg" className={`gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base shadow-xl shadow-purple-500/20`}>
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 w-full sm:w-auto opacity-0 animate-fade-up stagger-5">
+            <MagneticButton className="w-full sm:w-auto">
+              <Button asChild size="lg" className={`w-full sm:w-auto gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base shadow-xl shadow-purple-500/20`}>
                 <a href={`mailto:${member.email}`}>
                   <MessageCircle className="w-5 h-5" />
                   Start a Project
                 </a>
               </Button>
             </MagneticButton>
-            <Button asChild variant="outline" size="lg" className="gap-2 glass border-white/20 hover:border-white/40 hover:bg-white/5 px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base">
+            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto gap-2 glass border-white/20 hover:border-white/40 hover:bg-white/5 px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base">
               <a href={`mailto:${member.email}?subject=Project Inquiry`}>
                 <Mail className="w-5 h-5" />
                 Send a Message
