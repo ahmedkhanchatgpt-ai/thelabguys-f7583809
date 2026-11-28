@@ -455,15 +455,6 @@ const HeroCreative = ({ member }: HeroCreativeProps) => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0 animate-fade-up stagger-5 hidden md:block">
-          <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <span className="text-xs uppercase tracking-widest">Explore Work</span>
-            <div className="w-6 h-10 rounded-full border-2 border-purple-500/30 flex items-start justify-center p-1">
-              <div className="w-1.5 h-3 rounded-full bg-purple-400 animate-bounce" />
-            </div>
-          </div>
-        </div>
       </div>
       {/* Interactive Video Showreel Lightbox Modal */}
       <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
