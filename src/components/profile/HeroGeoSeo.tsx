@@ -144,51 +144,64 @@ const HeroGeoSeo = ({ member }: HeroGeoSeoProps) => {
           {/* Right - Clean Orbital Search/GEO Visual matching Joshua & Altaf */}
           <div className="order-2 lg:order-2 opacity-0 animate-fade-up stagger-1 py-6 lg:py-0">
             <div className="relative flex items-center justify-center min-h-[260px] sm:min-h-[340px]">
-              {/* Rotating rings */}
+              {/* Rotating rings with refined visibility */}
               <div
-                className="absolute w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-cyan-500/10 animate-spin-slow"
+                className="absolute w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-cyan-400/20 animate-spin-slow"
                 style={{ animationDuration: "30s" }}
               />
               <div
-                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-emerald-500/15 animate-spin-slow"
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-emerald-400/25 animate-spin-slow"
                 style={{ animationDirection: "reverse", animationDuration: "25s" }}
               />
               <div
-                className="absolute w-[190px] h-[190px] sm:w-[260px] sm:h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-teal-500/10 animate-spin-slow"
+                className="absolute w-[190px] h-[190px] sm:w-[260px] sm:h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-teal-400/15 animate-spin-slow"
                 style={{ animationDuration: "20s" }}
+              />
+
+              {/* Subtle radar pulse ring */}
+              <div
+                className="absolute w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full border border-cyan-400/30 animate-ping pointer-events-none"
+                style={{ animationDuration: "3.4s" }}
               />
 
               {/* Central Globe Emblem */}
               <div className="relative group">
-                <div className={`absolute inset-0 ${member.iconBg} blur-3xl opacity-45 group-hover:opacity-65 transition-opacity scale-150`} />
-                <div className={`relative w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full ${member.iconBg} flex items-center justify-center shadow-2xl shadow-cyan-500/20 group-hover:scale-105 transition-transform`}>
-                  <Globe className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white" strokeWidth={1.3} />
+                <div className={`absolute inset-0 ${member.iconBg} blur-3xl opacity-50 group-hover:opacity-75 transition-opacity duration-500 scale-150`} />
+                <div className={`relative w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full ${member.iconBg} p-[3px] shadow-[0_0_60px_-10px_rgba(34,211,238,0.45)] group-hover:scale-105 transition-all duration-300 ring-1 ring-white/25`}>
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-cyan-500/80 via-teal-500/75 to-emerald-500/85 flex items-center justify-center relative overflow-hidden">
+                    <div className="absolute top-2 left-1/4 right-1/4 h-1/4 rounded-full bg-white/20 blur-md pointer-events-none" />
+                    <div className="absolute inset-3 sm:inset-4 rounded-full border border-white/20 pointer-events-none" />
+                    <Globe
+                      className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.3)] group-hover:scale-110 transition-transform duration-300"
+                      strokeWidth={1.3}
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Orbiting field icons */}
+              {/* Orbiting field icons with crisp glow */}
               <div
-                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow"
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
                 style={{ animationDuration: "15s" }}
               >
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-cyan-500/30 flex items-center justify-center shadow-xl">
-                  <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#091316]/90 glass border border-cyan-400/45 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.45)]">
+                  <Search className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-300" />
                 </div>
               </div>
               <div
-                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow"
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
                 style={{ animationDuration: "15s", animationDirection: "reverse" }}
               >
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-emerald-500/30 flex items-center justify-center shadow-xl">
-                  <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#091316]/90 glass border border-emerald-400/45 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.45)]">
+                  <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-300" />
                 </div>
               </div>
               <div
-                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow"
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
                 style={{ animationDuration: "20s" }}
               >
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-teal-500/30 flex items-center justify-center shadow-xl">
-                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-400" />
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#091316]/90 glass border border-teal-400/45 flex items-center justify-center shadow-[0_0_20px_rgba(45,212,191,0.45)]">
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-teal-300" />
                 </div>
               </div>
             </div>

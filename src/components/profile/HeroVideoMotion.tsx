@@ -104,56 +104,71 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
           {/* Left - Clean Orbital Motion/Cinema Visual matching Altaf & Joshua */}
           <div className="order-2 lg:order-1 opacity-0 animate-fade-up stagger-1 py-6 lg:py-0">
             <div className="relative flex items-center justify-center min-h-[260px] sm:min-h-[340px]">
-              {/* Rotating orbital rings */}
+              {/* Rotating orbital rings with refined visibility */}
               <div
-                className="absolute w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-purple-500/10 animate-spin-slow"
+                className="absolute w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-purple-400/20 animate-spin-slow"
                 style={{ animationDuration: "30s" }}
               />
               <div
-                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-fuchsia-500/15 animate-spin-slow"
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-fuchsia-400/25 animate-spin-slow"
                 style={{ animationDirection: "reverse", animationDuration: "25s" }}
               />
               <div
-                className="absolute w-[190px] h-[190px] sm:w-[260px] sm:h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-pink-500/10 animate-spin-slow"
+                className="absolute w-[190px] h-[190px] sm:w-[260px] sm:h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-pink-400/15 animate-spin-slow"
                 style={{ animationDuration: "20s" }}
               />
 
-              {/* Central Play / Cinema Orb (clickable to open showreel modal) */}
+              {/* Subtle breathing sonar pulse around centerpiece */}
+              <div
+                className="absolute w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full border border-fuchsia-400/30 animate-ping pointer-events-none"
+                style={{ animationDuration: "3.2s" }}
+              />
+
+              {/* Central Play / Cinema Lens Orb (clickable to open showreel modal) */}
               <button
                 type="button"
                 onClick={openShowreel}
                 aria-label="Open 2024 Video Showreel"
                 className="relative group focus:outline-none"
               >
-                <div className={`absolute inset-0 ${member.iconBg} blur-3xl opacity-50 group-hover:opacity-75 transition-opacity scale-150`} />
-                <div className={`relative w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full ${member.iconBg} flex items-center justify-center shadow-2xl shadow-purple-500/25 group-hover:scale-105 active:scale-95 transition-transform`}>
-                  <Play className="w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 text-white fill-white/90 ml-2" strokeWidth={1.2} />
+                <div className={`absolute inset-0 ${member.iconBg} blur-3xl opacity-55 group-hover:opacity-85 transition-opacity duration-500 scale-150`} />
+                <div className={`relative w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full ${member.iconBg} p-[3px] shadow-[0_0_60px_-10px_rgba(217,70,239,0.55)] group-hover:scale-105 active:scale-95 transition-all duration-300 ring-1 ring-white/25`}>
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-purple-600/80 via-fuchsia-600/75 to-pink-500/85 flex items-center justify-center relative overflow-hidden">
+                    {/* Inner specular glass arc */}
+                    <div className="absolute top-2 left-1/4 right-1/4 h-1/4 rounded-full bg-white/20 blur-md pointer-events-none" />
+                    {/* Subtle inner lens ring */}
+                    <div className="absolute inset-3 sm:inset-4 rounded-full border border-white/20 pointer-events-none" />
+                    <Play
+                      className="relative z-10 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 text-white fill-white/95 ml-1.5 drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)] group-hover:scale-110 transition-transform duration-300"
+                      strokeWidth={1.2}
+                    />
+                  </div>
                 </div>
               </button>
 
-              {/* Orbiting Creative Field Icons */}
+              {/* Orbiting Creative Field Icons with crisp glow */}
               <div
                 className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
                 style={{ animationDuration: "15s" }}
               >
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-purple-500/30 flex items-center justify-center shadow-xl">
-                  <Clapperboard className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#0d0b16]/90 glass border border-purple-400/45 flex items-center justify-center shadow-[0_0_20px_rgba(168,85,247,0.45)]">
+                  <Clapperboard className="w-4 h-4 sm:w-5 sm:h-5 text-purple-300" />
                 </div>
               </div>
               <div
                 className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
                 style={{ animationDuration: "15s", animationDirection: "reverse" }}
               >
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-pink-500/30 flex items-center justify-center shadow-xl">
-                  <Palette className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-400" />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#0d0b16]/90 glass border border-pink-400/45 flex items-center justify-center shadow-[0_0_20px_rgba(236,72,153,0.45)]">
+                  <Palette className="w-4 h-4 sm:w-5 sm:h-5 text-pink-300" />
                 </div>
               </div>
               <div
                 className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
                 style={{ animationDuration: "20s" }}
               >
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-fuchsia-500/30 flex items-center justify-center shadow-xl">
-                  <Wand2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-fuchsia-400" />
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#0d0b16]/90 glass border border-fuchsia-400/45 flex items-center justify-center shadow-[0_0_20px_rgba(217,70,239,0.45)]">
+                  <Wand2 className="w-4 h-4 sm:w-5 sm:h-5 text-fuchsia-300" />
                 </div>
               </div>
             </div>
