@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Linkedin, Film, Play, Pause, Sparkles, Volume2, VolumeX, Maximize2, MessageCircle, Layers } from "lucide-react";
+import { ArrowLeft, Linkedin, Film, Play, Pause, Palette, Clapperboard, Wand2, Volume2, VolumeX, Maximize2, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import MagneticButton from "@/components/MagneticButton";
@@ -15,7 +15,6 @@ interface ReelClip {
   views: string;
   gradient: string;
   description: string;
-  // Optional: set embedUrl to a YouTube embed URL to load an external player inside the modal
   embedUrl?: string;
 }
 
@@ -86,9 +85,9 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
   return (
     <section className="min-h-[100dvh] flex lg:items-center relative pt-24 pb-14 lg:pt-20 lg:pb-20 overflow-hidden">
       {/* Ambient gradient orbs matching Purple -> Fuchsia -> Pink palette */}
-      <div className="absolute top-1/4 -left-20 w-[300px] sm:w-[420px] h-[300px] sm:h-[420px] bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow pointer-events-none" />
+      <div className="absolute top-1/4 -left-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-gradient-to-br from-purple-600 via-fuchsia-500 to-pink-500 rounded-full blur-[150px] opacity-15 animate-pulse-slow pointer-events-none" />
       <div
-        className="absolute bottom-1/4 -right-20 w-[260px] sm:w-[340px] h-[260px] sm:h-[340px] bg-gradient-to-br from-pink-500 to-purple-600 rounded-full blur-[130px] opacity-10 animate-pulse-slow pointer-events-none"
+        className="absolute bottom-1/4 -right-20 w-[260px] sm:w-[300px] h-[260px] sm:h-[300px] bg-gradient-to-br from-pink-500 to-purple-600 rounded-full blur-[120px] opacity-10 animate-pulse-slow pointer-events-none"
         style={{ animationDelay: "2s" }}
       />
 
@@ -102,13 +101,71 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left - Content (clean, zero overlapping clutter) */}
-          <div className="flex flex-col justify-center order-1 lg:order-1 min-w-0">
-            {/* Role Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass border border-purple-500/30 w-fit mb-5 sm:mb-6 opacity-0 animate-fade-up stagger-1">
+          {/* Left - Clean Orbital Motion/Cinema Visual matching Altaf & Joshua */}
+          <div className="order-2 lg:order-1 opacity-0 animate-fade-up stagger-1 py-6 lg:py-0">
+            <div className="relative flex items-center justify-center min-h-[260px] sm:min-h-[340px]">
+              {/* Rotating orbital rings */}
+              <div
+                className="absolute w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] md:w-[420px] md:h-[420px] rounded-full border border-purple-500/10 animate-spin-slow"
+                style={{ animationDuration: "30s" }}
+              />
+              <div
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-dashed border-fuchsia-500/15 animate-spin-slow"
+                style={{ animationDirection: "reverse", animationDuration: "25s" }}
+              />
+              <div
+                className="absolute w-[190px] h-[190px] sm:w-[260px] sm:h-[260px] md:w-[340px] md:h-[340px] rounded-full border border-pink-500/10 animate-spin-slow"
+                style={{ animationDuration: "20s" }}
+              />
+
+              {/* Central Play / Cinema Orb (clickable to open showreel modal) */}
+              <button
+                type="button"
+                onClick={openShowreel}
+                aria-label="Open 2024 Video Showreel"
+                className="relative group focus:outline-none"
+              >
+                <div className={`absolute inset-0 ${member.iconBg} blur-3xl opacity-50 group-hover:opacity-75 transition-opacity scale-150`} />
+                <div className={`relative w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 rounded-full ${member.iconBg} flex items-center justify-center shadow-2xl shadow-purple-500/25 group-hover:scale-105 active:scale-95 transition-transform`}>
+                  <Play className="w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 text-white fill-white/90 ml-2" strokeWidth={1.2} />
+                </div>
+              </button>
+
+              {/* Orbiting Creative Field Icons */}
+              <div
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
+                style={{ animationDuration: "15s" }}
+              >
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-purple-500/30 flex items-center justify-center shadow-xl">
+                  <Clapperboard className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
+                </div>
+              </div>
+              <div
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
+                style={{ animationDuration: "15s", animationDirection: "reverse" }}
+              >
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-pink-500/30 flex items-center justify-center shadow-xl">
+                  <Palette className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-400" />
+                </div>
+              </div>
+              <div
+                className="absolute w-[220px] h-[220px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] animate-spin-slow pointer-events-none"
+                style={{ animationDuration: "20s" }}
+              >
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-background glass border border-fuchsia-500/30 flex items-center justify-center shadow-xl">
+                  <Wand2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-fuchsia-400" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right - Content */}
+          <div className="flex flex-col justify-center order-1 lg:order-2">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border border-purple-500/30 w-fit mb-5 sm:mb-6 opacity-0 animate-fade-up stagger-2">
               <Film className="w-4 h-4 text-purple-400" />
-              <span className="text-xs sm:text-sm text-muted-foreground">Video Editor &amp; Motion</span>
-              <span className="w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse" />
+              <span className="text-xs sm:text-sm text-muted-foreground">Creative Director</span>
+              <div className="w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse" />
             </div>
 
             {/* Name with Signature Neon Glow */}
@@ -117,7 +174,7 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
                 className="block text-foreground"
                 style={{
                   textShadow:
-                    "0 0 40px rgba(168, 85, 247, 0.4), 0 0 80px rgba(236, 72, 153, 0.2)",
+                    "0 0 40px rgba(168, 85, 247, 0.4), 0 0 80px rgba(168, 85, 247, 0.2)",
                 }}
               >
                 Muhammad
@@ -136,14 +193,14 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
               </span>
             </h1>
 
-            {/* Role Subtitle */}
-            <div className="flex items-center gap-3 mb-5 sm:mb-6 opacity-0 animate-fade-up stagger-3">
+            {/* Role */}
+            <div className="flex items-center gap-3 mb-6 opacity-0 animate-fade-up stagger-3">
               <div className={`h-px w-12 bg-gradient-to-r ${member.gradient}`} />
-              <span className="text-base sm:text-lg text-muted-foreground">{member.role}</span>
+              <span className="text-lg text-muted-foreground">{member.role}</span>
             </div>
 
             {/* Tagline */}
-            <p className="text-lg sm:text-xl md:text-2xl font-medium mb-5 sm:mb-6 opacity-0 animate-fade-up stagger-3">
+            <p className="text-xl md:text-2xl font-medium mb-6 opacity-0 animate-fade-up stagger-3">
               {member.tagline}
             </p>
 
@@ -158,7 +215,7 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
                 <Button
                   asChild
                   size="lg"
-                  className={`w-full sm:w-auto gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base shadow-xl shadow-purple-500/25`}
+                  className={`w-full sm:w-auto gap-2 ${member.iconBg} border-0 hover:opacity-90 text-white px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base shadow-xl shadow-purple-500/20`}
                 >
                   <Link
                     to={`/contact?subject=${encodeURIComponent("Video Editing & Motion Project")}&expert=${encodeURIComponent(member.name)}`}
@@ -175,7 +232,7 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
                 size="lg"
                 className="w-full sm:w-auto gap-2 glass border-purple-500/30 hover:border-purple-500/50 hover:bg-purple-500/10 px-7 sm:px-8 py-5 sm:py-6 text-sm sm:text-base"
               >
-                <Play className="w-4 h-4 text-purple-400 fill-purple-400" />
+                <Play className="w-4 h-4 text-purple-400" />
                 Watch Showreel
               </Button>
             </div>
@@ -188,7 +245,7 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="w-11 h-11 rounded-lg glass border border-white/10 flex items-center justify-center hover:border-purple-500/50 hover:bg-purple-500/10 transition-all hover:scale-110 group"
+                  className="w-11 h-11 rounded-xl glass border border-white/10 flex items-center justify-center hover:border-purple-500/50 hover:bg-purple-500/10 transition-all hover:scale-110 group"
                 >
                   <Linkedin className="w-5 h-5 group-hover:text-purple-400 transition-colors" />
                 </a>
@@ -199,135 +256,13 @@ const HeroVideoMotion = ({ member }: HeroVideoMotionProps) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="X (Twitter)"
-                  className="w-11 h-11 rounded-lg glass border border-white/10 flex items-center justify-center hover:border-pink-500/50 hover:bg-pink-500/10 transition-all hover:scale-110 group"
+                  className="w-11 h-11 rounded-xl glass border border-white/10 flex items-center justify-center hover:border-pink-500/50 hover:bg-pink-500/10 transition-all hover:scale-110 group"
                 >
                   <svg className="w-5 h-5 group-hover:text-pink-400 transition-colors" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                 </a>
               )}
-            </div>
-          </div>
-
-          {/* Right - Clean Animated Studio Showreel & NLE Timeline Card */}
-          <div className="order-2 lg:order-2 opacity-0 animate-fade-up stagger-1 min-w-0">
-            <div className="relative">
-              <div className={`absolute -inset-4 bg-gradient-to-br ${member.gradient} blur-3xl opacity-20 pointer-events-none`} />
-
-              <div className="relative glass rounded-2xl sm:rounded-3xl border border-purple-500/25 overflow-hidden shadow-2xl">
-                {/* Studio Monitor Window Header */}
-                <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-white/10 bg-white/[0.03]">
-                  <div className="flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    </div>
-                    <span className="text-[11px] font-mono text-muted-foreground ml-1.5 truncate">
-                      showreel_master.prproj
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                    4K • 60FPS
-                  </span>
-                </div>
-
-                {/* Clickable Showreel Preview Frame */}
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={openShowreel}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      openShowreel();
-                    }
-                  }}
-                  aria-label="Play 2024 Master Showreel"
-                  className="group relative aspect-[16/9] bg-[#07070e] flex items-center justify-center cursor-pointer overflow-hidden"
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-25 group-hover:opacity-40 transition-opacity duration-500`} />
-
-                  {/* Animated Audio Equalizer Bars */}
-                  <div className="absolute inset-x-6 sm:inset-x-10 bottom-4 flex items-end justify-center gap-1 sm:gap-1.5 h-20 sm:h-28 opacity-75">
-                    {[35, 60, 45, 85, 55, 95, 40, 80, 65, 90, 50, 75, 88, 45, 70, 60, 85, 50].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-full bg-gradient-to-t from-purple-400/50 to-white/90"
-                        style={{
-                          height: `${h}%`,
-                          animation: `equalizer ${0.9 + (i % 4) * 0.18}s ease-in-out infinite alternate`,
-                          animationDelay: `${i * 0.06}s`,
-                        }}
-                      />
-                    ))}
-                  </div>
-
-                  {/* Clean Pulsing Play Button */}
-                  <div className="relative z-10 flex items-center justify-center">
-                    <div className="absolute w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-white/30 animate-ping" style={{ animationDuration: "2.4s" }} />
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white text-purple-700 flex items-center justify-center shadow-[0_0_35px_rgba(168,85,247,0.6)] group-hover:scale-110 transition-transform duration-300">
-                      <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-current ml-0.5" />
-                    </div>
-                  </div>
-
-                  {/* Overlay badge */}
-                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] font-mono text-white/85 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>CLICK TO WATCH REEL</span>
-                  </div>
-                </div>
-
-                {/* Animated NLE Multi-Track Timeline */}
-                <div className="p-4 sm:p-6 bg-white/[0.02] border-t border-white/10 space-y-3">
-                  <div className="flex items-center justify-between text-[10px] font-mono text-muted-foreground">
-                    <span>TIMELINE COMPOSITOR</span>
-                    <span className="text-fuchsia-400">00:02:45:18</span>
-                  </div>
-
-                  {/* Animated Tracks */}
-                  <div className="relative space-y-2 py-1 overflow-hidden">
-                    <div className="flex items-center gap-2">
-                      <span className="w-7 text-[10px] font-mono text-purple-300 shrink-0">V2</span>
-                      <div className="flex-1 grid grid-cols-6 gap-1.5 h-3.5">
-                        <div className="col-span-2 rounded bg-purple-500/50 border border-purple-400/40" />
-                        <div className="col-span-3 rounded bg-fuchsia-500/50 border border-fuchsia-400/40" />
-                        <div className="col-span-1 rounded bg-pink-500/50 border border-pink-400/40" />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-7 text-[10px] font-mono text-pink-300 shrink-0">V1</span>
-                      <div className="flex-1 grid grid-cols-5 gap-1.5 h-3.5">
-                        <div className="col-span-3 rounded bg-gradient-to-r from-purple-600/60 to-pink-500/60 border border-white/15" />
-                        <div className="col-span-2 rounded bg-gradient-to-r from-fuchsia-600/60 to-purple-500/60 border border-white/15" />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-7 text-[10px] font-mono text-cyan-300 shrink-0">A1</span>
-                      <div className="flex-1 h-3 rounded bg-cyan-500/30 border border-cyan-400/30" />
-                    </div>
-                  </div>
-
-                  {/* Clean Compact Stats Row Inside Card */}
-                  <div className="grid grid-cols-3 gap-2 pt-3 border-t border-white/10 text-center">
-                    <div>
-                      <Layers className="w-4 h-4 text-purple-400 mx-auto mb-1" />
-                      <p className="text-base sm:text-lg font-display font-bold text-white">500+</p>
-                      <p className="text-[10px] sm:text-xs text-muted-foreground">Videos</p>
-                    </div>
-                    <div>
-                      <Sparkles className="w-4 h-4 text-fuchsia-400 mx-auto mb-1" />
-                      <p className="text-base sm:text-lg font-display font-bold text-white">10M+</p>
-                      <p className="text-[10px] sm:text-xs text-muted-foreground">Total Views</p>
-                    </div>
-                    <div>
-                      <Film className="w-4 h-4 text-pink-400 mx-auto mb-1" />
-                      <p className="text-base sm:text-lg font-display font-bold text-white">100+</p>
-                      <p className="text-[10px] sm:text-xs text-muted-foreground">Clients</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
