@@ -46,31 +46,31 @@ const HeroTech = ({ member }: HeroTechProps) => {
                 
                 {/* Terminal content */}
                 <div className="p-4 sm:p-6 font-mono text-xs sm:text-sm space-y-2.5 sm:space-y-3 overflow-x-auto scrollbar-hide">
-                  <div className="flex items-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+                  <div className="flex items-center gap-2 opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
                     <span className="text-green-400">➜</span>
-                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '0.3s' }}>whoami</span>
+                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '0.15s' }}>whoami</span>
                   </div>
-                  <div className="pl-4 text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
-                    <span className="text-green-400 overflow-hidden whitespace-nowrap inline-block animate-typewriter" style={{ animationDelay: '0.9s' }}>{member.name}</span>
+                  <div className="pl-4 text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '0.45s', animationFillMode: 'forwards' }}>
+                    <span className="text-green-400 overflow-hidden whitespace-nowrap inline-block animate-typewriter" style={{ animationDelay: '0.5s' }}>{member.name}</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 pt-2 opacity-0 animate-fade-up" style={{ animationDelay: '1.4s', animationFillMode: 'forwards' }}>
+                  <div className="flex items-center gap-2 pt-2 opacity-0 animate-fade-up" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
                     <span className="text-green-400">➜</span>
-                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '1.5s' }}>cat role.txt</span>
+                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '0.85s' }}>cat role.txt</span>
                   </div>
-                  <div className="pl-4 text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '2s', animationFillMode: 'forwards' }}>
-                    <span className="text-yellow-400 overflow-hidden whitespace-nowrap inline-block animate-typewriter" style={{ animationDelay: '2.1s' }}>{member.role}</span>
+                  <div className="pl-4 text-foreground opacity-0 animate-fade-up" style={{ animationDelay: '1.15s', animationFillMode: 'forwards' }}>
+                    <span className="text-yellow-400 overflow-hidden whitespace-nowrap inline-block animate-typewriter" style={{ animationDelay: '1.2s' }}>{member.role}</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 pt-2 opacity-0 animate-fade-up" style={{ animationDelay: '2.6s', animationFillMode: 'forwards' }}>
+                  <div className="flex items-center gap-2 pt-2 opacity-0 animate-fade-up" style={{ animationDelay: '1.5s', animationFillMode: 'forwards' }}>
                     <span className="text-green-400">➜</span>
-                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '2.7s' }}>cat skills.json</span>
+                    <span className="text-muted-foreground overflow-hidden whitespace-nowrap animate-typewriter" style={{ animationDelay: '1.55s' }}>cat skills.json</span>
                   </div>
-                  <div className="pl-4 text-cyan-400 opacity-0 animate-fade-up" style={{ animationDelay: '3.2s', animationFillMode: 'forwards' }}>
+                  <div className="pl-4 text-cyan-400 opacity-0 animate-fade-up" style={{ animationDelay: '1.85s', animationFillMode: 'forwards' }}>
                     <span className="break-words inline-block">["{member.skills?.slice(0, 4).join('", "') || 'React", "TypeScript", "Node.js", "Next.js'}"]</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 pt-4 opacity-0 animate-fade-up" style={{ animationDelay: '4s', animationFillMode: 'forwards' }}>
+                  <div className="flex items-center gap-2 pt-4 opacity-0 animate-fade-up" style={{ animationDelay: '2.2s', animationFillMode: 'forwards' }}>
                     <span className="text-green-400">➜</span>
                     <span className="animate-blink text-white">_</span>
                   </div>

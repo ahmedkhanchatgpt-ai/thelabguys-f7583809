@@ -9,7 +9,7 @@ export interface ProcessStep {
   description: string;
 }
 
-export type LayoutVariant = "minimal" | "creative" | "tech" | "security" | "data" | "futuristic";
+export type LayoutVariant = "minimal" | "seo" | "creative" | "tech" | "security" | "data" | "futuristic";
 
 export interface TeamMember {
   id: string;
@@ -41,7 +41,7 @@ export const teamMembers: TeamMember[] = [
     role: "GEO & SEO Expert",
     tagline: "Making brands discoverable across AI & search",
     shortBio: "Driving organic growth through strategic SEO optimization.",
-    layoutVariant: "minimal",
+    layoutVariant: "seo",
     fullBio: "I help brands, websites, and creators get discovered through GEO and SEO, on AI platforms like ChatGPT, DeepSeek, Google Gemini, Perplexity, Bing, and Google. I focus on AI search visibility, structured data, entity optimization, and technical GEO, making your content a trusted answer across all search.",
     skills: ["GEO", "Technical SEO", "Keyword Research", "Content Strategy", "Link Building", "Analytics", "Local SEO"],
     services: [
@@ -147,7 +147,7 @@ export const teamMembers: TeamMember[] = [
     role: "Senior Video Editor & Motion Designer",
     tagline: "Transforming visions into cinematic masterpieces",
     shortBio: "Award-winning video editor crafting viral content for global brands.",
-    layoutVariant: "minimal",
+    layoutVariant: "creative",
     fullBio: "I'm a senior video editor and motion designer with 5+ years of experience creating high-impact visual content for brands, influencers, and agencies worldwide. My work has generated over 10M+ views across platforms. I specialize in cinematic storytelling, dynamic motion graphics, and scroll-stopping social media content. From concept to color grade, I deliver broadcast-quality results with fast turnarounds.",
     skills: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Filmora", "Cinema 4D", "Motion Graphics", "Color Grading", "Sound Design", "Storyboarding"],
     services: [

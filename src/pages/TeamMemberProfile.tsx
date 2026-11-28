@@ -13,10 +13,11 @@ import CreativeShowcase from "@/components/CreativeShowcase";
 import {
   HeroMinimal,
   HeroTech,
-  HeroCreative,
   HeroSecurity,
   HeroData,
   HeroFuturistic,
+  HeroGeoSeo,
+  HeroVideoMotion,
 } from "@/components/profile";
 
 const TeamMemberProfile = () => {
@@ -51,10 +52,12 @@ const TeamMemberProfile = () => {
     switch (member.layoutVariant) {
       case "minimal":
         return <HeroMinimal member={member} />;
+      case "seo":
+        return <HeroGeoSeo member={member} />;
       case "tech":
         return <HeroTech member={member} />;
       case "creative":
-        return <HeroCreative member={member} />;
+        return <HeroVideoMotion member={member} />;
       case "security":
         return <HeroSecurity member={member} />;
       case "data":
